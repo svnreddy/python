@@ -1,0 +1,721 @@
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+D:\PPT>cd python\hands
+
+D:\PPT\python\hands>python
+Python 3.5.2 (v3.5.2:4def2a2901a5, Jun 25 2016, 22:18:55) [MSC v.1900 64 bit (AM
+D64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> a = 1
+>>> type(a)
+<class 'int'>
+>>> f = 1.2
+>>> type(f)
+<class 'float'>
+>>> s = "OK"
+>>> type(s)
+<class 'str'>
+>>> b = True
+>>> type(b)
+<class 'bool'>
+>>> a + 1
+2
+>>> a / 2
+0.5
+>>> a // 2
+0
+>>> a % 2
+1
+>>> a % 2 == 0
+False
+>>> a % 2 == 1
+True
+>>> print(a)
+1
+>>> print(aa)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'aa' is not defined
+>>> a > 1 and a < 1
+False
+>>> a > 1 or a < 1
+False
+>>> not a >= 1
+False
+>>> if a == 1:
+...     print(a)
+...
+1
+>>> if a == 1:
+...     print(a)
+... else:
+...     print(a)
+...
+1
+>>> if a == 1:
+...     print(a)
+... elif a > 1;
+  File "<stdin>", line 3
+    elif a > 1;
+              ^
+SyntaxError: invalid syntax
+>>> if a == 1:
+...     print(a)
+... elif a > 1:
+...     print(a)
+... else:
+...     print(a)
+...
+1
+>>> if a == 1:
+...     print(a)
+...     print(a)
+...     print(a)
+...     print(a)
+...
+1
+1
+1
+1
+>>> quit()
+
+D:\PPT\python\hands>python first.py hello
+hello
+
+D:\PPT\python\hands>python first.py hello world
+hello world
+
+D:\PPT\python\hands>python
+Python 3.5.2 (v3.5.2:4def2a2901a5, Jun 25 2016, 22:18:55) [MSC v.1900 64 bit (AM
+D64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> a = 1
+>>> s = "1"
+>>> type(a)
+<class 'int'>
+>>> int(s)
+1
+>>> str(a)
+'1'
+>>> s = "OK"
+>>> s = 'OK'
+>>> s = """Hello
+... World"""
+>>> s
+'Hello\nWorld'
+>>> len(s)
+11
+>>> "He" in s
+True
+>>> "He" not in s
+False
+>>> s == "OK"
+False
+>>> s != "OK"
+True
+>>> for e in s:
+...     print(e)
+...
+H
+e
+l
+l
+o
+
+
+W
+o
+r
+l
+d
+>>> "OK" + " NOK"
+'OK NOK'
+>>> ""
+''
+>>> for e in range(10):
+...     print(e)
+...
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+>>> for e in range(1,10):
+...     print(e)
+...
+1
+2
+3
+4
+5
+6
+7
+8
+9
+>>>
+>>> s
+'Hello\nWorld'
+>>> s[0]
+'H'
+>>> s[1]
+'e'
+>>> s[len(s)-1]
+'d'
+>>> s[-1]
+'d'
+>>> s[-2]
+'l'
+>>> s[0:4]
+'Hell'
+>>> #s[start:end:step]
+...
+>>> s[0:7:2]
+'HloW'
+>>> s[::2]
+'HloWrd'
+>>> s[-1:-5:-1]
+'dlro'
+>>> s[::-1]
+'dlroW\nolleH'
+>>> s[-12:-3:1]
+'Hello\nWo'
+>>> int("AB", base=16)
+171
+>>> input="ABCDEF1234567890"
+>>> input[::2]
+'ACE13579'
+>>> input[:2]
+'AB'
+>>> input[:2]
+'AB'
+>>> input[2:2]
+''
+>>> input[2:4]
+'CD'
+>>> input[4:6]
+'EF'
+>>> input[6:8]
+'12'
+>>> input[8:10]
+'34'
+>>> input[10:12]
+'56'
+>>> >>> input[:2]
+  File "<stdin>", line 1
+    >>> input[:2]
+     ^
+SyntaxError: invalid syntax
+>>> 'AB'
+'AB'
+>>> >>> input[:2]
+  File "<stdin>", line 1
+    >>> input[:2]
+     ^
+SyntaxError: invalid syntax
+>>> 'AB'
+'AB'
+>>> >>> input[2:2]
+  File "<stdin>", line 1
+    >>> input[2:2]
+     ^
+SyntaxError: invalid syntax
+>>> ''
+''
+>>> >>> input[2:4]
+  File "<stdin>", line 1
+    >>> input[2:4]
+     ^
+SyntaxError: invalid syntax
+>>> 'CD'
+'CD'
+>>> >>> input[4:6]
+  File "<stdin>", line 1
+    >>> input[4:6]
+     ^
+SyntaxError: invalid syntax
+>>> 'EF'
+'EF'
+>>> >>> input[6:8]
+  File "<stdin>", line 1
+    >>> input[6:8]
+     ^
+SyntaxError: invalid syntax
+>>> '12'
+'12'
+>>> >>> input[8:10]
+  File "<stdin>", line 1
+    >>> input[8:10]
+     ^
+SyntaxError: invalid syntax
+>>> '34'
+'34'
+>>> >>> input[10:12]
+  File "<stdin>", line 1
+    >>> input[10:12]
+     ^
+SyntaxError: invalid syntax
+>>> '56'
+'56'
+>>>
+>>>
+>>>
+>>> input="ABCDEF1234567890"
+>>> for i in range(len(input)//2):
+...     print(input[i* 2 : 2*i+2])
+...
+AB
+CD
+EF
+12
+34
+56
+78
+90
+>>>
+>>>
+>>> res = 0
+>>> for i in range(len(input)//2):
+...      hex_str = input[i* 2 : 2*i+2]
+...      res += int(hex_str, base=16)
+...
+>>> print(res % 255)
+15
+>>> s
+'Hello\nWorld'
+>>> s[0] = 'H'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'str' object does not support item assignment
+>>> "OK" + "OK"
+'OKOK'
+>>> "OK" * 4
+'OKOKOKOK'
+>>> "name=%s,age=%d,salary=%f" % ("xyz", 20, 2.0)
+'name=xyz,age=20,salary=2.000000'
+>>> type(s)
+<class 'str'>
+>>> dir(str)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '_
+_eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs
+__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__'
+, '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__r
+epr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subcl
+asshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', '
+expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isd
+ecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'issp
+ace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'pa
+rtition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip
+', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate
+', 'upper', 'zfill']
+>>> s = "Hello World"
+>>> help(str.split)
+Help on method_descriptor:
+
+split(...)
+    S.split(sep=None, maxsplit=-1) -> list of strings
+
+    Return a list of the words in S, using sep as the
+    delimiter string.  If maxsplit is given, at most maxsplit
+    splits are done. If sep is not specified or is None, any
+    whitespace string is a separator and empty strings are
+    removed from the result.
+
+>>> s.split(" ")
+['Hello', 'World']
+>>> s.split()
+['Hello', 'World']
+>>> s1 = "A:B:C"
+>>> s1.split(":")
+['A', 'B', 'C']
+>>> dir(str)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '_
+_eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs
+__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__'
+, '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__r
+epr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subcl
+asshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', '
+expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isd
+ecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'issp
+ace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'pa
+rtition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip
+', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate
+', 'upper', 'zfill']
+>>> ":".join(s1.split(":"))
+'A:B:C'
+>>>
+>>> help(str.strip)
+Help on method_descriptor:
+
+strip(...)
+    S.strip([chars]) -> str
+
+    Return a copy of the string S with leading and trailing
+    whitespace removed.
+    If chars is given and not None, remove characters in chars instead.
+
+>>> l = [1, 2.0, "ok", [1,2,3]]
+>>> type(l)
+<class 'list'>
+>>> len(l)
+4
+>>> "ok" in l
+True
+>>> "ok" not in l
+False
+>>> l == [1,2,3]
+False
+>>> l != [1,2]
+True
+>>> for e in l:
+...     print(e)
+...
+1
+2.0
+ok
+[1, 2, 3]
+>>> l
+[1, 2.0, 'ok', [1, 2, 3]]
+>>> l[0]
+1
+>>> l[-1]
+[1, 2, 3]
+>>> l[-1]  = 20
+>>> l
+[1, 2.0, 'ok', 20]
+>>> l2 = l + [34,45]
+>>> l2
+[1, 2.0, 'ok', 20, 34, 45]
+>>> l
+[1, 2.0, 'ok', 20]
+>>> l.append(56)
+>>> l
+[1, 2.0, 'ok', 20, 56]
+>>> l += [67,78]
+>>> l
+[1, 2.0, 'ok', 20, 56, 67, 78]
+>>> l.append([56, 56])
+>>> l
+[1, 2.0, 'ok', 20, 56, 67, 78, [56, 56]]
+>>> [1,2,3,4]
+[1, 2, 3, 4]
+>>> []
+[]
+>>> [2]
+[2]
+>>> [1,2]
+[1, 2]
+>>> 2 * 2
+4
+>>> 2 % 2 == 1
+False
+>>> 3 % 2 == 1
+True
+>>> 3/ 2
+1.5
+>>> 3/ 2 == 1
+False
+>>> 3// 2 == 1
+True
+>>> 10 / 2 == 5
+True
+>>> 12 / 2 == 6
+True
+>>> 12 % 2 == 0
+True
+>>> 13 % 2 == 0
+False
+>>> input = '[1,2,3,4]'
+>>> list(input)
+['[', '1', ',', '2', ',', '3', ',', '4', ']']
+>>> input = '[1,2,3,4]'
+>>> output = []
+>>> for e in input.strip("[]").split(","):
+...     output.append(int(e))
+...
+>>> output
+[1, 2, 3, 4]
+>>> [1,2,3,4]
+[1, 2, 3, 4]
+>>> l = ["ok","nok"]
+>>> l[0]
+'ok'
+>>> l
+['ok', 'nok']
+>>>
+>>> ["1","3"][0]
+'1'
+>>> ["1","3"][1]
+'3'
+>>> #e1 = e.split(",")[0]
+...
+>>> #res = e1.split(":")[1]
+...
+>>> help(str.replace)
+Help on method_descriptor:
+
+replace(...)
+    S.replace(old, new[, count]) -> str
+
+    Return a copy of S with all occurrences of substring
+    old replaced by new.  If the optional argument count is
+    given, only the first count occurrences are replaced.
+
+>>> help(str.join)
+Help on method_descriptor:
+
+join(...)
+    S.join(iterable) -> str
+
+    Return a string which is the concatenation of the strings in the
+    iterable.  The separator between elements is S.
+
+>>>
+>>> l = [1,2,3]
+>>> c = 0
+>>> while c < 3:
+...     l = [l]
+...     c += 1
+...
+>>> l
+[[[[1, 2, 3]]]]
+>>> l2 = [1,2,3]
+>>> l2 = [l2]
+>>> l2
+[[1, 2, 3]]
+>>> l2 = [l2]
+>>> l2
+[[[1, 2, 3]]]
+>>> l2 = [l2]
+>>> l2
+[[[[1, 2, 3]]]]
+>>> type(l)
+<class 'list'>
+>>> len(l)
+1
+>>> l[0]
+[[[1, 2, 3]]]
+>>> type(l[0])
+<class 'list'>
+>>> len(l[0])
+1
+>>> l[0][0]
+[[1, 2, 3]]
+>>> len(l[0][0])
+1
+>>> l[0][0][0]
+[1, 2, 3]
+>>> l[0][0][0][2] = 30
+>>> l
+[[[[1, 2, 30]]]]
+>>> l2 = [ 1, [2, [3,4],[5],[],]]
+>>> l2_1 = [ 1, [2, [3,40],[5],[],]]
+>>> l2_2 = [ 1, [2, [3,4],[5],[],30]]
+>>> l2_3 = [ 1, [2, [3,4],[5],[20,23],]]
+>>> l2_4 = [ 1, [2, [3,4],[5],[],], "OK"]
+>>> l2 = [ 1, [2, [3,4],[5],[]]]
+>>> l2[1][1][1] = 40
+>>> l2
+[1, [2, [3, 40], [5], []]]
+>>> l2[1]
+[2, [3, 40], [5], []]
+>>> l2[1][1]
+[3, 40]
+>>> l2[1][1][1]
+40
+>>> l2 = [ 1, [2, [3,4],[5],[]]]
+>>> l1[1]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'l1' is not defined
+>>> l2[1]
+[2, [3, 4], [5], []]
+>>> l2[1][1]
+[3, 4]
+>>> l = [1,2,3,4]
+>>> l[2]
+3
+>>> l = [1,2,[3],4]
+>>> l[2]
+[3]
+>>> l2[1][1]
+[3, 4]
+>>> l2 = [ 1, [2, [3,4],[5],[]]]
+>>> l2[1].append(30)
+>>> l2
+[1, [2, [3, 4], [5], [], 30]]
+>>> l2[1][3] += [20,23]
+>>> l2
+[1, [2, [3, 4], [5], [20, 23], 30]]
+>>> l2 = [ 1, [2, [3,4],[5],[]]]
+>>> l2.append("OK")
+>>> l2
+[1, [2, [3, 4], [5], []], 'OK']
+>>>
+
+
+
+
+
+################first.py#################
+from  __future__  import print_function, division
+import sys 
+
+#a = sys.argv[1]
+#b = sys.argv[2]
+#print(int(a) + int(b))
+
+#
+s = "Hello World"
+#H - 1
+#e - 1
+#l - 3
+#...
+
+#Take each char(ch) from s 
+for ch in s:
+    #initialize counter 
+    counter = 0 
+    #Take each char(ch1) from s 
+    for ch1 in s:
+        #if ch and ch1 are same 
+        if ch == ch1:
+            #increment counter
+            counter += 1
+    #print ch and counter 
+    print(ch, "-", counter)
+
+##
+input = "aaabcaabcd"
+output = "abcd"
+
+#create one empty string(output)
+output = ""
+#Take each char(ch) from input
+for  ch in input:
+    #If ch does not exist in output 
+    if ch not in output:
+        #concatenate ch to output and replace old output by above 
+        output = output + ch 
+
+## 1,2,3,4,5,6,7,8,9
+output = "123456789"
+
+# create one empty string(output)
+# Take each number(e) from suitable range 
+    # concatenate e to output (*)
+    # and replace old output by above 
+
+output = ""
+for e in range(1,10):
+    output += str(e)  #output = output + str(e)
+print(output)
+
+
+input="ABCDEF1234567890"
+# Take two two character(one byte) from above 
+# (which are in hex digit )
+# Convert to int  , int("AB", base=16)
+#Sum all and then find mod with 255, that is your checksum 
+
+
+res = 0
+for i in range(len(input)//2):
+     hex_str = input[i* 2 : 2*i+2]
+     res += int(hex_str, base=16)
+
+print(res % 255) 
+################################################
+[]   list - Indexing:A , Duplicates:A, insertion order-Y, Mutable 
+()       tuple - Immutable, ---above---
+   
+   
+{}   set - Duplicates - NA , IO - No, Indexing - No , Mutable
+       frozenset - Immutable, ---above---
+    
+--------------------------
+dict 
+--------------------------
+#list - NO NO 
+lst = [1,3,6,2] 
+out = [1,9]
+
+Create empty list (out) 
+Take each element(e) from lst 
+    if e is odd
+        then only append to empty list, out 
+    
+out = []
+for e in lst:
+    out.append(e*e)
+print(out)
+
+
+out = []
+for e in lst:
+    if e % 2 == 1:
+        out.append(e)
+print(out)
+
+out = []
+for e in lst:
+    if e % 2 == 1:
+        out.append(e*e)
+print(out)
+
+##########################
+input = '[1,2,3,4]'
+output = [1,2,3,4]
+
+strip input with '[]' then split with ',' , store to s2 
+create empty list 
+Take each element(e) from s2 
+    convert e to int and append to empty list 
+
+output = []
+for e in input.strip("[]").split(","):
+    output.append(int(e))
+
+#Q
+input = 'Name:ABC,age=20|Name:XYZ,age=30'
+output = 'Name:Abc,age=20|Name:Xyz,age=30'
+
+#Split input with "|" and store to s2 
+s2 = input.split("|")
+#Create empty list(out)
+out = []
+#Take each element(e) from s2
+for e in s2:
+    #split e with ",", take first part (e1)
+    e1 = e.split(",")[0]
+    #Split e1 with ":", take 2nd part (res)
+    res = e1.split(":")[1]
+    #Capitalize res and store result to res2 
+    res2 = res.title()
+    #replace res by res2 in e and append to empty list  
+    e2 = e.replace(res, res2)
+    out.append(e2)
+output = '|'.join(out)
+
+
+l2 = [ 1, [2, [3,4],[5],[]]]
+
+l2_1 # [ 1, [2, [3,40],[5],[]]]
+l2[1][1][1] = 40
+ 
+l2_2 # [ 1, [2, [3,4],[5],[],30]]
+l2[1].append(30)
+
+l2_3 # [ 1, [2, [3,4],[5],[20,23]]]
+l2[1][3] += [20,23] 
+
+l2_4 # [ 1, [2, [3,4],[5],[]], "OK"]
+l2.append("OK")
+
+
+
