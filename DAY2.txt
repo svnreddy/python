@@ -1,0 +1,1953 @@
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+D:\PPT>cd python\hands
+
+D:\PPT\python\hands>python
+Python 3.5.2 (v3.5.2:4def2a2901a5, Jun 25 2016, 22:18:55) [MSC v.1900 64 bit (AM
+D64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> input = 'Name:ABC,age=20|Name:XYZ,age=30'
+>>> output = 'Name:Abc,age=20|Name:Xyz,age=30'
+>>>
+>>> #Split input with "|" and store to s2
+... s2 = input.split("|")
+>>> #Create empty list(out)
+... out = []
+>>> #Take each element(e) from s2
+... for e in s2:
+...     #split e with ",", take first part (e1)
+...     e1 = e.split(",")[0]
+...     #Split e1 with ":", take 2nd part (res)
+...     res = e1.split(":")[1]
+...     #Capitalize res and store result to res2
+...     res2 = res.title()
+...     #replace res by res2 in e and append to empty list
+...     e2 = e.replace(res, res2)
+...     out.append(e2)
+...
+>>> out
+['Name:Abc,age=20', 'Name:Xyz,age=30']
+>>> '|'.join(out)
+'Name:Abc,age=20|Name:Xyz,age=30'
+>>> help(str.join)
+Help on method_descriptor:
+
+join(...)
+    S.join(iterable) -> str
+
+    Return a string which is the concatenation of the strings in the
+    iterable.  The separator between elements is S.
+
+>>> help(str.replace)
+Help on method_descriptor:
+
+replace(...)
+    S.replace(old, new[, count]) -> str
+
+    Return a copy of S with all occurrences of substring
+    old replaced by new.  If the optional argument count is
+    given, only the first count occurrences are replaced.
+
+>>> help(str.split)
+Help on method_descriptor:
+
+split(...)
+    S.split(sep=None, maxsplit=-1) -> list of strings
+
+    Return a list of the words in S, using sep as the
+    delimiter string.  If maxsplit is given, at most maxsplit
+    splits are done. If sep is not specified or is None, any
+    whitespace string is a separator and empty strings are
+    removed from the result.
+
+>>> dir(str)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '_
+_eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs
+__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__'
+, '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__r
+epr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subcl
+asshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', '
+expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isd
+ecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'issp
+ace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'pa
+rtition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip
+', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate
+', 'upper', 'zfill']
+>>> dir(list)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__'
+, '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__'
+, '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__'
+, '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_e
+x__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__s
+izeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'ex
+tend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>> l = [1,2,3]
+>>> len(l)
+3
+>>> 2 in l
+True
+>>> for e in l:
+...     print(e)
+...
+1
+2
+3
+>>> l[0]
+1
+>>> l[::-1]
+[3, 2, 1]
+>>> l[::2]
+[1, 3]
+>>> l[0] = 3
+>>> l
+[3, 2, 3]
+>>> l[:0] = [99,100]
+>>> l
+[99, 100, 3, 2, 3]
+>>> l[len(l):] = [34,35]
+>>> l
+[99, 100, 3, 2, 3, 34, 35]
+>>> l[2:2] = [56,65]
+>>> l
+[99, 100, 56, 65, 3, 2, 3, 34, 35]
+>>> #l[start:end:step]
+...
+>>> l[1:4] = ["OK"]
+>>> l
+[99, 'OK', 3, 2, 3, 34, 35]
+>>> dir(list)
+['__add__', '__class__', '__contains__', '__delattr__', '__delitem__', '__dir__'
+, '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__'
+, '__gt__', '__hash__', '__iadd__', '__imul__', '__init__', '__iter__', '__le__'
+, '__len__', '__lt__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_e
+x__', '__repr__', '__reversed__', '__rmul__', '__setattr__', '__setitem__', '__s
+izeof__', '__str__', '__subclasshook__', 'append', 'clear', 'copy', 'count', 'ex
+tend', 'index', 'insert', 'pop', 'remove', 'reverse', 'sort']
+>>> l
+[99, 'OK', 3, 2, 3, 34, 35]
+>>> l = l[1:]
+>>> l
+['OK', 3, 2, 3, 34, 35]
+>>> l = l[:-1]
+>>> l
+['OK', 3, 2, 3, 34]
+>>> del l[0]
+>>> l
+[3, 2, 3, 34]
+>>> d l[0:1]
+  File "<stdin>", line 1
+    d l[0:1]
+      ^
+SyntaxError: invalid syntax
+>>> del l[0:1]
+>>> l
+[2, 3, 34]
+>>> a = 2
+>>> b = 1
+>>> a,b = b, a
+>>> a
+1
+>>> b
+2
+>>> head, *tail = l
+>>> head
+2
+>>> tail
+[3, 34]
+>>> l = [1,2,3,4]
+>>> a, *b, c = l
+>>> a
+1
+>>> b
+[2, 3]
+>>> c
+4
+>>> a, *b, c = [1,2]
+>>> a
+1
+>>> b
+[]
+>>> c
+2
+>>> l
+[1, 2, 3, 4]
+>>> l2 = [l,l]
+>>> l2
+[[1, 2, 3, 4], [1, 2, 3, 4]]
+>>> l2 = [*l, *l]
+>>> l2
+[1, 2, 3, 4, 1, 2, 3, 4]
+>>> l = [ [1,[2,3]], [4,[5,6]], [7,[8,9]]]
+>>> for e in l:
+...     print(e[0])
+...
+1
+4
+7
+>>> for e in l:
+...     print(e[1][0])
+...
+2
+5
+8
+>>> for f,r in l:
+...     print(f)
+...
+1
+4
+7
+>>> for f,(f1,f2) in l:
+...     print(f2)
+...
+3
+6
+9
+>>> res = []
+>>> for f,(f1,f2) in l:
+...     res += [f,f1,f2]
+...
+>>> res
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+>>> t = (1,2,3,[1,2])
+>>> type(t)
+<class 'tuple'>
+>>> te = ()
+>>> tuple(te)
+()
+>>> len(t)
+4
+>>> 3 in t
+True
+>>> t == (1,2)
+False
+>>> for e in t:
+...     print(e)
+...
+1
+2
+3
+[1, 2]
+>>> t[-1]
+[1, 2]
+>>> t[-1] = 23
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+>>> t[-1][-1] = 23
+>>> t
+(1, 2, 3, [1, 23])
+>>> t = (1,2,3)
+>>> t.append(30)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'tuple' object has no attribute 'append'
+>>> t2 = t + (4,5,6)
+>>> t2
+(1, 2, 3, 4, 5, 6)
+>>> t
+(1, 2, 3)
+>>> t = t + (4,5,6)
+>>> t
+(1, 2, 3, 4, 5, 6)
+>>> t2 = t + (4,5,6)
+>>> t = t2
+>>> t
+(1, 2, 3, 4, 5, 6, 4, 5, 6)
+>>> t
+(1, 2, 3, 4, 5, 6, 4, 5, 6)
+>>> t[-1] = 23
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+>>> t = 23
+>>> dir(tuple)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '_
+_eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs
+__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__'
+, '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__
+rmul__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'count', 'i
+ndex']
+>>> l = [1,2,3]
+>>> l2 = [l, l, l]
+>>> l2
+[[1, 2, 3], [1, 2, 3], [1, 2, 3]]
+>>> l2[-1][-1] = 30
+>>> l2
+[[1, 2, 30], [1, 2, 30], [1, 2, 30]]
+>>> l
+[1, 2, 30]
+>>> l2 = [l.copy(), l[:], l[:]]
+>>> l2
+[[1, 2, 30], [1, 2, 30], [1, 2, 30]]
+>>> l2[2][-1] = 30
+>>> l2[2][-1] = 300
+>>> l2
+[[1, 2, 30], [1, 2, 30], [1, 2, 300]]
+>>> l
+[1, 2, 30]
+>>> t = (1,2,3)
+>>> t2 = (t,t,t)
+>>> t2
+((1, 2, 3), (1, 2, 3), (1, 2, 3))
+>>> t2[-1][-1] = 30
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'tuple' object does not support item assignment
+>>> t
+(1, 2, 3)
+>>>
+>>> t
+(1, 2, 3)
+>>> list(t)
+[1, 2, 3]
+>>> tuple(l)
+(1, 2, 30)
+>>> list(zip(['a','b','c'], [10,20,30]))
+[('a', 10), ('b', 20), ('c', 30)]
+>>> list(enumerate(['a','b','c']))
+[(0, 'a'), (1, 'b'), (2, 'c')]
+>>> input="ABCDEF1234567890"
+>>> input[::2]
+'ACE13579'
+>>> input[1::2]
+'BDF24680'
+>>> list(zip(input[::2], input[1::2]))
+[('A', 'B'), ('C', 'D'), ('E', 'F'), ('1', '2'), ('3', '4'), ('5', '6'), ('7', '
+8'), ('9', '0')]
+>>> for l,r in list(zip(input[::2], input[1::2])):
+...     print(l+r)
+...
+AB
+CD
+EF
+12
+34
+56
+78
+90
+>>> res = 0
+>>> for l,r in list(zip(input[::2], input[1::2])):
+...      res += int(l+r, base=16)
+...
+>>> print(res % 255)
+15
+>>> res = []
+>>> for l,r in zip(input[::2], input[1::2]):
+...      res.append(int(l+r, base=16))
+...
+>>> print(sum(res) % 255)
+15
+>>> f = open(r"D:\PPT\python\hands\first.py", "rt")
+>>> lines = f.readlines()
+>>> f.close()
+>>> lines[0:5]
+['from  __future__  import print_function, division\n', 'import sys \n', '\n', '
+#a = sys.argv[1]\n', '#b = sys.argv[2]\n']
+>>> help(sum)
+Help on built-in function sum in module builtins:
+
+sum(iterable, start=0, /)
+    Return the sum of a 'start' value (default: 0) plus an iterable of numbers
+
+    When the iterable is empty, return the start value.
+    This function is intended specifically for use with numeric values and may
+    reject non-numeric types.
+
+>>> res = []
+>>> for index, line in enumerate(lines):
+...     res.append( ( index+1,len(line)) )
+...
+>>>
+>>> print(res)
+[(1, 50), (2, 12), (3, 1), (4, 17), (5, 17), (6, 24), (7, 1), (8, 2), (9, 18), (
+10, 7), (11, 7), (12, 7), (13, 5), (14, 1), (15, 28), (16, 13), (17, 25), (18, 1
+7), (19, 33), (20, 18), (21, 33), (22, 22), (23, 31), (24, 25), (25, 27), (26, 2
+8), (27, 1), (28, 3), (29, 21), (30, 16), (31, 1), (32, 33), (33, 12), (34, 31),
+ (35, 18), (36, 37), (37, 25), (38, 67), (39, 30), (40, 1), (41, 21), (42, 21),
+(43, 1), (44, 34), (45, 43), (46, 34), (47, 39), (48, 1), (49, 12), (50, 22), (5
+1, 48), (52, 14), (53, 1), (54, 1), (55, 25), (56, 47), (57, 28), (58, 39), (59,
+ 60), (60, 1), (61, 1), (62, 8), (63, 31), (64, 35), (65, 34), (66, 1), (67, 18)
+, (68, 49), (69, 67), (70, 40), (71, 4), (72, 4), (73, 62), (74, 42), (75, 5), (
+76, 27), (77, 6), (78, 27), (79, 15), (80, 17), (81, 12), (82, 1), (83, 25), (84
+, 31), (85, 16), (86, 45), (87, 5), (88, 9), (89, 14), (90, 20), (91, 11), (92,
+1), (93, 1), (94, 9), (95, 14), (96, 19), (97, 22), (98, 11), (99, 1), (100, 9),
+ (101, 14), (102, 19), (103, 24), (104, 11), (105, 1), (106, 27), (107, 20), (10
+8, 19), (109, 1), (110, 57), (111, 19), (112, 30), (113, 47), (114, 1), (115, 12
+), (116, 39), (117, 26), (118, 1), (119, 3), (120, 42), (121, 43), (122, 1), (12
+3, 39), (124, 22), (125, 24), (126, 9), (127, 30), (128, 13), (129, 44), (130, 2
+5), (131, 44), (132, 27), (133, 46), (134, 23), (135, 57), (136, 30), (137, 19),
+ (138, 23), (139, 1), (140, 1), (141, 29), (142, 1), (143, 32), (144, 17), (145,
+ 2), (146, 34), (147, 17), (148, 1), (149, 36), (150, 21), (151, 1), (152, 37),
+(153, 16), (154, 1), (155, 25), (156, 45), (157, 26), (158, 37), (159, 59), (160
+, 1), (161, 1), (162, 1), (163, 9), (164, 41), (165, 35), (166, 1), (167, 22), (
+168, 1)]
+>>> max_length = res[0][-1]
+>>> line_number = res[0][0]
+>>> for no, length in res:
+...     if length > max_l:
+...         max_length = length
+...         line_number = no
+...
+...
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+NameError: name 'max_l' is not defined
+>>> max_length = res[0][-1]
+>>> line_number = res[0][0]
+>>> for no, length in res:
+...     if length > max_length:
+...         max_length = length
+...         line_number = no
+...
+>>>
+>>> line_number
+38
+>>> list(enumerate(lines))
+[(0, 'from  __future__  import print_function, division\n'), (1, 'import sys \n'
+), (2, '\n'), (3, '#a = sys.argv[1]\n'), (4, '#b = sys.argv[2]\n'), (5, '#print(
+int(a) + int(b))\n'), (6, '\n'), (7, '#\n'), (8, 's = "Hello World"\n'), (9, '#H
+ - 1\n'), (10, '#e - 1\n'), (11, '#l - 3\n'), (12, '#...\n'), (13, '\n'), (14, '
+#Take each char(ch) from s \n'), (15, 'for ch in s:\n'), (16, '    #initialize c
+ounter \n'), (17, '    counter = 0 \n'), (18, '    #Take each char(ch1) from s \
+n'), (19, '    for ch1 in s:\n'), (20, '        #if ch and ch1 are same \n'), (2
+1, '        if ch == ch1:\n'), (22, '            #increment counter\n'), (23, '
+           counter += 1\n'), (24, '    #print ch and counter \n'), (25, '    pri
+nt(ch, "-", counter)\n'), (26, '\n'), (27, '##\n'), (28, 'input = "aaabcaabcd"\n
+'), (29, 'output = "abcd"\n'), (30, '\n'), (31, '#create one empty string(output
+)\n'), (32, 'output = ""\n'), (33, '#Take each char(ch) from input\n'), (34, 'fo
+r  ch in input:\n'), (35, '    #If ch does not exist in output \n'), (36, '    i
+f ch not in output:\n'), (37, '        #concatenate ch to output and replace old
+ output by above \n'), (38, '        output = output + ch \n'), (39, '\n'), (40,
+ '## 1,2,3,4,5,6,7,8,9\n'), (41, 'output = "123456789"\n'), (42, '\n'), (43, '#
+create one empty string(output)\n'), (44, '# Take each number(e) from suitable r
+ange \n'), (45, '    # concatenate e to output (*)\n'), (46, '    # and replace
+old output by above \n'), (47, '\n'), (48, 'output = ""\n'), (49, 'for e in rang
+e(1,10):\n'), (50, '    output += str(e)  #output = output + str(e)\n'), (51, 'p
+rint(output)\n'), (52, '\n'), (53, '\n'), (54, 'input="ABCDEF1234567890"\n'), (5
+5, '# Take two two character(one byte) from above \n'), (56, '# (which are in he
+x digit )\n'), (57, '# Convert to int  , int("AB", base=16)\n'), (58, '#Sum all
+and then find mod with 255, that is your checksum \n'), (59, '\n'), (60, '\n'),
+(61, 'res = 0\n'), (62, 'for i in range(len(input)//2):\n'), (63, '     hex_str
+= input[i* 2 : 2*i+2]\n'), (64, '     res += int(hex_str, base=16)\n'), (65, '\n
+'), (66, 'print(res % 255) \n'), (67, '#########################################
+#######\n'), (68, '[]   list - Indexing:A , Duplicates:A, insertion order-Y, Mut
+able \n'), (69, '()       tuple - Immutable, ---above---\n'), (70, '   \n'), (71
+, '   \n'), (72, '{}   set - Duplicates - NA , IO - No, Indexing - No , Mutable\
+n'), (73, '       frozenset - Immutable, ---above---\n'), (74, '    \n'), (75, '
+--------------------------\n'), (76, 'dict \n'), (77, '-------------------------
+-\n'), (78, '#list - NO NO \n'), (79, 'lst = [1,3,6,2] \n'), (80, 'out = [1,9]\n
+'), (81, '\n'), (82, 'Create empty list (out) \n'), (83, 'Take each element(e) f
+rom lst \n'), (84, '    if e is odd\n'), (85, '        then only append to empty
+ list, out \n'), (86, '    \n'), (87, 'out = []\n'), (88, 'for e in lst:\n'), (8
+9, '    out.append(e*e)\n'), (90, 'print(out)\n'), (91, '\n'), (92, '\n'), (93,
+'out = []\n'), (94, 'for e in lst:\n'), (95, '    if e % 2 == 1:\n'), (96, '
+    out.append(e)\n'), (97, 'print(out)\n'), (98, '\n'), (99, 'out = []\n'), (10
+0, 'for e in lst:\n'), (101, '    if e % 2 == 1:\n'), (102, '        out.append(
+e*e)\n'), (103, 'print(out)\n'), (104, '\n'), (105, '##########################\
+n'), (106, "input = '[1,2,3,4]'\n"), (107, 'output = [1,2,3,4]\n'), (108, '\n'),
+ (109, "strip input with '[]' then split with ',' , store to s2 \n"), (110, 'cre
+ate empty list \n'), (111, 'Take each element(e) from s2 \n'), (112, '    conver
+t e to int and append to empty list \n'), (113, '\n'), (114, 'output = []\n'), (
+115, 'for e in input.strip("[]").split(","):\n'), (116, '    output.append(int(e
+))\n'), (117, '\n'), (118, '#Q\n'), (119, "input = 'Name:ABC,age=20|Name:XYZ,age
+=30'\n"), (120, "output = 'Name:Abc,age=20|Name:Xyz,age=30'\n"), (121, '\n'), (1
+22, '#Split input with "|" and store to s2 \n'), (123, 's2 = input.split("|")\n'
+), (124, '#Create empty list(out)\n'), (125, 'out = []\n'), (126, '#Take each el
+ement(e) from s2\n'), (127, 'for e in s2:\n'), (128, '    #split e with ",", tak
+e first part (e1)\n'), (129, '    e1 = e.split(",")[0]\n'), (130, '    #Split e1
+ with ":", take 2nd part (res)\n'), (131, '    res = e1.split(":")[1]\n'), (132,
+ '    #Capitalize res and store result to res2 \n'), (133, '    res2 = res.title
+()\n'), (134, '    #replace res by res2 in e and append to empty list  \n'), (13
+5, '    e2 = e.replace(res, res2)\n'), (136, '    out.append(e2)\n'), (137, "out
+put = '|'.join(out)\n"), (138, '\n'), (139, '\n'), (140, 'l2 = [ 1, [2, [3,4],[5
+],[]]]\n'), (141, '\n'), (142, 'l2_1 # [ 1, [2, [3,40],[5],[]]]\n'), (143, 'l2[1
+][1][1] = 40\n'), (144, ' \n'), (145, 'l2_2 # [ 1, [2, [3,4],[5],[],30]]\n'), (1
+46, 'l2[1].append(30)\n'), (147, '\n'), (148, 'l2_3 # [ 1, [2, [3,4],[5],[20,23]
+]]\n'), (149, 'l2[1][3] += [20,23] \n'), (150, '\n'), (151, 'l2_4 # [ 1, [2, [3,
+4],[5],[]], "OK"]\n'), (152, 'l2.append("OK")\n'), (153, '\n'), (154, 'input="AB
+CDEF1234567890"\n'), (155, 'Take two two character(one byte) from above \n'), (1
+56, '(which are in hex digit )\n'), (157, 'Convert to int  , int("AB", base=16)\
+n'), (158, 'Sum all and then find mod with 255, that is your checksum \n'), (159
+, '\n'), (160, '\n'), (161, '\n'), (162, 'res = []\n'), (163, 'for l,r in zip(in
+put[::2], input[1::2]):\n'), (164, '     res.append(int(l+r, base=16))\n'), (165
+, '\n'), (166, 'print(sum(res) % 255)\n'), (167, '\n')]
+>>> res = []
+>>> for line in lines:
+...     line1 = line.strip()
+...     if len(line1) > 0 and line1[0] != '#':
+...         res.append(line)
+...
+>>> print(len(res))
+91
+>>>
+>>> res = []
+>>> for line in lines:
+...     line1 = line.strip()
+...     if line1 and line1[0] != '#':
+...         res.append(line)
+...
+>>> print(len(res))
+91
+>>>
+>>>
+>>> import glob
+>>> glob.glob("*.py")
+['first.py']
+>>> [91, ]
+[91]
+>>> import glob
+>>> locs = []
+>>> for filename in glob.glob("*.py"):
+...     f = open(filename, "rt")
+...     lines = f.readlines()  #list of string
+...     f.close()
+...     res = []
+...     for line in lines:
+...         line1 = line.strip()
+...         if line1 and line1[0] != '#':
+...             res.append(line)
+...     locs.append(len(res))
+...
+>>> print(sum(locs))
+124
+>>>
+>>> s1 = {1,2,1,2,3}
+>>> s1
+{1, 2, 3}
+>>> len(s1)
+3
+>>> 2 in s1
+True
+>>> s1 == {3,2,1}
+True
+>>> for e in s1:
+...     print(e)
+...
+1
+2
+3
+>>> s1[0]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'set' object does not support indexing
+>>> s1.append(3)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'set' object has no attribute 'append'
+>>> s1.add(10)
+>>> s1
+{10, 1, 2, 3}
+>>> list(set([1,1,1,2]))
+[1, 2]
+>>> es = set()
+>>> ed = {}
+>>> type(ed)
+<class 'dict'>
+>>> type(es)
+<class 'set'>
+>>> s1 = {1,2,3,4}
+>>> s2 = {4,5,6}
+>>> s1 | s2
+{1, 2, 3, 4, 5, 6}
+>>> s1 & s2
+{4}
+>>> s1 - s2
+{1, 2, 3}
+>>> s1 ^ s2
+{1, 2, 3, 5, 6}
+>>> (s1-s2) |(s2-s1)
+{1, 2, 3, 5, 6}
+>>> s = "OK"
+>>> rs = r"OK"
+>>> su = u"OK"
+>>> sb = b"OK"
+>>> type(s), type(rs), type(su), type(sb)
+(<class 'str'>, <class 'str'>, <class 'str'>, <class 'bytes'>)
+>>> len(r"\n")
+2
+>>> len("\n")
+1
+>>> rs.encode("utf-8")
+b'OK'
+>>> sb.decode("utf-8")
+'OK'
+>>> ord("\n")
+10
+>>> sb.decode("ascii")
+'OK'
+>>> dir(bytes)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '_
+_eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs
+__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__'
+, '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__r
+epr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subcl
+asshook__', 'capitalize', 'center', 'count', 'decode', 'endswith', 'expandtabs',
+ 'find', 'fromhex', 'hex', 'index', 'isalnum', 'isalpha', 'isdigit', 'islower',
+'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans'
+, 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'r
+strip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'tran
+slate', 'upper', 'zfill']
+>>> dir(str)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '_
+_eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs
+__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__'
+, '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__r
+epr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subcl
+asshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', '
+expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isd
+ecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'issp
+ace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'pa
+rtition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip
+', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate
+', 'upper', 'zfill']
+>>>
+>>> [1,2] == [2,1]
+False
+>>> set(dir(bytes)) - set(dir(str))
+{'decode', 'hex', 'fromhex'}
+>>> set(dir(str)) - set(dir(bytes))
+{'isdecimal', 'format', 'isnumeric', 'isidentifier', 'encode', 'format_map', 'is
+printable', 'casefold'}
+>>> set(dir(str)) ^ set(dir(bytes))
+{'format', 'decode', 'casefold', 'isdecimal', 'isprintable', 'hex', 'fromhex', '
+format_map', 'encode', 'isnumeric', 'isidentifier'}
+>>> lst = [ {1,2}, {2,3}]
+>>> (1,2)
+(1, 2)
+>>> [1,2]
+[1, 2]
+>>> {1,2}
+{1, 2}
+>>> {[1,2], [2,3] }
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+>>> {1,1,2,3}
+{1, 2, 3}
+>>> hash(1)
+1
+>>> hash("ok")
+-8713770128342304504
+>>> hash( (1,2) )
+3713081631934410656
+>>> hash( (2,1) )
+3713082714465905806
+>>> hash( [2,1] )
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+>>> d = {'ok': 1, 'nok': 2}
+>>> len(d)
+2
+>>> 'ok' in d
+True
+>>> k = 'ok'
+>>> d[k]
+1
+>>> d['nok']
+2
+>>> d['new'] = [20,10]
+>>> d
+{'ok': 1, 'nok': 2, 'new': [20, 10]}
+>>> d['new'] = 30
+>>> d
+{'ok': 1, 'nok': 2, 'new': 30}
+>>> for k in d:
+...     print(k, d[k])
+...
+ok 1
+nok 2
+new 30
+>>> {}
+{}
+>>> set()
+set()
+>>> d
+{'ok': 1, 'nok': 2, 'new': 30}
+>>> del d['ok']
+>>> d
+{'nok': 2, 'new': 30}
+>>>
+>>> d.keys()
+dict_keys(['nok', 'new'])
+>>> d.values()
+dict_values([2, 30])
+>>> d.items()
+dict_items([('nok', 2), ('new', 30)])
+>>> for k,v in d.items():
+...     print(k,v)
+...
+nok 2
+new 30
+>>> import glob
+>>> directory = r"d:\desktop\ppt"
+>>> glob.glob(directory + "/*")
+[]
+>>> directory = r"d:\ppt"
+>>> glob.glob(directory + "/*")
+['d:\\ppt\\android', 'd:\\ppt\\C++', 'd:\\ppt\\clojure', 'd:\\ppt\\convert_abs_r
+el.pl', 'd:\\ppt\\d.html', 'd:\\ppt\\F#', 'd:\\ppt\\ffmpeg Documentation.mht', '
+d:\\ppt\\flink', 'd:\\ppt\\gdrive', 'd:\\ppt\\Git-2.17.0-64-bit.exe', 'd:\\ppt\\
+git-command.txt', 'd:\\ppt\\go', 'd:\\ppt\\Groovy', 'd:\\ppt\\haskell', 'd:\\ppt
+\\js', 'd:\\ppt\\kotlin', 'd:\\ppt\\lua', 'd:\\ppt\\MNIST_data', 'd:\\ppt\\ms.ne
+t', 'd:\\ppt\\Network', 'd:\\ppt\\Objective-c', 'd:\\ppt\\open.pl', 'd:\\ppt\\Pe
+rl', 'd:\\ppt\\py-data-module', 'd:\\ppt\\python', 'd:\\ppt\\QuickGlance.txt', '
+d:\\ppt\\R', 'd:\\ppt\\removehttp.pl', 'd:\\ppt\\route.txt', 'd:\\ppt\\ruby', 'd
+:\\ppt\\s.html', 'd:\\ppt\\sample.db', 'd:\\ppt\\scala', 'd:\\ppt\\shell', 'd:\\
+ppt\\spark', 'd:\\ppt\\start-stop.txt', 'd:\\ppt\\swift', 'd:\\ppt\\var.txt', 'd
+:\\ppt\\var_thisMachine.txt']
+>>> import os.path
+>>> glob.glob(os.path.join(directory , "*"))
+['d:\\ppt\\android', 'd:\\ppt\\C++', 'd:\\ppt\\clojure', 'd:\\ppt\\convert_abs_r
+el.pl', 'd:\\ppt\\d.html', 'd:\\ppt\\F#', 'd:\\ppt\\ffmpeg Documentation.mht', '
+d:\\ppt\\flink', 'd:\\ppt\\gdrive', 'd:\\ppt\\Git-2.17.0-64-bit.exe', 'd:\\ppt\\
+git-command.txt', 'd:\\ppt\\go', 'd:\\ppt\\Groovy', 'd:\\ppt\\haskell', 'd:\\ppt
+\\js', 'd:\\ppt\\kotlin', 'd:\\ppt\\lua', 'd:\\ppt\\MNIST_data', 'd:\\ppt\\ms.ne
+t', 'd:\\ppt\\Network', 'd:\\ppt\\Objective-c', 'd:\\ppt\\open.pl', 'd:\\ppt\\Pe
+rl', 'd:\\ppt\\py-data-module', 'd:\\ppt\\python', 'd:\\ppt\\QuickGlance.txt', '
+d:\\ppt\\R', 'd:\\ppt\\removehttp.pl', 'd:\\ppt\\route.txt', 'd:\\ppt\\ruby', 'd
+:\\ppt\\s.html', 'd:\\ppt\\sample.db', 'd:\\ppt\\scala', 'd:\\ppt\\shell', 'd:\\
+ppt\\spark', 'd:\\ppt\\start-stop.txt', 'd:\\ppt\\swift', 'd:\\ppt\\var.txt', 'd
+:\\ppt\\var_thisMachine.txt']
+>>> dir(os.path)
+['__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '
+__name__', '__package__', '__spec__', '_get_bothseps', '_getfinalpathname', '_ge
+tfullpathname', '_getvolumepathname', 'abspath', 'altsep', 'basename', 'commonpa
+th', 'commonprefix', 'curdir', 'defpath', 'devnull', 'dirname', 'exists', 'expan
+duser', 'expandvars', 'extsep', 'genericpath', 'getatime', 'getctime', 'getmtime
+', 'getsize', 'isabs', 'isdir', 'isfile', 'islink', 'ismount', 'join', 'lexists'
+, 'normcase', 'normpath', 'os', 'pardir', 'pathsep', 'realpath', 'relpath', 'sam
+efile', 'sameopenfile', 'samestat', 'sep', 'split', 'splitdrive', 'splitext', 's
+plitunc', 'stat', 'supports_unicode_filenames', 'sys']
+>>> d = {}
+>>> for file in glob.glob(os.path.join(directory , "*")):
+...     if os.path.isfile(file) :
+...             d[file] = os.path.getsize(file)
+...
+>>> d
+{'d:\\ppt\\removehttp.pl': 181, 'd:\\ppt\\var.txt': 812, 'd:\\ppt\\Git-2.17.0-64
+-bit.exe': 40531384, 'd:\\ppt\\s.html': 12360, 'd:\\ppt\\ffmpeg Documentation.mh
+t': 489436, 'd:\\ppt\\sample.db': 2048, 'd:\\ppt\\route.txt': 2526, 'd:\\ppt\\Qu
+ickGlance.txt': 869462, 'd:\\ppt\\d.html': 96561, 'd:\\ppt\\open.pl': 96, 'd:\\p
+pt\\convert_abs_rel.pl': 1637, 'd:\\ppt\\git-command.txt': 172, 'd:\\ppt\\var_th
+isMachine.txt': 3704, 'd:\\ppt\\start-stop.txt': 46452}
+>>> command = 'tasklist'
+>>> import subprocess as S
+>>> proc = S.Popen(command, shell=True,
+...                     stdout=S.PIPE, stderr=S.PIPE,
+...                     universal_newlines=True)
+>>> stdout, stderr = proc.communicate()
+>>> print(stdout)
+
+Image Name                     PID Session Name        Session#    Mem Usage
+========================= ======== ================ =========== ============
+System Idle Process              0 Services                   0          4 K
+System                           4 Services                   0     12,664 K
+smss.exe                       348 Services                   0        200 K
+csrss.exe                      524 Services                   0      1,264 K
+wininit.exe                    580 Services                   0        408 K
+csrss.exe                      596 Console                    1     54,528 K
+winlogon.exe                   648 Console                    1      1,696 K
+services.exe                   672 Services                   0      4,040 K
+lsass.exe                      688 Services                   0      7,356 K
+svchost.exe                    760 Services                   0      5,300 K
+svchost.exe                    808 Services                   0      4,680 K
+TeraCopyService.exe            888 Services                   0        516 K
+dwm.exe                        916 Console                    1     18,792 K
+svchost.exe                    960 Services                   0     12,276 K
+svchost.exe                    996 Services                   0     20,664 K
+svchost.exe                    360 Services                   0      7,392 K
+svchost.exe                    588 Services                   0     47,560 K
+svchost.exe                   1068 Services                   0     10,292 K
+AsLdrSrv.exe                  1168 Services                   0        636 K
+GFNEXSrv.exe                  1204 Services                   0        572 K
+spoolsv.exe                   1300 Services                   0      1,996 K
+svchost.exe                   1364 Services                   0      1,972 K
+svchost.exe                   1392 Services                   0     14,292 K
+svchost.exe                   1508 Services                   0      1,512 K
+AdminService.exe              1524 Services                   0        960 K
+officeclicktorun.exe          1580 Services                   0      2,392 K
+ddmgr.exe                     1624 Services                   0        524 K
+svchost.exe                   1660 Services                   0      7,912 K
+dasHost.exe                   1672 Services                   0         56 K
+svchost.exe                   1696 Services                   0      1,292 K
+HWDeviceService64.exe         1712 Services                   0      2,708 K
+HeciServer.exe                1876 Services                   0        620 K
+ouc.exe                       1976 Services                   0     15,160 K
+svchost.exe                   2000 Services                   0      2,384 K
+svchost.exe                   2040 Services                   0      1,432 K
+MsMpEng.exe                   1056 Services                   0   1,19,288 K
+Ath_CoexAgent.exe             1792 Services                   0      1,476 K
+NisSrv.exe                    2548 Services                   0      1,912 K
+svchost.exe                   2644 Services                   0      1,492 K
+HControl.exe                  1960 Console                    1      1,728 K
+taskhostex.exe                 108 Console                    1      5,820 K
+USBChargerPlus.exe            2596 Console                    1        124 K
+ACMON.exe                     2784 Console                    1        176 K
+KBFiltr.exe                   3116 Console                    1      1,120 K
+explorer.exe                  3164 Console                    1     53,980 K
+DCSHelper.exe                 3172 Console                    1      1,260 K
+ATKOSD2.exe                   3416 Console                    1      3,568 K
+DMedia.exe                    3424 Console                    1        468 K
+GoogleCrashHandler.exe        3912 Services                   0        232 K
+GoogleCrashHandler64.exe      3920 Services                   0         60 K
+igfxpers.exe                  3252 Console                    1        132 K
+igfxsrvc.exe                  3400 Console                    1      2,708 K
+BtvStack.exe                  3272 Console                    1      2,840 K
+ActivateDesktop.exe           3328 Console                    1        296 K
+hkcmd.exe                     3548 Console                    1        812 K
+flvga_tray.exe                 980 Console                    1      1,172 K
+CCleaner64.exe                3048 Console                    1        740 K
+RAVBg64.exe                   3128 Console                    1        124 K
+RAVBg64.exe                   4008 Console                    1        120 K
+RAVCpl64.exe                  4020 Console                    1        124 K
+wuauclt.exe                   2440 Console                    1        632 K
+taskhost.exe                  2576 Services                   0     11,520 K
+notepad++.exe                 2636 Console                    1     13,764 K
+cmd.exe                       4424 Console                    1      1,984 K
+conhost.exe                   4472 Console                    1      4,888 K
+python.exe                    2704 Console                    1      7,448 K
+armsvc.exe                    2816 Services                   0      6,560 K
+cmd.exe                       2580 Console                    1      2,324 K
+conhost.exe                    544 Console                    1      5,040 K
+SearchIndexer.exe             4784 Services                   0      9,064 K
+cmd.exe                       4776 Console                    1      2,064 K
+tasklist.exe                   860 Console                    1      5,784 K
+WmiPrvSE.exe                  2560 Services                   0      6,028 K
+
+>>> type(stdout)
+<class 'str'>
+>>> stdout
+'\nImage Name                     PID Session Name        Session#    Mem Usage\
+n========================= ======== ================ =========== ============\nS
+ystem Idle Process              0 Services                   0          4 K\nSys
+tem                           4 Services                   0     12,664 K\nsmss.
+exe                       348 Services                   0        200 K\ncsrss.e
+xe                      524 Services                   0      1,264 K\nwininit.e
+xe                    580 Services                   0        408 K\ncsrss.exe
+                    596 Console                    1     54,528 K\nwinlogon.exe
+                  648 Console                    1      1,696 K\nservices.exe
+                672 Services                   0      4,040 K\nlsass.exe
+              688 Services                   0      7,356 K\nsvchost.exe
+            760 Services                   0      5,300 K\nsvchost.exe
+          808 Services                   0      4,680 K\nTeraCopyService.exe
+        888 Services                   0        516 K\ndwm.exe
+      916 Console                    1     18,792 K\nsvchost.exe
+    960 Services                   0     12,276 K\nsvchost.exe
+  996 Services                   0     20,664 K\nsvchost.exe
+360 Services                   0      7,392 K\nsvchost.exe                    58
+8 Services                   0     47,560 K\nsvchost.exe                   1068
+Services                   0     10,292 K\nAsLdrSrv.exe                  1168 Se
+rvices                   0        636 K\nGFNEXSrv.exe                  1204 Serv
+ices                   0        572 K\nspoolsv.exe                   1300 Servic
+es                   0      1,996 K\nsvchost.exe                   1364 Services
+                   0      1,972 K\nsvchost.exe                   1392 Services
+                 0     14,292 K\nsvchost.exe                   1508 Services
+               0      1,512 K\nAdminService.exe              1524 Services
+             0        960 K\nofficeclicktorun.exe          1580 Services
+           0      2,392 K\nddmgr.exe                     1624 Services
+         0        524 K\nsvchost.exe                   1660 Services
+       0      7,912 K\ndasHost.exe                   1672 Services
+     0         56 K\nsvchost.exe                   1696 Services
+   0      1,292 K\nHWDeviceService64.exe         1712 Services
+ 0      2,708 K\nHeciServer.exe                1876 Services                   0
+        620 K\nouc.exe                       1976 Services                   0
+   15,160 K\nsvchost.exe                   2000 Services                   0
+  2,384 K\nsvchost.exe                   2040 Services                   0
+1,432 K\nMsMpEng.exe                   1056 Services                   0   1,19,
+288 K\nAth_CoexAgent.exe             1792 Services                   0      1,47
+6 K\nNisSrv.exe                    2548 Services                   0      1,912
+K\nsvchost.exe                   2644 Services                   0      1,492 K\
+nHControl.exe                  1960 Console                    1      1,728 K\nt
+askhostex.exe                 108 Console                    1      5,820 K\nUSB
+ChargerPlus.exe            2596 Console                    1        124 K\nACMON
+.exe                     2784 Console                    1        176 K\nKBFiltr
+.exe                   3116 Console                    1      1,120 K\nexplorer.
+exe                  3164 Console                    1     53,980 K\nDCSHelper.e
+xe                 3172 Console                    1      1,260 K\nATKOSD2.exe
+                 3416 Console                    1      3,568 K\nDMedia.exe
+               3424 Console                    1        468 K\nGoogleCrashHandle
+r.exe        3912 Services                   0        232 K\nGoogleCrashHandler6
+4.exe      3920 Services                   0         60 K\nigfxpers.exe
+         3252 Console                    1        132 K\nigfxsrvc.exe
+       3400 Console                    1      2,708 K\nBtvStack.exe
+     3272 Console                    1      2,840 K\nActivateDesktop.exe
+   3328 Console                    1        296 K\nhkcmd.exe
+ 3548 Console                    1        812 K\nflvga_tray.exe
+980 Console                    1      1,172 K\nCCleaner64.exe                304
+8 Console                    1        740 K\nRAVBg64.exe                   3128
+Console                    1        124 K\nRAVBg64.exe                   4008 Co
+nsole                    1        120 K\nRAVCpl64.exe                  4020 Cons
+ole                    1        124 K\nwuauclt.exe                   2440 Consol
+e                    1        632 K\ntaskhost.exe                  2576 Services
+                   0     11,520 K\nnotepad++.exe                 2636 Console
+                 1     13,764 K\ncmd.exe                       4424 Console
+               1      1,984 K\nconhost.exe                   4472 Console
+             1      4,888 K\npython.exe                    2704 Console
+           1      7,448 K\narmsvc.exe                    2816 Services
+         0      6,560 K\ncmd.exe                       2580 Console
+       1      2,324 K\nconhost.exe                    544 Console
+     1      5,040 K\nSearchIndexer.exe             4784 Services
+   0      9,064 K\ncmd.exe                       4776 Console
+ 1      2,064 K\ntasklist.exe                   860 Console                    1
+      5,784 K\nWmiPrvSE.exe                  2560 Services                   0
+    6,028 K\n'
+>>> stdout.splitlines()
+['', 'Image Name                     PID Session Name        Session#    Mem Usa
+ge', '========================= ======== ================ =========== ==========
+==', 'System Idle Process              0 Services                   0          4
+ K', 'System                           4 Services                   0     12,664
+ K', 'smss.exe                       348 Services                   0        200
+ K', 'csrss.exe                      524 Services                   0      1,264
+ K', 'wininit.exe                    580 Services                   0        408
+ K', 'csrss.exe                      596 Console                    1     54,528
+ K', 'winlogon.exe                   648 Console                    1      1,696
+ K', 'services.exe                   672 Services                   0      4,040
+ K', 'lsass.exe                      688 Services                   0      7,356
+ K', 'svchost.exe                    760 Services                   0      5,300
+ K', 'svchost.exe                    808 Services                   0      4,680
+ K', 'TeraCopyService.exe            888 Services                   0        516
+ K', 'dwm.exe                        916 Console                    1     18,792
+ K', 'svchost.exe                    960 Services                   0     12,276
+ K', 'svchost.exe                    996 Services                   0     20,664
+ K', 'svchost.exe                    360 Services                   0      7,392
+ K', 'svchost.exe                    588 Services                   0     47,560
+ K', 'svchost.exe                   1068 Services                   0     10,292
+ K', 'AsLdrSrv.exe                  1168 Services                   0        636
+ K', 'GFNEXSrv.exe                  1204 Services                   0        572
+ K', 'spoolsv.exe                   1300 Services                   0      1,996
+ K', 'svchost.exe                   1364 Services                   0      1,972
+ K', 'svchost.exe                   1392 Services                   0     14,292
+ K', 'svchost.exe                   1508 Services                   0      1,512
+ K', 'AdminService.exe              1524 Services                   0        960
+ K', 'officeclicktorun.exe          1580 Services                   0      2,392
+ K', 'ddmgr.exe                     1624 Services                   0        524
+ K', 'svchost.exe                   1660 Services                   0      7,912
+ K', 'dasHost.exe                   1672 Services                   0         56
+ K', 'svchost.exe                   1696 Services                   0      1,292
+ K', 'HWDeviceService64.exe         1712 Services                   0      2,708
+ K', 'HeciServer.exe                1876 Services                   0        620
+ K', 'ouc.exe                       1976 Services                   0     15,160
+ K', 'svchost.exe                   2000 Services                   0      2,384
+ K', 'svchost.exe                   2040 Services                   0      1,432
+ K', 'MsMpEng.exe                   1056 Services                   0   1,19,288
+ K', 'Ath_CoexAgent.exe             1792 Services                   0      1,476
+ K', 'NisSrv.exe                    2548 Services                   0      1,912
+ K', 'svchost.exe                   2644 Services                   0      1,492
+ K', 'HControl.exe                  1960 Console                    1      1,728
+ K', 'taskhostex.exe                 108 Console                    1      5,820
+ K', 'USBChargerPlus.exe            2596 Console                    1        124
+ K', 'ACMON.exe                     2784 Console                    1        176
+ K', 'KBFiltr.exe                   3116 Console                    1      1,120
+ K', 'explorer.exe                  3164 Console                    1     53,980
+ K', 'DCSHelper.exe                 3172 Console                    1      1,260
+ K', 'ATKOSD2.exe                   3416 Console                    1      3,568
+ K', 'DMedia.exe                    3424 Console                    1        468
+ K', 'GoogleCrashHandler.exe        3912 Services                   0        232
+ K', 'GoogleCrashHandler64.exe      3920 Services                   0         60
+ K', 'igfxpers.exe                  3252 Console                    1        132
+ K', 'igfxsrvc.exe                  3400 Console                    1      2,708
+ K', 'BtvStack.exe                  3272 Console                    1      2,840
+ K', 'ActivateDesktop.exe           3328 Console                    1        296
+ K', 'hkcmd.exe                     3548 Console                    1        812
+ K', 'flvga_tray.exe                 980 Console                    1      1,172
+ K', 'CCleaner64.exe                3048 Console                    1        740
+ K', 'RAVBg64.exe                   3128 Console                    1        124
+ K', 'RAVBg64.exe                   4008 Console                    1        120
+ K', 'RAVCpl64.exe                  4020 Console                    1        124
+ K', 'wuauclt.exe                   2440 Console                    1        632
+ K', 'taskhost.exe                  2576 Services                   0     11,520
+ K', 'notepad++.exe                 2636 Console                    1     13,764
+ K', 'cmd.exe                       4424 Console                    1      1,984
+ K', 'conhost.exe                   4472 Console                    1      4,888
+ K', 'python.exe                    2704 Console                    1      7,448
+ K', 'armsvc.exe                    2816 Services                   0      6,560
+ K', 'cmd.exe                       2580 Console                    1      2,324
+ K', 'conhost.exe                    544 Console                    1      5,040
+ K', 'SearchIndexer.exe             4784 Services                   0      9,064
+ K', 'cmd.exe                       4776 Console                    1      2,064
+ K', 'tasklist.exe                   860 Console                    1      5,784
+ K', 'WmiPrvSE.exe                  2560 Services                   0      6,028
+ K']
+>>> lines = stdout.splitlines()
+>>> lines[0:5]
+['', 'Image Name                     PID Session Name        Session#    Mem Usa
+ge', '========================= ======== ================ =========== ==========
+==', 'System Idle Process              0 Services                   0          4
+ K', 'System                           4 Services                   0     12,664
+ K']
+>>> lines[0:4]
+['', 'Image Name                     PID Session Name        Session#    Mem Usa
+ge', '========================= ======== ================ =========== ==========
+==', 'System Idle Process              0 Services                   0          4
+ K']
+>>> processes = {}
+>>> for line in stdout.splitlines()[4:]:
+...     name,pid,s,s,memory,k = lines.split()
+...     processes[pid] = {'name': name , 'memory': memory }
+...
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+AttributeError: 'list' object has no attribute 'split'
+>>> processes = {}
+>>> for line in stdout.splitlines()[4:]:
+...     name,pid,s,s,memory,k = line.split()
+...     processes[pid] = {'name': name , 'memory': memory }
+...
+>>> processes
+{'2548': {'name': 'NisSrv.exe', 'memory': '1,912'}, '1660': {'name': 'svchost.ex
+e', 'memory': '7,912'}, '960': {'name': 'svchost.exe', 'memory': '12,276'}, '304
+8': {'name': 'CCleaner64.exe', 'memory': '740'}, '3116': {'name': 'KBFiltr.exe',
+ 'memory': '1,120'}, '3272': {'name': 'BtvStack.exe', 'memory': '2,840'}, '1792'
+: {'name': 'Ath_CoexAgent.exe', 'memory': '1,476'}, '3128': {'name': 'RAVBg64.ex
+e', 'memory': '124'}, '3328': {'name': 'ActivateDesktop.exe', 'memory': '296'},
+'1976': {'name': 'ouc.exe', 'memory': '15,160'}, '1392': {'name': 'svchost.exe',
+ 'memory': '14,292'}, '648': {'name': 'winlogon.exe', 'memory': '1,696'}, '3172'
+: {'name': 'DCSHelper.exe', 'memory': '1,260'}, '888': {'name': 'TeraCopyService
+.exe', 'memory': '516'}, '3912': {'name': 'GoogleCrashHandler.exe', 'memory': '2
+32'}, '4020': {'name': 'RAVCpl64.exe', 'memory': '124'}, '1672': {'name': 'dasHo
+st.exe', 'memory': '56'}, '1960': {'name': 'HControl.exe', 'memory': '1,728'}, '
+1876': {'name': 'HeciServer.exe', 'memory': '620'}, '348': {'name': 'smss.exe',
+'memory': '200'}, '1364': {'name': 'svchost.exe', 'memory': '1,972'}, '588': {'n
+ame': 'svchost.exe', 'memory': '47,560'}, '2580': {'name': 'cmd.exe', 'memory':
+'2,324'}, '996': {'name': 'svchost.exe', 'memory': '20,664'}, '3400': {'name': '
+igfxsrvc.exe', 'memory': '2,708'}, '2704': {'name': 'python.exe', 'memory': '7,4
+48'}, '108': {'name': 'taskhostex.exe', 'memory': '5,820'}, '1204': {'name': 'GF
+NEXSrv.exe', 'memory': '572'}, '2560': {'name': 'WmiPrvSE.exe', 'memory': '6,028
+'}, '1580': {'name': 'officeclicktorun.exe', 'memory': '2,392'}, '760': {'name':
+ 'svchost.exe', 'memory': '5,300'}, '4008': {'name': 'RAVBg64.exe', 'memory': '1
+20'}, '1524': {'name': 'AdminService.exe', 'memory': '960'}, '360': {'name': 'sv
+chost.exe', 'memory': '7,392'}, '3548': {'name': 'hkcmd.exe', 'memory': '812'},
+'980': {'name': 'flvga_tray.exe', 'memory': '1,172'}, '4472': {'name': 'conhost.
+exe', 'memory': '4,888'}, '808': {'name': 'svchost.exe', 'memory': '4,680'}, '31
+64': {'name': 'explorer.exe', 'memory': '53,980'}, '1168': {'name': 'AsLdrSrv.ex
+e', 'memory': '636'}, '2816': {'name': 'armsvc.exe', 'memory': '6,560'}, '860':
+{'name': 'tasklist.exe', 'memory': '5,784'}, '2000': {'name': 'svchost.exe', 'me
+mory': '2,384'}, '2040': {'name': 'svchost.exe', 'memory': '1,432'}, '1056': {'n
+ame': 'MsMpEng.exe', 'memory': '1,19,288'}, '1300': {'name': 'spoolsv.exe', 'mem
+ory': '1,996'}, '2596': {'name': 'USBChargerPlus.exe', 'memory': '124'}, '3920':
+ {'name': 'GoogleCrashHandler64.exe', 'memory': '60'}, '916': {'name': 'dwm.exe'
+, 'memory': '18,792'}, '2576': {'name': 'taskhost.exe', 'memory': '11,520'}, '54
+4': {'name': 'conhost.exe', 'memory': '5,040'}, '3252': {'name': 'igfxpers.exe',
+ 'memory': '132'}, '3416': {'name': 'ATKOSD2.exe', 'memory': '3,568'}, '672': {'
+name': 'services.exe', 'memory': '4,040'}, '1712': {'name': 'HWDeviceService64.e
+xe', 'memory': '2,708'}, '2440': {'name': 'wuauclt.exe', 'memory': '632'}, '1624
+': {'name': 'ddmgr.exe', 'memory': '524'}, '4': {'name': 'System', 'memory': '12
+,664'}, '580': {'name': 'wininit.exe', 'memory': '408'}, '1508': {'name': 'svcho
+st.exe', 'memory': '1,512'}, '2636': {'name': 'notepad++.exe', 'memory': '13,764
+'}, '2644': {'name': 'svchost.exe', 'memory': '1,492'}, '2784': {'name': 'ACMON.
+exe', 'memory': '176'}, '1068': {'name': 'svchost.exe', 'memory': '10,292'}, '52
+4': {'name': 'csrss.exe', 'memory': '1,264'}, '3424': {'name': 'DMedia.exe', 'me
+mory': '468'}, '1696': {'name': 'svchost.exe', 'memory': '1,292'}, '4784': {'nam
+e': 'SearchIndexer.exe', 'memory': '9,064'}, '4424': {'name': 'cmd.exe', 'memory
+': '1,984'}, '596': {'name': 'csrss.exe', 'memory': '54,528'}, '688': {'name': '
+lsass.exe', 'memory': '7,356'}, '4776': {'name': 'cmd.exe', 'memory': '2,064'}}
+>>>
+>>>
+>>> s = '1,912'
+>>> int(s)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: invalid literal for int() with base 10: '1,912'
+>>> s.replace(',', '')
+'1912'
+>>> int(s.replace(',', ''))
+1912
+>>> processes = {}
+>>> for line in stdout.splitlines()[4:]:
+...     name,pid,s,s,memory,k = line.split()
+...     processes[int(pid)] = {'name': name , 'memory': int(memory.replace(',',
+'')) }
+...
+...
+>>> processes
+{1792: {'name': 'Ath_CoexAgent.exe', 'memory': 1476}, 3328: {'name': 'ActivateDe
+sktop.exe', 'memory': 296}, 3252: {'name': 'igfxpers.exe', 'memory': 132}, 4: {'
+name': 'System', 'memory': 12664}, 4424: {'name': 'cmd.exe', 'memory': 1984}, 64
+8: {'name': 'winlogon.exe', 'memory': 1696}, 1068: {'name': 'svchost.exe', 'memo
+ry': 10292}, 524: {'name': 'csrss.exe', 'memory': 1264}, 3116: {'name': 'KBFiltr
+.exe', 'memory': 1120}, 1168: {'name': 'AsLdrSrv.exe', 'memory': 636}, 3416: {'n
+ame': 'ATKOSD2.exe', 'memory': 3568}, 1300: {'name': 'spoolsv.exe', 'memory': 19
+96}, 3048: {'name': 'CCleaner64.exe', 'memory': 740}, 4020: {'name': 'RAVCpl64.e
+xe', 'memory': 124}, 1696: {'name': 'svchost.exe', 'memory': 1292}, 688: {'name'
+: 'lsass.exe', 'memory': 7356}, 2596: {'name': 'USBChargerPlus.exe', 'memory': 1
+24}, 1960: {'name': 'HControl.exe', 'memory': 1728}, 3164: {'name': 'explorer.ex
+e', 'memory': 53980}, 4472: {'name': 'conhost.exe', 'memory': 4888}, 1580: {'nam
+e': 'officeclicktorun.exe', 'memory': 2392}, 760: {'name': 'svchost.exe', 'memor
+y': 5300}, 2580: {'name': 'cmd.exe', 'memory': 2324}, 1712: {'name': 'HWDeviceSe
+rvice64.exe', 'memory': 2708}, 1672: {'name': 'dasHost.exe', 'memory': 56}, 4008
+: {'name': 'RAVBg64.exe', 'memory': 120}, 1204: {'name': 'GFNEXSrv.exe', 'memory
+': 572}, 2576: {'name': 'taskhost.exe', 'memory': 11520}, 1976: {'name': 'ouc.ex
+e', 'memory': 15160}, 2548: {'name': 'NisSrv.exe', 'memory': 1912}, 2704: {'name
+': 'python.exe', 'memory': 7448}, 4784: {'name': 'SearchIndexer.exe', 'memory':
+9064}, 3548: {'name': 'hkcmd.exe', 'memory': 812}, 2816: {'name': 'armsvc.exe',
+'memory': 6560}, 960: {'name': 'svchost.exe', 'memory': 12276}, 672: {'name': 's
+ervices.exe', 'memory': 4040}, 2440: {'name': 'wuauclt.exe', 'memory': 632}, 580
+: {'name': 'wininit.exe', 'memory': 408}, 3912: {'name': 'GoogleCrashHandler.exe
+', 'memory': 232}, 2636: {'name': 'notepad++.exe', 'memory': 13764}, 4776: {'nam
+e': 'cmd.exe', 'memory': 2064}, 588: {'name': 'svchost.exe', 'memory': 47560}, 3
+172: {'name': 'DCSHelper.exe', 'memory': 1260}, 2560: {'name': 'WmiPrvSE.exe', '
+memory': 6028}, 2000: {'name': 'svchost.exe', 'memory': 2384}, 2040: {'name': 's
+vchost.exe', 'memory': 1432}, 1364: {'name': 'svchost.exe', 'memory': 1972}, 327
+2: {'name': 'BtvStack.exe', 'memory': 2840}, 544: {'name': 'conhost.exe', 'memor
+y': 5040}, 1624: {'name': 'ddmgr.exe', 'memory': 524}, 1508: {'name': 'svchost.e
+xe', 'memory': 1512}, 348: {'name': 'smss.exe', 'memory': 200}, 3424: {'name': '
+DMedia.exe', 'memory': 468}, 2784: {'name': 'ACMON.exe', 'memory': 176}, 3920: {
+'name': 'GoogleCrashHandler64.exe', 'memory': 60}, 996: {'name': 'svchost.exe',
+'memory': 20664}, 1056: {'name': 'MsMpEng.exe', 'memory': 119288}, 360: {'name':
+ 'svchost.exe', 'memory': 7392}, 860: {'name': 'tasklist.exe', 'memory': 5784},
+108: {'name': 'taskhostex.exe', 'memory': 5820}, 980: {'name': 'flvga_tray.exe',
+ 'memory': 1172}, 1392: {'name': 'svchost.exe', 'memory': 14292}, 808: {'name':
+'svchost.exe', 'memory': 4680}, 2644: {'name': 'svchost.exe', 'memory': 1492}, 1
+524: {'name': 'AdminService.exe', 'memory': 960}, 3400: {'name': 'igfxsrvc.exe',
+ 'memory': 2708}, 596: {'name': 'csrss.exe', 'memory': 54528}, 3128: {'name': 'R
+AVBg64.exe', 'memory': 124}, 888: {'name': 'TeraCopyService.exe', 'memory': 516}
+, 1876: {'name': 'HeciServer.exe', 'memory': 620}, 916: {'name': 'dwm.exe', 'mem
+ory': 18792}, 1660: {'name': 'svchost.exe', 'memory': 7912}}
+>>>
+>>> import re
+>>> s = "Hello World"
+>>> sp = r"\w\w\w\w\w"
+>>> re.findall(sp,s)
+['Hello', 'World']
+>>> re.findall(r"\w+",s)
+['Hello', 'World']
+>>> re.findall(r"Hello\s+(\w+)",s)
+['World']
+>>> s1 = "tasklist.exe                  4172 Console                    1      5
+,800 K"
+>>> re.findall(r"\w+",s1)
+['tasklist', 'exe', '4172', 'Console', '1', '5', '800', 'K']
+>>> re.findall(r"(\w+\.exe)",s1)
+['tasklist.exe']
+>>> re.findall(r"(\w+\.exe)\s+(\d+)\s+(\w+)\s(\d+)",s1)
+[]
+>>> re.findall(r"(\w+\.exe)\s+(\d+)",s1)
+[('tasklist.exe', '4172')]
+>>> re.findall(r"(\w+\.exe)\s+(\d+)\s+(\w+)",s1)
+[('tasklist.exe', '4172', 'Console')]
+>>> re.findall(r"(\w+\.exe)\s+(\d+)\s+(\w+)\s+(\d+)\s+",s1)
+[('tasklist.exe', '4172', 'Console', '1')]
+>>> re.findall(r"(\w+\.exe)\s+(\d+)\s+(\w+)\s+(\d+)\s+(\d+)",s1)
+[('tasklist.exe', '4172', 'Console', '1', '5')]
+>>> s1
+'tasklist.exe                  4172 Console                    1      5,800 K'
+>>> re.findall(r"(\w+\.exe)\s+(\d+)\s+(\w+)\s+(\d+)\s+([\d,]+)",s1)
+[('tasklist.exe', '4172', 'Console', '1', '5,800')]
+>>> re.findall(r"([\w\.]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+([\d,]+)",s1)
+[('tasklist.exe', '4172', 'Console', '1', '5,800')]
+>>> s2 = "System Idle Process              0 Services                   0
+   4 K"
+>>> re.findall(r"([\w\.]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+([\d,]+)",s2)
+[('Process', '0', 'Services', '0', '4')]
+>>> re.findall(r"([\w\. ]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+([\d,]+)",s2)
+[('System Idle Process             ', '0', 'Services', '0', '4')]
+>>> processes = {}
+>>> import re
+>>> for line in stdout.splitlines()[4:]:
+...     name,pid,s,s,memory = re.findall(r"([\w\. ]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+
+([\d,]+)",line)
+...     processes[int(pid)] = {'name': name , 'memory': int(memory.replace(',',
+'')) }
+...
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+ValueError: not enough values to unpack (expected 5, got 1)
+>>>
+>>>
+>>> processes = {}
+>>> import re
+>>> sp = r"([\w\. ]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+([\d,]+)"
+>>> for line in stdout.splitlines()[3:]:
+...     #name,pid,s,s,memory = re.findall(sp,line)
+...     #processes[int(pid)] = {'name': name , 'memory': int(memory.replace(',',
+ '')) }
+...     print(re.findall(sp,line))
+...
+[('System Idle Process             ', '0', 'Services', '0', '4')]
+[('System                          ', '4', 'Services', '0', '12,664')]
+[('smss.exe                      ', '348', 'Services', '0', '200')]
+[('csrss.exe                     ', '524', 'Services', '0', '1,264')]
+[('wininit.exe                   ', '580', 'Services', '0', '408')]
+[('csrss.exe                     ', '596', 'Console', '1', '54,528')]
+[('winlogon.exe                  ', '648', 'Console', '1', '1,696')]
+[('services.exe                  ', '672', 'Services', '0', '4,040')]
+[('lsass.exe                     ', '688', 'Services', '0', '7,356')]
+[('svchost.exe                   ', '760', 'Services', '0', '5,300')]
+[('svchost.exe                   ', '808', 'Services', '0', '4,680')]
+[('TeraCopyService.exe           ', '888', 'Services', '0', '516')]
+[('dwm.exe                       ', '916', 'Console', '1', '18,792')]
+[('svchost.exe                   ', '960', 'Services', '0', '12,276')]
+[('svchost.exe                   ', '996', 'Services', '0', '20,664')]
+[('svchost.exe                   ', '360', 'Services', '0', '7,392')]
+[('svchost.exe                   ', '588', 'Services', '0', '47,560')]
+[('svchost.exe                  ', '1068', 'Services', '0', '10,292')]
+[('AsLdrSrv.exe                 ', '1168', 'Services', '0', '636')]
+[('GFNEXSrv.exe                 ', '1204', 'Services', '0', '572')]
+[('spoolsv.exe                  ', '1300', 'Services', '0', '1,996')]
+[('svchost.exe                  ', '1364', 'Services', '0', '1,972')]
+[('svchost.exe                  ', '1392', 'Services', '0', '14,292')]
+[('svchost.exe                  ', '1508', 'Services', '0', '1,512')]
+[('AdminService.exe             ', '1524', 'Services', '0', '960')]
+[('officeclicktorun.exe         ', '1580', 'Services', '0', '2,392')]
+[('ddmgr.exe                    ', '1624', 'Services', '0', '524')]
+[('svchost.exe                  ', '1660', 'Services', '0', '7,912')]
+[('dasHost.exe                  ', '1672', 'Services', '0', '56')]
+[('svchost.exe                  ', '1696', 'Services', '0', '1,292')]
+[('HWDeviceService64.exe        ', '1712', 'Services', '0', '2,708')]
+[('HeciServer.exe               ', '1876', 'Services', '0', '620')]
+[('ouc.exe                      ', '1976', 'Services', '0', '15,160')]
+[('svchost.exe                  ', '2000', 'Services', '0', '2,384')]
+[('svchost.exe                  ', '2040', 'Services', '0', '1,432')]
+[('MsMpEng.exe                  ', '1056', 'Services', '0', '1,19,288')]
+[('Ath_CoexAgent.exe            ', '1792', 'Services', '0', '1,476')]
+[('NisSrv.exe                   ', '2548', 'Services', '0', '1,912')]
+[('svchost.exe                  ', '2644', 'Services', '0', '1,492')]
+[('HControl.exe                 ', '1960', 'Console', '1', '1,728')]
+[('taskhostex.exe                ', '108', 'Console', '1', '5,820')]
+[('USBChargerPlus.exe           ', '2596', 'Console', '1', '124')]
+[('ACMON.exe                    ', '2784', 'Console', '1', '176')]
+[('KBFiltr.exe                  ', '3116', 'Console', '1', '1,120')]
+[('explorer.exe                 ', '3164', 'Console', '1', '53,980')]
+[('DCSHelper.exe                ', '3172', 'Console', '1', '1,260')]
+[('ATKOSD2.exe                  ', '3416', 'Console', '1', '3,568')]
+[('DMedia.exe                   ', '3424', 'Console', '1', '468')]
+[('GoogleCrashHandler.exe       ', '3912', 'Services', '0', '232')]
+[('GoogleCrashHandler64.exe     ', '3920', 'Services', '0', '60')]
+[('igfxpers.exe                 ', '3252', 'Console', '1', '132')]
+[('igfxsrvc.exe                 ', '3400', 'Console', '1', '2,708')]
+[('BtvStack.exe                 ', '3272', 'Console', '1', '2,840')]
+[('ActivateDesktop.exe          ', '3328', 'Console', '1', '296')]
+[('hkcmd.exe                    ', '3548', 'Console', '1', '812')]
+[('flvga_tray.exe                ', '980', 'Console', '1', '1,172')]
+[('CCleaner64.exe               ', '3048', 'Console', '1', '740')]
+[('RAVBg64.exe                  ', '3128', 'Console', '1', '124')]
+[('RAVBg64.exe                  ', '4008', 'Console', '1', '120')]
+[('RAVCpl64.exe                 ', '4020', 'Console', '1', '124')]
+[('wuauclt.exe                  ', '2440', 'Console', '1', '632')]
+[('taskhost.exe                 ', '2576', 'Services', '0', '11,520')]
+[('.exe                ', '2636', 'Console', '1', '13,764')]
+[('cmd.exe                      ', '4424', 'Console', '1', '1,984')]
+[('conhost.exe                  ', '4472', 'Console', '1', '4,888')]
+[('python.exe                   ', '2704', 'Console', '1', '7,448')]
+[('armsvc.exe                   ', '2816', 'Services', '0', '6,560')]
+[('cmd.exe                      ', '2580', 'Console', '1', '2,324')]
+[('conhost.exe                   ', '544', 'Console', '1', '5,040')]
+[('SearchIndexer.exe            ', '4784', 'Services', '0', '9,064')]
+[('cmd.exe                      ', '4776', 'Console', '1', '2,064')]
+[('tasklist.exe                  ', '860', 'Console', '1', '5,784')]
+[('WmiPrvSE.exe                 ', '2560', 'Services', '0', '6,028')]
+>>> sp = r"([\w\. ]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+([\d,]+)"
+>>> for line in stdout.splitlines()[3:]:
+...     #name,pid,s,s,memory = re.findall(sp,line)
+...     #processes[int(pid)] = {'name': name , 'memory': int(memory.replace(',',
+ '')) }
+...     print(line)
+...     print(re.findall(sp,line))
+...
+System Idle Process              0 Services                   0          4 K
+[('System Idle Process             ', '0', 'Services', '0', '4')]
+System                           4 Services                   0     12,664 K
+[('System                          ', '4', 'Services', '0', '12,664')]
+smss.exe                       348 Services                   0        200 K
+[('smss.exe                      ', '348', 'Services', '0', '200')]
+csrss.exe                      524 Services                   0      1,264 K
+[('csrss.exe                     ', '524', 'Services', '0', '1,264')]
+wininit.exe                    580 Services                   0        408 K
+[('wininit.exe                   ', '580', 'Services', '0', '408')]
+csrss.exe                      596 Console                    1     54,528 K
+[('csrss.exe                     ', '596', 'Console', '1', '54,528')]
+winlogon.exe                   648 Console                    1      1,696 K
+[('winlogon.exe                  ', '648', 'Console', '1', '1,696')]
+services.exe                   672 Services                   0      4,040 K
+[('services.exe                  ', '672', 'Services', '0', '4,040')]
+lsass.exe                      688 Services                   0      7,356 K
+[('lsass.exe                     ', '688', 'Services', '0', '7,356')]
+svchost.exe                    760 Services                   0      5,300 K
+[('svchost.exe                   ', '760', 'Services', '0', '5,300')]
+svchost.exe                    808 Services                   0      4,680 K
+[('svchost.exe                   ', '808', 'Services', '0', '4,680')]
+TeraCopyService.exe            888 Services                   0        516 K
+[('TeraCopyService.exe           ', '888', 'Services', '0', '516')]
+dwm.exe                        916 Console                    1     18,792 K
+[('dwm.exe                       ', '916', 'Console', '1', '18,792')]
+svchost.exe                    960 Services                   0     12,276 K
+[('svchost.exe                   ', '960', 'Services', '0', '12,276')]
+svchost.exe                    996 Services                   0     20,664 K
+[('svchost.exe                   ', '996', 'Services', '0', '20,664')]
+svchost.exe                    360 Services                   0      7,392 K
+[('svchost.exe                   ', '360', 'Services', '0', '7,392')]
+svchost.exe                    588 Services                   0     47,560 K
+[('svchost.exe                   ', '588', 'Services', '0', '47,560')]
+svchost.exe                   1068 Services                   0     10,292 K
+[('svchost.exe                  ', '1068', 'Services', '0', '10,292')]
+AsLdrSrv.exe                  1168 Services                   0        636 K
+[('AsLdrSrv.exe                 ', '1168', 'Services', '0', '636')]
+GFNEXSrv.exe                  1204 Services                   0        572 K
+[('GFNEXSrv.exe                 ', '1204', 'Services', '0', '572')]
+spoolsv.exe                   1300 Services                   0      1,996 K
+[('spoolsv.exe                  ', '1300', 'Services', '0', '1,996')]
+svchost.exe                   1364 Services                   0      1,972 K
+[('svchost.exe                  ', '1364', 'Services', '0', '1,972')]
+svchost.exe                   1392 Services                   0     14,292 K
+[('svchost.exe                  ', '1392', 'Services', '0', '14,292')]
+svchost.exe                   1508 Services                   0      1,512 K
+[('svchost.exe                  ', '1508', 'Services', '0', '1,512')]
+AdminService.exe              1524 Services                   0        960 K
+[('AdminService.exe             ', '1524', 'Services', '0', '960')]
+officeclicktorun.exe          1580 Services                   0      2,392 K
+[('officeclicktorun.exe         ', '1580', 'Services', '0', '2,392')]
+ddmgr.exe                     1624 Services                   0        524 K
+[('ddmgr.exe                    ', '1624', 'Services', '0', '524')]
+svchost.exe                   1660 Services                   0      7,912 K
+[('svchost.exe                  ', '1660', 'Services', '0', '7,912')]
+dasHost.exe                   1672 Services                   0         56 K
+[('dasHost.exe                  ', '1672', 'Services', '0', '56')]
+svchost.exe                   1696 Services                   0      1,292 K
+[('svchost.exe                  ', '1696', 'Services', '0', '1,292')]
+HWDeviceService64.exe         1712 Services                   0      2,708 K
+[('HWDeviceService64.exe        ', '1712', 'Services', '0', '2,708')]
+HeciServer.exe                1876 Services                   0        620 K
+[('HeciServer.exe               ', '1876', 'Services', '0', '620')]
+ouc.exe                       1976 Services                   0     15,160 K
+[('ouc.exe                      ', '1976', 'Services', '0', '15,160')]
+svchost.exe                   2000 Services                   0      2,384 K
+[('svchost.exe                  ', '2000', 'Services', '0', '2,384')]
+svchost.exe                   2040 Services                   0      1,432 K
+[('svchost.exe                  ', '2040', 'Services', '0', '1,432')]
+MsMpEng.exe                   1056 Services                   0   1,19,288 K
+[('MsMpEng.exe                  ', '1056', 'Services', '0', '1,19,288')]
+Ath_CoexAgent.exe             1792 Services                   0      1,476 K
+[('Ath_CoexAgent.exe            ', '1792', 'Services', '0', '1,476')]
+NisSrv.exe                    2548 Services                   0      1,912 K
+[('NisSrv.exe                   ', '2548', 'Services', '0', '1,912')]
+svchost.exe                   2644 Services                   0      1,492 K
+[('svchost.exe                  ', '2644', 'Services', '0', '1,492')]
+HControl.exe                  1960 Console                    1      1,728 K
+[('HControl.exe                 ', '1960', 'Console', '1', '1,728')]
+taskhostex.exe                 108 Console                    1      5,820 K
+[('taskhostex.exe                ', '108', 'Console', '1', '5,820')]
+USBChargerPlus.exe            2596 Console                    1        124 K
+[('USBChargerPlus.exe           ', '2596', 'Console', '1', '124')]
+ACMON.exe                     2784 Console                    1        176 K
+[('ACMON.exe                    ', '2784', 'Console', '1', '176')]
+KBFiltr.exe                   3116 Console                    1      1,120 K
+[('KBFiltr.exe                  ', '3116', 'Console', '1', '1,120')]
+explorer.exe                  3164 Console                    1     53,980 K
+[('explorer.exe                 ', '3164', 'Console', '1', '53,980')]
+DCSHelper.exe                 3172 Console                    1      1,260 K
+[('DCSHelper.exe                ', '3172', 'Console', '1', '1,260')]
+ATKOSD2.exe                   3416 Console                    1      3,568 K
+[('ATKOSD2.exe                  ', '3416', 'Console', '1', '3,568')]
+DMedia.exe                    3424 Console                    1        468 K
+[('DMedia.exe                   ', '3424', 'Console', '1', '468')]
+GoogleCrashHandler.exe        3912 Services                   0        232 K
+[('GoogleCrashHandler.exe       ', '3912', 'Services', '0', '232')]
+GoogleCrashHandler64.exe      3920 Services                   0         60 K
+[('GoogleCrashHandler64.exe     ', '3920', 'Services', '0', '60')]
+igfxpers.exe                  3252 Console                    1        132 K
+[('igfxpers.exe                 ', '3252', 'Console', '1', '132')]
+igfxsrvc.exe                  3400 Console                    1      2,708 K
+[('igfxsrvc.exe                 ', '3400', 'Console', '1', '2,708')]
+BtvStack.exe                  3272 Console                    1      2,840 K
+[('BtvStack.exe                 ', '3272', 'Console', '1', '2,840')]
+ActivateDesktop.exe           3328 Console                    1        296 K
+[('ActivateDesktop.exe          ', '3328', 'Console', '1', '296')]
+hkcmd.exe                     3548 Console                    1        812 K
+[('hkcmd.exe                    ', '3548', 'Console', '1', '812')]
+flvga_tray.exe                 980 Console                    1      1,172 K
+[('flvga_tray.exe                ', '980', 'Console', '1', '1,172')]
+CCleaner64.exe                3048 Console                    1        740 K
+[('CCleaner64.exe               ', '3048', 'Console', '1', '740')]
+RAVBg64.exe                   3128 Console                    1        124 K
+[('RAVBg64.exe                  ', '3128', 'Console', '1', '124')]
+RAVBg64.exe                   4008 Console                    1        120 K
+[('RAVBg64.exe                  ', '4008', 'Console', '1', '120')]
+RAVCpl64.exe                  4020 Console                    1        124 K
+[('RAVCpl64.exe                 ', '4020', 'Console', '1', '124')]
+wuauclt.exe                   2440 Console                    1        632 K
+[('wuauclt.exe                  ', '2440', 'Console', '1', '632')]
+taskhost.exe                  2576 Services                   0     11,520 K
+[('taskhost.exe                 ', '2576', 'Services', '0', '11,520')]
+notepad++.exe                 2636 Console                    1     13,764 K
+[('.exe                ', '2636', 'Console', '1', '13,764')]
+cmd.exe                       4424 Console                    1      1,984 K
+[('cmd.exe                      ', '4424', 'Console', '1', '1,984')]
+conhost.exe                   4472 Console                    1      4,888 K
+[('conhost.exe                  ', '4472', 'Console', '1', '4,888')]
+python.exe                    2704 Console                    1      7,448 K
+[('python.exe                   ', '2704', 'Console', '1', '7,448')]
+armsvc.exe                    2816 Services                   0      6,560 K
+[('armsvc.exe                   ', '2816', 'Services', '0', '6,560')]
+cmd.exe                       2580 Console                    1      2,324 K
+[('cmd.exe                      ', '2580', 'Console', '1', '2,324')]
+conhost.exe                    544 Console                    1      5,040 K
+[('conhost.exe                   ', '544', 'Console', '1', '5,040')]
+SearchIndexer.exe             4784 Services                   0      9,064 K
+[('SearchIndexer.exe            ', '4784', 'Services', '0', '9,064')]
+cmd.exe                       4776 Console                    1      2,064 K
+[('cmd.exe                      ', '4776', 'Console', '1', '2,064')]
+tasklist.exe                   860 Console                    1      5,784 K
+[('tasklist.exe                  ', '860', 'Console', '1', '5,784')]
+WmiPrvSE.exe                  2560 Services                   0      6,028 K
+[('WmiPrvSE.exe                 ', '2560', 'Services', '0', '6,028')]
+>>> sp = r"([\w\. \+]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+([\d,]+)"
+>>> for line in stdout.splitlines()[3:]:
+...     #name,pid,s,s,memory = re.findall(sp,line)
+...     #processes[int(pid)] = {'name': name , 'memory': int(memory.replace(',',
+ '')) }
+...     print(line)
+...     print(re.findall(sp,line))
+...
+System Idle Process              0 Services                   0          4 K
+[('System Idle Process             ', '0', 'Services', '0', '4')]
+System                           4 Services                   0     12,664 K
+[('System                          ', '4', 'Services', '0', '12,664')]
+smss.exe                       348 Services                   0        200 K
+[('smss.exe                      ', '348', 'Services', '0', '200')]
+csrss.exe                      524 Services                   0      1,264 K
+[('csrss.exe                     ', '524', 'Services', '0', '1,264')]
+wininit.exe                    580 Services                   0        408 K
+[('wininit.exe                   ', '580', 'Services', '0', '408')]
+csrss.exe                      596 Console                    1     54,528 K
+[('csrss.exe                     ', '596', 'Console', '1', '54,528')]
+winlogon.exe                   648 Console                    1      1,696 K
+[('winlogon.exe                  ', '648', 'Console', '1', '1,696')]
+services.exe                   672 Services                   0      4,040 K
+[('services.exe                  ', '672', 'Services', '0', '4,040')]
+lsass.exe                      688 Services                   0      7,356 K
+[('lsass.exe                     ', '688', 'Services', '0', '7,356')]
+svchost.exe                    760 Services                   0      5,300 K
+[('svchost.exe                   ', '760', 'Services', '0', '5,300')]
+svchost.exe                    808 Services                   0      4,680 K
+[('svchost.exe                   ', '808', 'Services', '0', '4,680')]
+TeraCopyService.exe            888 Services                   0        516 K
+[('TeraCopyService.exe           ', '888', 'Services', '0', '516')]
+dwm.exe                        916 Console                    1     18,792 K
+[('dwm.exe                       ', '916', 'Console', '1', '18,792')]
+svchost.exe                    960 Services                   0     12,276 K
+[('svchost.exe                   ', '960', 'Services', '0', '12,276')]
+svchost.exe                    996 Services                   0     20,664 K
+[('svchost.exe                   ', '996', 'Services', '0', '20,664')]
+svchost.exe                    360 Services                   0      7,392 K
+[('svchost.exe                   ', '360', 'Services', '0', '7,392')]
+svchost.exe                    588 Services                   0     47,560 K
+[('svchost.exe                   ', '588', 'Services', '0', '47,560')]
+svchost.exe                   1068 Services                   0     10,292 K
+[('svchost.exe                  ', '1068', 'Services', '0', '10,292')]
+AsLdrSrv.exe                  1168 Services                   0        636 K
+[('AsLdrSrv.exe                 ', '1168', 'Services', '0', '636')]
+GFNEXSrv.exe                  1204 Services                   0        572 K
+[('GFNEXSrv.exe                 ', '1204', 'Services', '0', '572')]
+spoolsv.exe                   1300 Services                   0      1,996 K
+[('spoolsv.exe                  ', '1300', 'Services', '0', '1,996')]
+svchost.exe                   1364 Services                   0      1,972 K
+[('svchost.exe                  ', '1364', 'Services', '0', '1,972')]
+svchost.exe                   1392 Services                   0     14,292 K
+[('svchost.exe                  ', '1392', 'Services', '0', '14,292')]
+svchost.exe                   1508 Services                   0      1,512 K
+[('svchost.exe                  ', '1508', 'Services', '0', '1,512')]
+AdminService.exe              1524 Services                   0        960 K
+[('AdminService.exe             ', '1524', 'Services', '0', '960')]
+officeclicktorun.exe          1580 Services                   0      2,392 K
+[('officeclicktorun.exe         ', '1580', 'Services', '0', '2,392')]
+ddmgr.exe                     1624 Services                   0        524 K
+[('ddmgr.exe                    ', '1624', 'Services', '0', '524')]
+svchost.exe                   1660 Services                   0      7,912 K
+[('svchost.exe                  ', '1660', 'Services', '0', '7,912')]
+dasHost.exe                   1672 Services                   0         56 K
+[('dasHost.exe                  ', '1672', 'Services', '0', '56')]
+svchost.exe                   1696 Services                   0      1,292 K
+[('svchost.exe                  ', '1696', 'Services', '0', '1,292')]
+HWDeviceService64.exe         1712 Services                   0      2,708 K
+[('HWDeviceService64.exe        ', '1712', 'Services', '0', '2,708')]
+HeciServer.exe                1876 Services                   0        620 K
+[('HeciServer.exe               ', '1876', 'Services', '0', '620')]
+ouc.exe                       1976 Services                   0     15,160 K
+[('ouc.exe                      ', '1976', 'Services', '0', '15,160')]
+svchost.exe                   2000 Services                   0      2,384 K
+[('svchost.exe                  ', '2000', 'Services', '0', '2,384')]
+svchost.exe                   2040 Services                   0      1,432 K
+[('svchost.exe                  ', '2040', 'Services', '0', '1,432')]
+MsMpEng.exe                   1056 Services                   0   1,19,288 K
+[('MsMpEng.exe                  ', '1056', 'Services', '0', '1,19,288')]
+Ath_CoexAgent.exe             1792 Services                   0      1,476 K
+[('Ath_CoexAgent.exe            ', '1792', 'Services', '0', '1,476')]
+NisSrv.exe                    2548 Services                   0      1,912 K
+[('NisSrv.exe                   ', '2548', 'Services', '0', '1,912')]
+svchost.exe                   2644 Services                   0      1,492 K
+[('svchost.exe                  ', '2644', 'Services', '0', '1,492')]
+HControl.exe                  1960 Console                    1      1,728 K
+[('HControl.exe                 ', '1960', 'Console', '1', '1,728')]
+taskhostex.exe                 108 Console                    1      5,820 K
+[('taskhostex.exe                ', '108', 'Console', '1', '5,820')]
+USBChargerPlus.exe            2596 Console                    1        124 K
+[('USBChargerPlus.exe           ', '2596', 'Console', '1', '124')]
+ACMON.exe                     2784 Console                    1        176 K
+[('ACMON.exe                    ', '2784', 'Console', '1', '176')]
+KBFiltr.exe                   3116 Console                    1      1,120 K
+[('KBFiltr.exe                  ', '3116', 'Console', '1', '1,120')]
+explorer.exe                  3164 Console                    1     53,980 K
+[('explorer.exe                 ', '3164', 'Console', '1', '53,980')]
+DCSHelper.exe                 3172 Console                    1      1,260 K
+[('DCSHelper.exe                ', '3172', 'Console', '1', '1,260')]
+ATKOSD2.exe                   3416 Console                    1      3,568 K
+[('ATKOSD2.exe                  ', '3416', 'Console', '1', '3,568')]
+DMedia.exe                    3424 Console                    1        468 K
+[('DMedia.exe                   ', '3424', 'Console', '1', '468')]
+GoogleCrashHandler.exe        3912 Services                   0        232 K
+[('GoogleCrashHandler.exe       ', '3912', 'Services', '0', '232')]
+GoogleCrashHandler64.exe      3920 Services                   0         60 K
+[('GoogleCrashHandler64.exe     ', '3920', 'Services', '0', '60')]
+igfxpers.exe                  3252 Console                    1        132 K
+[('igfxpers.exe                 ', '3252', 'Console', '1', '132')]
+igfxsrvc.exe                  3400 Console                    1      2,708 K
+[('igfxsrvc.exe                 ', '3400', 'Console', '1', '2,708')]
+BtvStack.exe                  3272 Console                    1      2,840 K
+[('BtvStack.exe                 ', '3272', 'Console', '1', '2,840')]
+ActivateDesktop.exe           3328 Console                    1        296 K
+[('ActivateDesktop.exe          ', '3328', 'Console', '1', '296')]
+hkcmd.exe                     3548 Console                    1        812 K
+[('hkcmd.exe                    ', '3548', 'Console', '1', '812')]
+flvga_tray.exe                 980 Console                    1      1,172 K
+[('flvga_tray.exe                ', '980', 'Console', '1', '1,172')]
+CCleaner64.exe                3048 Console                    1        740 K
+[('CCleaner64.exe               ', '3048', 'Console', '1', '740')]
+RAVBg64.exe                   3128 Console                    1        124 K
+[('RAVBg64.exe                  ', '3128', 'Console', '1', '124')]
+RAVBg64.exe                   4008 Console                    1        120 K
+[('RAVBg64.exe                  ', '4008', 'Console', '1', '120')]
+RAVCpl64.exe                  4020 Console                    1        124 K
+[('RAVCpl64.exe                 ', '4020', 'Console', '1', '124')]
+wuauclt.exe                   2440 Console                    1        632 K
+[('wuauclt.exe                  ', '2440', 'Console', '1', '632')]
+taskhost.exe                  2576 Services                   0     11,520 K
+[('taskhost.exe                 ', '2576', 'Services', '0', '11,520')]
+notepad++.exe                 2636 Console                    1     13,764 K
+[('notepad++.exe                ', '2636', 'Console', '1', '13,764')]
+cmd.exe                       4424 Console                    1      1,984 K
+[('cmd.exe                      ', '4424', 'Console', '1', '1,984')]
+conhost.exe                   4472 Console                    1      4,888 K
+[('conhost.exe                  ', '4472', 'Console', '1', '4,888')]
+python.exe                    2704 Console                    1      7,448 K
+[('python.exe                   ', '2704', 'Console', '1', '7,448')]
+armsvc.exe                    2816 Services                   0      6,560 K
+[('armsvc.exe                   ', '2816', 'Services', '0', '6,560')]
+cmd.exe                       2580 Console                    1      2,324 K
+[('cmd.exe                      ', '2580', 'Console', '1', '2,324')]
+conhost.exe                    544 Console                    1      5,040 K
+[('conhost.exe                   ', '544', 'Console', '1', '5,040')]
+SearchIndexer.exe             4784 Services                   0      9,064 K
+[('SearchIndexer.exe            ', '4784', 'Services', '0', '9,064')]
+cmd.exe                       4776 Console                    1      2,064 K
+[('cmd.exe                      ', '4776', 'Console', '1', '2,064')]
+tasklist.exe                   860 Console                    1      5,784 K
+[('tasklist.exe                  ', '860', 'Console', '1', '5,784')]
+WmiPrvSE.exe                  2560 Services                   0      6,028 K
+[('WmiPrvSE.exe                 ', '2560', 'Services', '0', '6,028')]
+>>>
+>>>
+>>> s3 = "A;B,C|D"
+>>> s3.split(";")
+['A', 'B,C|D']
+>>> s3.split(";,|")
+['A;B,C|D']
+>>> res.split(r";|,|\|", s3)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'list' object has no attribute 'split'
+>>> re.split(r";|,|\|", s3)
+['A', 'B', 'C', 'D']
+>>> re.sub("World", "Earth", s)
+'Hello Earth'
+>>> help(re.sub)
+Help on function sub in module re:
+
+sub(pattern, repl, string, count=0, flags=0)
+    Return the string obtained by replacing the leftmost
+    non-overlapping occurrences of the pattern in string by the
+    replacement repl.  repl can be either a string or a callable;
+    if a string, backslash escapes in it are processed.  If it is
+    a callable, it's passed the match object and must return
+    a replacement string to be used.
+
+>>> s4 = "The The world is is round"
+>>> re.sub(r"(\w+)\s+\1", r"\1", s4)
+'The world is round'
+>>>
+>>>
+>>>
+>>> stdout
+'\nImage Name                     PID Session Name        Session#    Mem Usage\
+n========================= ======== ================ =========== ============\nS
+ystem Idle Process              0 Services                   0          4 K\nSys
+tem                           4 Services                   0     12,664 K\nsmss.
+exe                       348 Services                   0        200 K\ncsrss.e
+xe                      524 Services                   0      1,264 K\nwininit.e
+xe                    580 Services                   0        408 K\ncsrss.exe
+                    596 Console                    1     54,528 K\nwinlogon.exe
+                  648 Console                    1      1,696 K\nservices.exe
+                672 Services                   0      4,040 K\nlsass.exe
+              688 Services                   0      7,356 K\nsvchost.exe
+            760 Services                   0      5,300 K\nsvchost.exe
+          808 Services                   0      4,680 K\nTeraCopyService.exe
+        888 Services                   0        516 K\ndwm.exe
+      916 Console                    1     18,792 K\nsvchost.exe
+    960 Services                   0     12,276 K\nsvchost.exe
+  996 Services                   0     20,664 K\nsvchost.exe
+360 Services                   0      7,392 K\nsvchost.exe                    58
+8 Services                   0     47,560 K\nsvchost.exe                   1068
+Services                   0     10,292 K\nAsLdrSrv.exe                  1168 Se
+rvices                   0        636 K\nGFNEXSrv.exe                  1204 Serv
+ices                   0        572 K\nspoolsv.exe                   1300 Servic
+es                   0      1,996 K\nsvchost.exe                   1364 Services
+                   0      1,972 K\nsvchost.exe                   1392 Services
+                 0     14,292 K\nsvchost.exe                   1508 Services
+               0      1,512 K\nAdminService.exe              1524 Services
+             0        960 K\nofficeclicktorun.exe          1580 Services
+           0      2,392 K\nddmgr.exe                     1624 Services
+         0        524 K\nsvchost.exe                   1660 Services
+       0      7,912 K\ndasHost.exe                   1672 Services
+     0         56 K\nsvchost.exe                   1696 Services
+   0      1,292 K\nHWDeviceService64.exe         1712 Services
+ 0      2,708 K\nHeciServer.exe                1876 Services                   0
+        620 K\nouc.exe                       1976 Services                   0
+   15,160 K\nsvchost.exe                   2000 Services                   0
+  2,384 K\nsvchost.exe                   2040 Services                   0
+1,432 K\nMsMpEng.exe                   1056 Services                   0   1,19,
+288 K\nAth_CoexAgent.exe             1792 Services                   0      1,47
+6 K\nNisSrv.exe                    2548 Services                   0      1,912
+K\nsvchost.exe                   2644 Services                   0      1,492 K\
+nHControl.exe                  1960 Console                    1      1,728 K\nt
+askhostex.exe                 108 Console                    1      5,820 K\nUSB
+ChargerPlus.exe            2596 Console                    1        124 K\nACMON
+.exe                     2784 Console                    1        176 K\nKBFiltr
+.exe                   3116 Console                    1      1,120 K\nexplorer.
+exe                  3164 Console                    1     53,980 K\nDCSHelper.e
+xe                 3172 Console                    1      1,260 K\nATKOSD2.exe
+                 3416 Console                    1      3,568 K\nDMedia.exe
+               3424 Console                    1        468 K\nGoogleCrashHandle
+r.exe        3912 Services                   0        232 K\nGoogleCrashHandler6
+4.exe      3920 Services                   0         60 K\nigfxpers.exe
+         3252 Console                    1        132 K\nigfxsrvc.exe
+       3400 Console                    1      2,708 K\nBtvStack.exe
+     3272 Console                    1      2,840 K\nActivateDesktop.exe
+   3328 Console                    1        296 K\nhkcmd.exe
+ 3548 Console                    1        812 K\nflvga_tray.exe
+980 Console                    1      1,172 K\nCCleaner64.exe                304
+8 Console                    1        740 K\nRAVBg64.exe                   3128
+Console                    1        124 K\nRAVBg64.exe                   4008 Co
+nsole                    1        120 K\nRAVCpl64.exe                  4020 Cons
+ole                    1        124 K\nwuauclt.exe                   2440 Consol
+e                    1        632 K\ntaskhost.exe                  2576 Services
+                   0     11,520 K\nnotepad++.exe                 2636 Console
+                 1     13,764 K\ncmd.exe                       4424 Console
+               1      1,984 K\nconhost.exe                   4472 Console
+             1      4,888 K\npython.exe                    2704 Console
+           1      7,448 K\narmsvc.exe                    2816 Services
+         0      6,560 K\ncmd.exe                       2580 Console
+       1      2,324 K\nconhost.exe                    544 Console
+     1      5,040 K\nSearchIndexer.exe             4784 Services
+   0      9,064 K\ncmd.exe                       4776 Console
+ 1      2,064 K\ntasklist.exe                   860 Console                    1
+      5,784 K\nWmiPrvSE.exe                  2560 Services                   0
+    6,028 K\n'
+>>> help(str.splitlines)
+Help on method_descriptor:
+
+splitlines(...)
+    S.splitlines([keepends]) -> list of strings
+
+    Return a list of the lines in S, breaking at line boundaries.
+    Line breaks are not included in the resulting list unless keepends
+    is given and true.
+
+>>>
+
+
+###############first.py ###############
+from  __future__  import print_function, division
+import sys 
+
+#a = sys.argv[1]
+#b = sys.argv[2]
+#print(int(a) + int(b))
+
+#
+s = "Hello World"
+#H - 1
+#e - 1
+#l - 3
+#...
+d = {}
+#Take each char(ch) from s 
+for ch in set(s):
+    #initialize counter 
+    counter = 0 
+    #Take each char(ch1) from s 
+    for ch1 in s:
+        #if ch and ch1 are same 
+        if ch == ch1:
+            #increment counter
+            counter += 1
+    #print ch and counter 
+    d[ch] = counter 
+    print(ch, "-", counter)
+
+##
+input = "aaabcaabcd"
+output = "abcd"
+
+#create one empty string(output)
+output = ""
+#Take each char(ch) from input
+for  ch in input:
+    #If ch does not exist in output 
+    if ch not in output:
+        #concatenate ch to output and replace old output by above 
+        output = output + ch 
+
+## 1,2,3,4,5,6,7,8,9
+output = "123456789"
+
+# create one empty string(output)
+# Take each number(e) from suitable range 
+    # concatenate e to output (*)
+    # and replace old output by above 
+
+output = ""
+for e in range(1,10):
+    output += str(e)  #output = output + str(e)
+print(output)
+
+
+input="ABCDEF1234567890"
+# Take two two character(one byte) from above 
+# (which are in hex digit )
+# Convert to int  , int("AB", base=16)
+#Sum all and then find mod with 255, that is your checksum 
+
+
+res = 0
+for i in range(len(input)//2):
+     hex_str = input[i* 2 : 2*i+2]
+     res += int(hex_str, base=16)
+
+print(res % 255) 
+################################################
+[]   list - Indexing:A , Duplicates:A, insertion order-Y, Mutable 
+()       tuple - Immutable, ---above---
+         collection of element - each element could be any type
+   
+{}   set - Duplicates - NA , IO - No, Indexing - No , Mutable
+       frozenset - Immutable, ---above---
+    
+--------------------------
+{k:v} dict -  collection of key, value , where keys are like set 
+Given a key, find value 
+
+--------------------------
+#list - NO NO 
+lst = [1,3,6,2] 
+out = [1,9]
+
+Create empty list (out) 
+Take each element(e) from lst 
+    if e is odd
+        then only append to empty list, out 
+    
+out = []
+for e in lst:
+    out.append(e*e)
+print(out)
+
+
+out = []
+for e in lst:
+    if e % 2 == 1:
+        out.append(e)
+print(out)
+
+out = []
+for e in lst:
+    if e % 2 == 1:
+        out.append(e*e)
+print(out)
+
+##########################
+input = '[1,2,3,4]'
+output = [1,2,3,4]
+
+strip input with '[]' then split with ',' , store to s2 
+create empty list 
+Take each element(e) from s2 
+    convert e to int and append to empty list 
+
+output = []
+for e in input.strip("[]").split(","):
+    output.append(int(e))
+
+#Q
+input = 'Name:ABC,age=20|Name:XYZ,age=30'
+output = 'Name:Abc,age=20|Name:Xyz,age=30'
+
+#Split input with "|" and store to s2 
+s2 = input.split("|")
+#Create empty list(out)
+out = []
+#Take each element(e) from s2
+for e in s2:
+    #split e with ",", take first part (e1)
+    e1 = e.split(",")[0]
+    #Split e1 with ":", take 2nd part (res)
+    res = e1.split(":")[1]
+    #Capitalize res and store result to res2 
+    res2 = res.title()
+    #replace res by res2 in e and append to empty list  
+    e2 = e.replace(res, res2)
+    out.append(e2)
+output = '|'.join(out)
+
+
+l2 = [ 1, [2, [3,4],[5],[]]]
+
+l2_1 # [ 1, [2, [3,40],[5],[]]]
+l2[1][1][1] = 40
+ 
+l2_2 # [ 1, [2, [3,4],[5],[],30]]
+l2[1].append(30)
+
+l2_3 # [ 1, [2, [3,4],[5],[20,23]]]
+l2[1][3] += [20,23] 
+
+l2_4 # [ 1, [2, [3,4],[5],[]], "OK"]
+l2.append("OK")
+
+input="ABCDEF1234567890"
+Take two two character(one byte) from above 
+(which are in hex digit )
+Convert to int  , int("AB", base=16)
+Sum all and then find mod with 255, that is your checksum 
+
+
+
+res = []
+for l,r in zip(input[::2], input[1::2]):
+     res.append(int(l+r, base=16))
+
+print(sum(res) % 255)
+
+
+f = open(r"D:\PPT\python\hands\first.py", "rt")
+lines = f.readlines()  #list of string 
+f.close()
+#file size 
+res = []
+for line in lines:
+    res.append( len(line) )
+print(sum(res))
+#which line is max 
+res = []
+for index, line in enumerate(lines):
+    print(index)
+    res.append( ( index+1,len(line)) )
+print(res) #list of tuples, 
+
+max_length = res[0][-1]
+line_number = res[0][0]
+for no, length in res:
+    if length > max_length:
+        max_length = length 
+        line_number = no 
+
+print(line_number)
+#how many LOC?
+#how many LOC in a dir 
+filename = r"D:\PPT\python\hands\first.py"
+import glob 
+locs = []
+for filename in glob.glob("*.py"):
+    f = open(filename, "rt")
+    lines = f.readlines()  #list of string 
+    f.close()
+    res = []
+    for line in lines:
+        line1 = line.strip()
+        if line1 and line1[0] != '#':
+            res.append(line)
+    locs.append(len(res))
+
+print(sum(locs))
+
+##########
+s = "Hello World"
+
+#Create a empty dict(d)
+d = {}
+#Take each element(e) from s 
+for e in s:
+    #if e does not exist in empty dict 
+    if e not in d:
+        #create a key for e and initialize it's value 
+        d[e] = 1
+    else: 
+        #increment it's value 
+        d[e] += 1
+      
+print(d) 
+
+##
+Execute tasklist and create a dict 
+{pid_no: {'name':..., 'memory': .. }, .....}
+
+D:\PPT\python\hands>tasklist
+
+Image Name                     PID Session Name        Session#    Mem Usage
+========================= ======== ================ =========== ============
+System Idle Process              0 Services                   0          4 K
+System                           4 Services                   0     12,396 K
+
+command = 'tasklist'
+import subprocess as S 
+proc = S.Popen(command, shell=True, 
+                    stdout=S.PIPE, stderr=S.PIPE, 
+                    universal_newlines=True)
+stdout, stderr = proc.communicate()
+processes = {}
+import re 
+sp = r"([\w\. \+]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+([\d,]+)"
+for line in stdout.splitlines()[3:]:
+    name,pid,s,s,memory = re.findall(sp,line)
+    processes[int(pid)] = {'name': name , 'memory': int(memory.replace(',', '')) }
+    #print(line)
+    #print(re.findall(sp,line))
+    
+    
+                 
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
