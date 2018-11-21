@@ -1,0 +1,1601 @@
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+D:\PPT>cd python\hands
+
+D:\PPT\python\hands>python
+Python 3.5.2 (v3.5.2:4def2a2901a5, Jun 25 2016, 22:18:55) [MSC v.1900 64 bit (AM
+D64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> f = open(r"first.py", "rt")
+>>> lines = f.readlines()
+>>> f.close()
+>>> with open(r"first.py", "rt") as f:
+...     lines = f.readlines()
+...
+>>> with open(r"first.py", "rt") as f1:
+...     with open(r"first.py.bk","wt") as f2:
+...             f2.writelines(f1.readlines())
+...
+>>> import glob
+>>> glob.glob("*")
+['DAY1.txt', 'DAY2.txt', 'first.py', 'first.py.bk']
+>>> import os.path
+>>> os.path.getsize('first.py') == os.path.getsize('first.py.bk')
+True
+>>> string = "___END___\n"
+>>> with open(r"first.py.bk","at") as f :
+...     f.writelines([string])
+...
+>>> with open(r"first.py.bk","rt") as f :
+...     lines = f.readlines()
+...
+>>> lines[-1]
+'___END___\n'
+>>> lines[-1] == string
+True
+>>> with open(r"first.py.bk","rt") as f :
+...     lines_str = f.read()
+...
+>>> lines_str[-10:]
+'___END___\n'
+>>> lines_str[-len(string):]
+'___END___\n'
+>>> lines_str[-len(string):] == string
+True
+>>> help(f.writelines)
+Help on built-in function writelines:
+
+writelines(lines, /) method of _io.TextIOWrapper instance
+
+>>> command = 'nslookup www.google.com'
+>>> import subprocess as S
+>>> proc = S.Popen(command, shell=True,stdout=S.PIPE, stderr=S.PIPE,universal_ne
+wlines=True)
+>>> stdout, stderr = proc.communicate()
+>>> print(stdout)
+Server:  dlinkrouter.Dlink
+Address:  192.168.0.1
+
+Name:    www.google.com
+Addresses:  2404:6800:4007:80b::2004
+          172.217.163.36
+
+
+>>> print(proc.returncode)
+0
+>>> with open(r"out.txt", "wt") as f:
+...     proc = S.Popen(command, shell=True, stdout=f,universal_newlines=True)
+...     proc.wait()
+...
+Non-authoritative answer:
+0
+>>> with open(r"out.txt", "wt") as f:
+...     proc = S.Popen(command, shell=True, stdout=f, stderr=S.STDOUT,universal_
+newlines=True)
+...     proc.wait()
+...
+0
+>>> import os
+>>> with open(os.devnull, "w") as DEVNULL:
+...     with open(r"out.txt", "wt") as f:
+...         proc = S.Popen(command, shell=True,stdout=f, stderr=DEVNULL,universa
+l_newlines=True)
+...         proc.wait()
+...
+0
+>>> command1 = 'type out.txt'
+>>> p1 = S.Popen(command1, shell=True,stdout=S.PIPE, stderr=S.STDOUT,universal_n
+ewlines=True)
+>>> command2 = 'findstr -c:"Server"'
+>>> p2 = S.Popen(command2, shell=True, stdin=p1.stdout,
+...                 stdout=S.PIPE, stderr=S.STDOUT,universal_newlines=True)
+>>> p1.stdout.close()
+>>> stdout, stderr = p2.communicate()
+>>> print(stdout)
+Server:  dlinkrouter.Dlink
+
+>>> s="  4    14 ms    14 ms    14 ms  203.92.63.134.reverse.spectranet.in [203.
+92.63.1.34]"
+>>>
+>>> import re
+>>> sp = r"\s+(\d+)\s+(\d+)\s+\w+\s+\d+\s+\w+"
+>>> re.findall(sp, s)
+[('4', '14')]
+>>> sp = r"\s+\d+\s+\d+\s+\w+\s+\d+\s+\w+\s+\d+\w+(.+)"
+>>> re.findall(sp, s)
+[' ms  203.92.63.134.reverse.spectranet.in [203.92.63.1.34]']
+>>> sp = r"\s+\d+\s+\d+\s+\w+\s+\d+\s+\w+\s+\d+\w+\s+(.+)"
+>>> re.findall(sp, s)
+['ms  203.92.63.134.reverse.spectranet.in [203.92.63.1.34]']
+>>> sp = r"\s+\d+\s+\d+\s+\w+\s+\d+\s+\w+\s+\d+\w+\w+\s+(.+)"
+>>> re.findall(sp, s)
+[]
+>>> sp = r"(.+?)$"
+>>> re.findall(sp, s)
+['  4    14 ms    14 ms    14 ms  203.92.63.134.reverse.spectranet.in [203.92.63
+.1.34]']
+>>> sp = r".+\s(.+?)$"
+>>> re.findall(sp, s)
+['[203.92.63.1.34]']
+>>> sp = r".+\s(.+?)\s(.+?)$"
+>>> re.findall(sp, s)
+[('203.92.63.134.reverse.spectranet.in', '[203.92.63.1.34]')]
+>>> s2=' 2     1 ms     1 ms     1 ms  10.201.119.1'
+>>> re.findall(sp, s2)
+[('ms', ' 10.201.119.1')]
+>>> command = 'tracert www.google.com'
+>>> import subprocess as S
+>>>
+>>> proc = S.Popen(command, shell=True,stdout=S.PIPE, stderr=S.PIPE,universal_ne
+wlines=True)
+>>> stdout, stderr = proc.communicate()
+>>> #print(stdout)
+...
+>>> res = []
+>>> for line in stdout.splitlines()[4:-1]:
+...     coms = line.split()
+...     print(coms)
+... sd
+  File "<stdin>", line 4
+    sd
+     ^
+SyntaxError: invalid syntax
+>>>
+>>>
+>>> for line in stdout.splitlines()[4:-1]:
+...     coms = line.split()
+...     if coms:
+...         print(coms[7])
+...
+192.168.1.1
+abts-kk-dynamic-001.64.172.122.airtelbroadband.in
+202.56.198.133
+182.79.153.5
+182.79.153.18
+182.79.224.126
+72.14.220.197
+108.170.248.202
+72.14.235.133
+209.85.255.128
+216.239.54.21
+Traceback (most recent call last):
+  File "<stdin>", line 4, in <module>
+IndexError: list index out of range
+>>>
+>>>
+>>>
+>>> for line in stdout.splitlines()[4:-1]:
+...     coms = line.split()
+...     if coms and '*' not in coms:
+...         print(coms[7])
+...
+192.168.1.1
+abts-kk-dynamic-001.64.172.122.airtelbroadband.in
+202.56.198.133
+182.79.153.5
+182.79.153.18
+182.79.224.126
+72.14.220.197
+108.170.248.202
+72.14.235.133
+209.85.255.128
+216.239.54.21
+sc-in-f103.1e100.net
+>>>
+>>> import os
+>>> dir(os)
+['F_OK', 'MutableMapping', 'O_APPEND', 'O_BINARY', 'O_CREAT', 'O_EXCL', 'O_NOINH
+ERIT', 'O_RANDOM', 'O_RDONLY', 'O_RDWR', 'O_SEQUENTIAL', 'O_SHORT_LIVED', 'O_TEM
+PORARY', 'O_TEXT', 'O_TRUNC', 'O_WRONLY', 'P_DETACH', 'P_NOWAIT', 'P_NOWAITO', '
+P_OVERLAY', 'P_WAIT', 'R_OK', 'SEEK_CUR', 'SEEK_END', 'SEEK_SET', 'TMP_MAX', 'W_
+OK', 'X_OK', '_DummyDirEntry', '_Environ', '__all__', '__builtins__', '__cached_
+_', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__',
+'_dummy_scandir', '_execvpe', '_exists', '_exit', '_get_exports_list', '_putenv'
+, '_unsetenv', '_wrap_close', 'abort', 'access', 'altsep', 'chdir', 'chmod', 'cl
+ose', 'closerange', 'cpu_count', 'curdir', 'defpath', 'device_encoding', 'devnul
+l', 'dup', 'dup2', 'environ', 'errno', 'error', 'execl', 'execle', 'execlp', 'ex
+eclpe', 'execv', 'execve', 'execvp', 'execvpe', 'extsep', 'fdopen', 'fsdecode',
+'fsencode', 'fstat', 'fsync', 'ftruncate', 'get_exec_path', 'get_handle_inherita
+ble', 'get_inheritable', 'get_terminal_size', 'getcwd', 'getcwdb', 'getenv', 'ge
+tlogin', 'getpid', 'getppid', 'isatty', 'kill', 'linesep', 'link', 'listdir', 'l
+seek', 'lstat', 'makedirs', 'mkdir', 'name', 'open', 'pardir', 'path', 'pathsep'
+, 'pipe', 'popen', 'putenv', 'read', 'readlink', 'remove', 'removedirs', 'rename
+', 'renames', 'replace', 'rmdir', 'scandir', 'sep', 'set_handle_inheritable', 's
+et_inheritable', 'spawnl', 'spawnle', 'spawnv', 'spawnve', 'st', 'startfile', 's
+tat', 'stat_float_times', 'stat_result', 'statvfs_result', 'strerror', 'supports
+_bytes_environ', 'supports_dir_fd', 'supports_effective_ids', 'supports_fd', 'su
+pports_follow_symlinks', 'symlink', 'sys', 'system', 'terminal_size', 'times', '
+times_result', 'truncate', 'umask', 'uname_result', 'unlink', 'urandom', 'utime'
+, 'waitpid', 'walk', 'write']
+>>> import os.path
+>>> dir(os.path)
+['__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '
+__name__', '__package__', '__spec__', '_get_bothseps', '_getfinalpathname', '_ge
+tfullpathname', '_getvolumepathname', 'abspath', 'altsep', 'basename', 'commonpa
+th', 'commonprefix', 'curdir', 'defpath', 'devnull', 'dirname', 'exists', 'expan
+duser', 'expandvars', 'extsep', 'genericpath', 'getatime', 'getctime', 'getmtime
+', 'getsize', 'isabs', 'isdir', 'isfile', 'islink', 'ismount', 'join', 'lexists'
+, 'normcase', 'normpath', 'os', 'pardir', 'pathsep', 'realpath', 'relpath', 'sam
+efile', 'sameopenfile', 'samestat', 'sep', 'split', 'splitdrive', 'splitext', 's
+plitunc', 'stat', 'supports_unicode_filenames', 'sys']
+>>> os.environ
+environ({'HOMEPATH': '\\Users\\das', 'OS': 'Windows_NT', 'HADOOP_HOME': 'C:\\had
+oop-2.3.0', 'SBT_HOME': 'C:\\Program Files (x86)\\sbt\\', 'PROCESSOR_LEVEL': '6'
+, 'SPARK_HOME': 'C:\\spark-1.2.1', 'TMP': 'C:\\Users\\das\\AppData\\Local\\Temp'
+, 'PATHEXT': '.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY', 'PROGR
+AMFILES(X86)': 'C:\\Program Files (x86)', 'PATH': 'C:\\Program Files\\Java\\jdk1
+.8.0_65\\bin;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Perl64\\site\\bin;C:\\P
+erl64\\bin;C:\\Program Files (x86)\\Intel\\TXE Components\\TCS\\;C:\\Program Fil
+es\\Intel\\TXE Components\\TCS\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\
+System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program File
+s\\R\\Rtools\\bin;C:\\Program Files\\R\\Rtools\\gcc-4.6.3\\bin;C:\\hadoop-2.3.0\
+\sbin;C:\\hadoop-2.3.0\\bin;C:\\Program Files (x86)\\sbt\\bin;c:\\scala-2.11.4\\
+bin;C:\\Ruby21-x64\\bin;C:\\Python35;C:\\Python35\\Scripts;C:\\Program Files\\R\
+\R-3.2.2\\bin;C:\\Program Files\\R\\R-3.2.2\\bin\\x64;C:\\Groovy\\Groovy\\bin;C:
+\\Program Files (x86)\\Microsoft SDKs\\F#\\3.1\\Framework\\v4.0;C:\\spark-1.2.1\
+\bin;C:\\Users\\das\\bin;C:\\Groovy\\gradle\\bin;C:\\Groovy\\grails\\bin;C:\\use
+rs\\das\\bin;C:\\Program Files (x86)\\WinMerge;C:\\Program Files (x86)\\GnuWin32
+\\bin;C:\\Python27;C:\\Python27\\Scripts;C:\\Perl64\\bin;C:\\Program Files (x86)
+\\Skype\\Phone\\;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\ind
+igoampp\\apache-2.2.15\\bin;C:\\indigoampp\\mysql-5.1.30\\bin;C:\\UnxUtils\\usr\
+\local\\wbin;C:\\Anaconda2;C:\\Anaconda2\\Scripts;C:\\apache-maven-3.0.5\\bin;c:
+\\eclipse\\binC:\\indigoampp\\apache-2.2.15\\bin;C:\\indigoampp\\mysql-5.1.30\\b
+in;C:\\Program Files (x86)\\OpenSSH\\bin;c:\\eclipse\\bin;C:\\Users\\das\\AppDat
+a\\Roaming\\npm;c:\\ffmpeg\\bin;C:\\Python35\\lib\\site-packages\\pywin32_system
+32', 'PROMPT': '$P$G', 'USERPROFILE': 'C:\\Users\\das', 'PROCESSOR_IDENTIFIER':
+'Intel64 Family 6 Model 55 Stepping 8, GenuineIntel', 'COMPUTERNAME': 'HOME-PC',
+ 'COMSPEC': 'C:\\Windows\\system32\\cmd.exe', 'COMMONPROGRAMFILES(X86)': 'C:\\Pr
+ogram Files (x86)\\Common Files', 'JAVA_HOME': 'C:\\Program Files\\Java\\jdk1.8.
+0_65', 'HOMEDRIVE': 'C:', 'WINDIR': 'C:\\Windows', 'GOOGLE_DEFAULT_CLIENT_ID': '
+no', 'SYSTEMDRIVE': 'C:', 'GOOGLE_DEFAULT_CLIENT_SECRET': 'no', 'COMMONPROGRAMFI
+LES': 'C:\\Program Files\\Common Files', 'PROGRAMDATA': 'C:\\ProgramData', 'PROG
+RAMW6432': 'C:\\Program Files', 'JRE_HOME': 'C:\\Program Files\\Java\\jre1.8.0_6
+5', 'SESSIONNAME': 'Console', 'PROCESSOR_REVISION': '3708', 'GOOGLE_API_KEY': 'n
+o', 'GRAILS_HOME': 'C:\\Groovy\\grails', 'USERDOMAIN': 'home-pc', 'COMMONPROGRAM
+W6432': 'C:\\Program Files\\Common Files', 'GROOVY_HOME': 'C:\\Groovy\\Groovy',
+'NUMBER_OF_PROCESSORS': '4', 'FP_NO_HOST_CHECK': 'NO', 'PROGRAMFILES': 'C:\\Prog
+ram Files', 'PSMODULEPATH': 'C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Mod
+ules\\', 'USERNAME': 'das', 'ALLUSERSPROFILE': 'C:\\ProgramData', 'TEMP': 'C:\\U
+sers\\das\\AppData\\Local\\Temp', 'SYSTEMROOT': 'C:\\Windows', 'SCALA_HOME': 'C:
+\\scala-2.11.4', 'LOGONSERVER': '\\\\HOME-PC', 'CYGWIN': 'mintty', 'LOCALAPPDATA
+': 'C:\\Users\\das\\AppData\\Local', 'USERDOMAIN_ROAMINGPROFILE': 'home-pc', 'PU
+BLIC': 'C:\\Users\\Public', 'APPDATA': 'C:\\Users\\das\\AppData\\Roaming', 'PROC
+ESSOR_ARCHITECTURE': 'AMD64'})
+>>> os.environ['HOMEPATH']
+'\\Users\\das'
+>>> os.environ['MY_HOMEPATH'] = "C"
+>>> os.environ['MY_HOMEPATH']
+'C'
+>>> proc = S.Popen("printenv", shell=True,stdout=S.PIPE, stderr=S.PIPE,universal
+_newlines=True)
+>>> stdout, stderr = proc.communicate()
+>>> 'MY_HOMEPATH' in stdout
+True
+>>> import datetime
+>>> datetime.datetime.today().strftime("%m%d%y%H%M%S"),
+('112118114924',)
+>>> datetime.datetime.today().strftime("%m%d%y%H%M%S")
+'112118114937'
+>>> dir(datetime)
+['MAXYEAR', 'MINYEAR', '__builtins__', '__cached__', '__doc__', '__file__', '__l
+oader__', '__name__', '__package__', '__spec__', '_divide_and_round', 'date', 'd
+atetime', 'datetime_CAPI', 'time', 'timedelta', 'timezone', 'tzinfo']
+>>> datetime.date.today()
+datetime.date(2018, 11, 21)
+>>> datetime.date.today() + datetime.timedelta(days=365)
+datetime.date(2019, 11, 21)
+>>> "first.py"
+'first.py'
+>>> d = { 'name' : 'xyz'}
+>>> d = dict(name='xyz')
+>>> d
+{'name': 'xyz'}
+>>> import platform
+>>> platform.node()
+'home-pc'
+>>> os.environ['MY_HOMEPATH'] = "C"
+>>> os.environ['MY_HOMEPATH']
+'C'
+>>> import csv
+>>> with open(r"data/iris.csv", "rt") as f:
+...     rd = csv.reader(f)
+...     rows = list(rd)
+...
+>>> rows[0:5]
+[['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Name'], ['5.1', '3.
+5', '1.4', '0.2', 'Iris-setosa'], ['4.9', '3.0', '1.4', '0.2', 'Iris-setosa'], [
+'4.7', '3.2', '1.3', '0.2', 'Iris-setosa'], ['4.6', '3.1', '1.5', '0.2', 'Iris-s
+etosa']]
+>>> headers = rows[0]
+>>> rows = rows[1:]
+>>> rows[:5]
+[['5.1', '3.5', '1.4', '0.2', 'Iris-setosa'], ['4.9', '3.0', '1.4', '0.2', 'Iris
+-setosa'], ['4.7', '3.2', '1.3', '0.2', 'Iris-setosa'], ['4.6', '3.1', '1.5', '0
+.2', 'Iris-setosa'], ['5.0', '3.6', '1.4', '0.2', 'Iris-setosa']]
+>>> headers
+['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Name']
+>>> rowsd = []
+>>> for sl, sw, pl, pw, name in rows:
+...     res.append([float(sl), float(sw), float(pl), float(pw), name])
+...
+>>> rowsd[:5]
+[]
+>>> rowsd = []
+>>> for sl, sw, pl, pw, name in rows:
+...     rowsd.append([float(sl), float(sw), float(pl), float(pw), name])
+...
+>>> rowsd[:5]
+[[5.1, 3.5, 1.4, 0.2, 'Iris-setosa'], [4.9, 3.0, 1.4, 0.2, 'Iris-setosa'], [4.7,
+ 3.2, 1.3, 0.2, 'Iris-setosa'], [4.6, 3.1, 1.5, 0.2, 'Iris-setosa'], [5.0, 3.6,
+1.4, 0.2, 'Iris-setosa']]
+>>> res = []
+>>> l = [1,2,3,4]
+>>> for e in l:
+...     res.append(e*e)
+...
+>>> res
+[1, 4, 9, 16]
+>>> res = [ e*e for e in l]
+>>> res
+[1, 4, 9, 16]
+>>> [ e*e for e in l]
+[1, 4, 9, 16]
+>>> [ e*e for e in l if e%2 == 1]
+[1, 9]
+>>> { e*e for e in l if e%2 == 1}
+{1, 9}
+>>> { e:e*e for e in l if e%2 == 1}
+{1: 1, 3: 9}
+>>> res = {}
+>>> for e in l:
+...     if e%2 == 1:
+...             res[e] = e*e
+...
+>>> res
+{1: 1, 3: 9}
+>>> [ (x,y) for x in l if x%2 == 1 for y in l if y%2 == 0]
+[(1, 2), (1, 4), (3, 2), (3, 4)]
+>>> res = []
+>>> for x in l:
+...     if x%2 == 1:
+...             for y in l:
+...                     if y%2 == 0:
+...                             res.append( (x,y) )
+...
+>>> res
+[(1, 2), (1, 4), (3, 2), (3, 4)]
+>>> names = {row[-1] for row in rowsd }
+>>>
+>>> name
+'Iris-virginica'
+>>> names
+{'Iris-setosa', 'Iris-versicolor', 'Iris-virginica'}
+>>> {n : max([r[0] for r in rowsd]) for n in names }
+{'Iris-setosa': 7.9, 'Iris-versicolor': 7.9, 'Iris-virginica': 7.9}
+>>> from sqllite3 import connect
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named 'sqllite3'
+>>> con = connect(r"iris.db")
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'connect' is not defined
+>>> cur = con.cursor()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'con' is not defined
+>>> from sqlite3 import connect
+>>> con = connect(r"iris.db")
+>>> cur = con.cursor()
+>>> cur.execute("""create table iris (sl double, sw double,
+...         pl double, pw double, name string)""")
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+>>> for r in rowsd:
+...     cur.execute("""insert into iris values(?,?,?,?,?) """, r)
+...
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+>>> con.commit()
+>>> q = cur.execute("""select name, max(sl) from iris group by name""")
+>>> result = list(q.fetchall())
+>>> print(result)
+[('Iris-setosa', 5.8), ('Iris-versicolor', 7.0), ('Iris-virginica', 7.9)]
+>>>
+>>> cur.execute("""drop table if exists iris""")
+<sqlite3.Cursor object at 0x000000BC031C27A0>
+>>> con.close()
+>>>
+>>> import json
+>>> with open(r"data/example.json", "rt") as f:
+...     obj = json.load(f)
+...
+>>> obj
+[{'empId': 1, 'details': {'children': [], 'salary': 123.5, 'isAlive': True, 'pho
+neNumbers': [{'number': '212 555-1234', 'type': 'home'}, {'number': '646 555-456
+7', 'type': 'office'}, {'number': '123 456-7890', 'type': 'mobile'}], 'address':
+ {'postalCode': '10021-3100', 'state': 'NY', 'streetAddress': '21 2nd Street', '
+city': 'New York'}, 'spouse': None, 'firstName': 'John', 'age': 25, 'lastName':
+'Smith'}}, {'empId': 20, 'details': {'children': [], 'salary': 123.5, 'isAlive':
+ True, 'phoneNumbers': [{'number': '212 555-1234', 'type': 'home'}, {'number': '
+646 555-4567', 'type': 'office'}, {'number': '123 456-7890', 'type': 'mobile'}],
+ 'address': {'postalCode': '10021-3100', 'state': 'CL', 'streetAddress': '21 2nd
+ Street', 'city': 'New York'}, 'spouse': None, 'firstName': 'Johns', 'age': 25,
+'lastName': 'Smith'}}]
+>>> type(obj)
+<class 'list'>
+>>> type(obj[0])
+<class 'dict'>
+>>> obj[0].keys()
+dict_keys(['empId', 'details'])
+>>> [emp['empId']   for emp in obj]
+[1, 20]
+>>> res = []
+>>> for emp in obj:
+...     res.append(emp['empId'])
+...
+>>> res
+[1, 20]
+>>> [emp['details']['firstName'] + emp['details']['lastName']   for emp in obj]
+['JohnSmith', 'JohnsSmith']
+>>> for emp in obj:
+...     res.append(emp['details']['firstName'] + emp['details']['lastName'])
+...
+>>> res
+[1, 20, 'JohnSmith', 'JohnsSmith']
+>>> url = 'http://omdbapi.com/?i=tt1285016&apikey=5cdc2256'
+>>> import requests
+>>> r = requests.get(url)
+>>> r.json()
+{'Runtime': '120 min', 'Country': 'USA', 'Title': 'The Social Network', 'Website
+': 'http://www.thesocialnetwork-movie.com/', 'Ratings': [{'Value': '7.7/10', 'So
+urce': 'Internet Movie Database'}, {'Value': '95%', 'Source': 'Rotten Tomatoes'}
+, {'Value': '95/100', 'Source': 'Metacritic'}], 'Rated': 'PG-13', 'BoxOffice': '
+$96,400,000', 'Year': '2010', 'Writer': 'Aaron Sorkin (screenplay), Ben Mezrich
+(book)', 'imdbVotes': '550,434', 'Production': 'Columbia Pictures', 'Director':
+'David Fincher', 'Plot': 'Harvard student Mark Zuckerberg creates the social net
+working site that would become known as Facebook, but is later sued by two broth
+ers who claimed he stole their idea, and the co-founder who was later squeezed o
+ut of the business.', 'imdbRating': '7.7', 'Released': '01 Oct 2010', 'Response'
+: 'True', 'imdbID': 'tt1285016', 'Poster': 'https://m.media-amazon.com/images/M/
+MV5BMTM2ODk0NDAwMF5BMl5BanBnXkFtZTcwNTM1MDc2Mw@@._V1_SX300.jpg', 'Actors': 'Jess
+e Eisenberg, Rooney Mara, Bryan Barter, Dustin Fitzsimons', 'Awards': 'Won 3 Osc
+ars. Another 165 wins & 168 nominations.', 'DVD': '11 Jan 2011', 'Language': 'En
+glish, French', 'Genre': 'Biography, Drama', 'Type': 'movie', 'Metascore': '95'}
+
+>>> data = r.json()
+>>> [r['Value']     for r in data['Ratings']]
+['7.7/10', '95%', '95/100']
+>>> [r['Value']     for r in data['Ratings'] if r['Source']=='Metacritic']
+['95/100']
+>>> headers = {'Content-Type': 'application/json'}
+>>> data = {'username': 'XYZ'}
+>>>
+>>> import json
+>>> r = requests.post("http://httpbin.org/post", data=json.dumps(data),
+...     headers= headers)
+>>>
+>>> r.json()
+{'files': {}, 'args': {}, 'origin': '122.172.87.116', 'data': '{"username": "XYZ
+"}', 'url': 'http://httpbin.org/post', 'headers': {'Host': 'httpbin.org', 'Conne
+ction': 'close', 'Accept-Encoding': 'gzip, deflate', 'Content-Type': 'applicatio
+n/json', 'Accept': '*/*', 'User-Agent': 'python-requests/2.18.4', 'Content-Lengt
+h': '19'}, 'form': {}, 'json': {'username': 'XYZ'}}
+>>> json.dumps(data)
+'{"username": "XYZ"}'
+>>> import time
+>>> time.sleep(10)
+>>> url = 'http://localhost:5000/json'
+>>> r = requests.get(url)
+>>> r.json()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python35\lib\site-packages\requests\models.py", line 892, in json
+    return complexjson.loads(self.text, **kwargs)
+  File "C:\Python35\lib\json\__init__.py", line 319, in loads
+    return _default_decoder.decode(s)
+  File "C:\Python35\lib\json\decoder.py", line 339, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "C:\Python35\lib\json\decoder.py", line 357, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+>>> r = requests.get(url)
+>>> r.json()
+[{'empId': 1, 'details': {'children': [], 'firstName': 'John', 'isAlive': True,
+'phoneNumbers': [{'number': '212 555-1234', 'type': 'home'}, {'number': '646 555
+-4567', 'type': 'office'}, {'number': '123 456-7890', 'type': 'mobile'}], 'addre
+ss': {'postalCode': '10021-3100', 'state': 'NY', 'streetAddress': '21 2nd Street
+', 'city': 'New York'}, 'salary': 123.5, 'spouse': None, 'age': 25, 'lastName':
+'Smith'}}, {'empId': 20, 'details': {'children': [], 'firstName': 'Johns', 'isAl
+ive': True, 'phoneNumbers': [{'number': '212 555-1234', 'type': 'home'}, {'numbe
+r': '646 555-4567', 'type': 'office'}, {'number': '123 456-7890', 'type': 'mobil
+e'}], 'address': {'postalCode': '10021-3100', 'state': 'CL', 'streetAddress': '2
+1 2nd Street', 'city': 'New York'}, 'salary': 123.5, 'spouse': None, 'age': 25,
+'lastName': 'Smith'}}]
+>>> r = requests.get("http://www.google.com")
+>>> r.text
+'<!doctype html><html itemscope="" itemtype="http://schema.org/WebPage" lang="en
+-IN"><head><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"><m
+eta content="/images/branding/googleg/1x/googleg_standard_color_128dp.png" itemp
+rop="image"><title>Google</title><script nonce="PZV8Vjj5e+3UTQY4ov/09w==">(funct
+ion(){window.google={kEI:\'Ykv1W7SpJMfQrQHz1KX4DA\',kEXPI:\'0,1353746,58,1654,30
+3,1017,1406,697,528,731,141,184,293,1180,30,524,28,273,181,222,564,172,167,167,2
+335998,225,32,45,23,6,1,329219,1294,12383,4855,32692,15247,867,6692,5471,6381,33
+35,2,2,4604,2197,363,1218,2102,4133,1372,224,1017,1195,266,5107,575,835,284,2,57
+9,727,612,1820,58,2,2,2,190,1107,284,1428,2611,403,1693,664,630,8,300,1269,222,5
+52,276,1230,609,141,971,430,2487,455,395,525,22,599,5,2,2,1745,218,528,3,931,113
+3,182,283,3736,69,1050,334,130,1344,386,1011,81,7,3,25,463,620,29,989,406,458,46
+7,1,1374,5,13,80,676,536,696,1456,1,2833,313,315,3,558,412,2,553,80,1480,756,53,
+2,265,272,108,1234,78,23,1119,38,363,557,439,134,145,155,499,716,385,981,484,47,
+590,490,157,744,387,1030,51,360,7,59,32,416,282,475,233,61,889,307,58,118,56,443
+,122,147,214,36,628,255,1,1124,263,37,2,469,15,236,149,411,649,209,334,27,39,17,
+203,81,3,46,271,97,167,82,247,51,58,8,1041,345,173,60,194,313,9,21,261,259,59787
+51,2554,140,20,5997441,90,2800095,4,1572,549,332,445,1,2,80,1,900,583,4,309,1,8,
+1,2,2132,1,1,1,1,1,414,1,748,141,463,30,131,11,52,1,1,1,76,4,2,17,2,2,2,18,15,1,
+1,29,2,6,5,7,37,22307581\',authuser:0,kscs:\'c9c918f0_Ykv1W7SpJMfQrQHz1KX4DA\',k
+GL:\'IN\'};google.kHL=\'en-IN\';})();google.time=function(){return(new Date).get
+Time()};(function(){google.lc=[];google.li=0;google.getEI=function(a){for(var b;
+a&&(!a.getAttribute||!(b=a.getAttribute("eid")));)a=a.parentNode;return b||googl
+e.kEI};google.getLEI=function(a){for(var b=null;a&&(!a.getAttribute||!(b=a.getAt
+tribute("leid")));)a=a.parentNode;return b};google.https=function(){return"https
+:"==window.location.protocol};google.ml=function(){return null};google.log=funct
+ion(a,b,e,c,g){if(a=google.logUrl(a,b,e,c,g)){b=new Image;var d=google.lc,f=goog
+le.li;d[f]=b;b.onerror=b.onload=b.onabort=function(){delete d[f]};google.vel&&go
+ogle.vel.lu&&google.vel.lu(a);b.src=a;google.li=f+1}};google.logUrl=function(a,b
+,e,c,g){var d="",f=google.ls||"";e||-1!=b.search("&ei=")||(d="&ei="+google.getEI
+(c),-1==b.search("&lei=")&&(c=google.getLEI(c))&&(d+="&lei="+c));c="";!e&&google
+.cshid&&-1==b.search("&cshid=")&&"slh"!=a&&(c="&cshid="+google.cshid);a=e||"/"+(
+g||"gen_204")+"?atyp=i&ct="+a+"&cad="+b+d+f+"&zx="+google.time()+c;/^http:/i.tes
+t(a)&&google.https()&&(google.ml(Error("a"),!1,{src:a,glmm:1}),a="");return a};}
+).call(this);(function(){google.y={};google.x=function(a,b){if(a)var c=a.id;else
+{do c=Math.random();while(google.y[c])}google.y[c]=[a,b];return!1};google.lm=[];
+google.plm=function(a){google.lm.push.apply(google.lm,a)};google.lq=[];google.lo
+ad=function(a,b,c){google.lq.push([[a],b,c])};google.loadAll=function(a,b){googl
+e.lq.push([a,b])};}).call(this);google.f={};</script><script nonce="PZV8Vjj5e+3U
+TQY4ov/09w==">var a=window.location,b=a.href.indexOf("#");if(0<=b){var c=a.href.
+substring(b+1);/(^|&)q=/.test(c)&&-1==c.indexOf("#")&&a.replace("/search?"+c.rep
+lace(/(^|&)fp=[^&]*/g,"")+"&cad=h")};</script><style>#gbar,#guser{font-size:13px
+;padding-top:1px !important;}#gbar{height:22px}#guser{padding-bottom:7px !import
+ant;text-align:right}.gbh,.gbd{border-top:1px solid #c9d7f1;font-size:1px}.gbh{h
+eight:0;position:absolute;top:24px;width:100%}@media all{.gb1{height:22px;margin
+-right:.5em;vertical-align:top}#gbar{float:left}}a.gb1,a.gb4{text-decoration:und
+erline !important}a.gb1,a.gb4{color:#00c !important}.gbi .gb4{color:#dd8e27 !imp
+ortant}.gbf .gb4{color:#900 !important}\n</style><style>body,td,a,p,.h{font-fami
+ly:arial,sans-serif}body{margin:0;overflow-y:scroll}#gog{padding:3px 8px 0}td{li
+ne-height:.8em}.gac_m td{line-height:17px}form{margin-bottom:20px}.h{color:#36c}
+.q{color:#00c}.ts td{padding:0}.ts{border-collapse:collapse}em{font-weight:bold;
+font-style:normal}.lst{height:25px;width:496px}.gsfi,.lst{font:18px arial,sans-s
+erif}.gsfs{font:17px arial,sans-serif}.ds{display:inline-box;display:inline-bloc
+k;margin:3px 0 4px;margin-left:4px}input{font-family:inherit}a.gb1,a.gb2,a.gb3,a
+.gb4{color:#11c !important}body{background:#fff;color:black}a{color:#11c;text-de
+coration:none}a:hover,a:active{text-decoration:underline}.fl a{color:#36c}a:visi
+ted{color:#551a8b}a.gb1,a.gb4{text-decoration:underline}a.gb3:hover{text-decorat
+ion:none}#ghead a.gb2:hover{color:#fff !important}.sblc{padding-top:5px}.sblc a{
+display:block;margin:2px 0;margin-left:13px;font-size:11px}.lsbb{background:#eee
+;border:solid 1px;border-color:#ccc #999 #999 #ccc;height:30px}.lsbb{display:blo
+ck}.ftl,#fll a{display:inline-block;margin:0 12px}.lsb{background:url(/images/na
+v_logo229.png) 0 -261px repeat-x;border:none;color:#000;cursor:pointer;height:30
+px;margin:0;outline:0;font:15px arial,sans-serif;vertical-align:top}.lsb:active{
+background:#ccc}.lst:focus{outline:none}</style><script nonce="PZV8Vjj5e+3UTQY4o
+v/09w=="></script></head><body bgcolor="#fff"><script nonce="PZV8Vjj5e+3UTQY4ov/
+09w==">(function(){var src=\'/images/nav_logo229.png\';var iesg=false;document.b
+ody.onload = function(){window.n && window.n();if (document.images){new Image().
+src=src;}\nif (!iesg){document.f&&document.f.q.focus();document.gbqf&&document.g
+bqf.q.focus();}\n}\n})();</script><div id="mngb"> <div id=gbar><nobr><b class=gb
+1>Search</b> <a class=gb1 href="http://www.google.co.in/imghp?hl=en&tab=wi">Imag
+es</a> <a class=gb1 href="http://maps.google.co.in/maps?hl=en&tab=wl">Maps</a> <
+a class=gb1 href="https://play.google.com/?hl=en&tab=w8">Play</a> <a class=gb1 h
+ref="http://www.youtube.com/?gl=IN&tab=w1">YouTube</a> <a class=gb1 href="http:/
+/news.google.co.in/nwshp?hl=en&tab=wn">News</a> <a class=gb1 href="https://mail.
+google.com/mail/?tab=wm">Gmail</a> <a class=gb1 href="https://drive.google.com/?
+tab=wo">Drive</a> <a class=gb1 style="text-decoration:none" href="https://www.go
+ogle.co.in/intl/en/options/"><u>More</u> &raquo;</a></nobr></div><div id=guser w
+idth=100%><nobr><span id=gbn class=gbi></span><span id=gbf class=gbf></span><spa
+n id=gbe></span><a href="http://www.google.co.in/history/optout?hl=en" class=gb4
+>Web History</a> | <a  href="/preferences?hl=en" class=gb4>Settings</a> | <a tar
+get=_top id=gb_70 href="https://accounts.google.com/ServiceLogin?hl=en&passive=t
+rue&continue=http://www.google.com/" class=gb4>Sign in</a></nobr></div><div clas
+s=gbh style=left:0></div><div class=gbh style=right:0></div> </div><center><br c
+lear="all" id="lgpd"><div id="lga"><img alt="Google" height="92" src="/images/br
+anding/googlelogo/1x/googlelogo_white_background_color_272x92dp.png" style="padd
+ing:28px 0 14px" width="272" id="hplogo" onload="window.lol&&lol()"><br><br></di
+v><form action="/search" name="f"><table cellpadding="0" cellspacing="0"><tr val
+ign="top"><td width="25%">&nbsp;</td><td align="center" nowrap=""><input name="i
+e" value="ISO-8859-1" type="hidden"><input value="en-IN" name="hl" type="hidden"
+><input name="source" type="hidden" value="hp"><input name="biw" type="hidden"><
+input name="bih" type="hidden"><div class="ds" style="height:32px;margin:4px 0">
+<input style="color:#000;margin:0;padding:5px 8px 0 6px;vertical-align:top" auto
+complete="off" class="lst" value="" title="Google Search" maxlength="2048" name=
+"q" size="57"></div><br style="line-height:0"><span class="ds"><span class="lsbb
+"><input class="lsb" value="Google Search" name="btnG" type="submit"></span></sp
+an><span class="ds"><span class="lsbb"><input class="lsb" value="I\'m Feeling Lu
+cky" name="btnI" onclick="if(this.form.q.value)this.checked=1; else top.location
+=\'/doodles/\'" type="submit"></span></span></td><td class="fl sblc" align="left
+" nowrap="" width="25%"><a href="/advanced_search?hl=en-IN&amp;authuser=0">Advan
+ced search</a><a href="/language_tools?hl=en-IN&amp;authuser=0">Language tools</
+a></td></tr></table><input id="gbv" name="gbv" type="hidden" value="1"><script n
+once="PZV8Vjj5e+3UTQY4ov/09w==">(function(){var a,b="1";if(document&&document.ge
+tElementById)if("undefined"!=typeof XMLHttpRequest)b="2";else if("undefined"!=ty
+peof ActiveXObject){var c,d,e=["MSXML2.XMLHTTP.6.0","MSXML2.XMLHTTP.3.0","MSXML2
+.XMLHTTP","Microsoft.XMLHTTP"];for(c=0;d=e[c++];)try{new ActiveXObject(d),b="2"}
+catch(h){}}a=b;if("2"==a&&-1==location.search.indexOf("&gbv=2")){var f=google.gb
+vu,g=document.getElementById("gbv");g&&(g.value=a);f&&window.setTimeout(function
+(){location.href=f},0)};}).call(this);</script></form><div id="gac_scont"></div>
+<div style="font-size:83%;min-height:3.5em"><br><div id="gws-output-pages-elemen
+ts-homepage_additional_languages__als"><style>#gws-output-pages-elements-homepag
+e_additional_languages__als{font-size:small;margin-bottom:24px}#SIvCob{display:i
+nline-block;line-height:28px;}#SIvCob a{padding:0 3px;}.H6sW5{display:inline-blo
+ck;margin:0 2px;white-space:nowrap}.z4hgWe{display:inline-block;margin:0 2px}</s
+tyle><div id="SIvCob">Google offered in:  <a href="http://www.google.com/setpref
+s?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&amp;hl=hi&amp;source=homepage&amp;sa=X&am
+p;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAU">&#2361;&#2367;&#2344;&#2381;&#23
+42;&#2368;</a>    <a href="http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9
+pGNVNwN5jrE%3D&amp;hl=bn&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuuXeA
+hVHaCsKHXNqCc8Q2ZgBCAY">&#2476;&#2494;&#2434;&#2482;&#2494;</a>    <a href="http
+://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&amp;hl=te&amp;so
+urce=homepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAc">&#3108;
+&#3142;&#3122;&#3137;&#3095;&#3137;</a>    <a href="http://www.google.com/setpre
+fs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&amp;hl=mr&amp;source=homepage&amp;sa=X&a
+mp;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAg">&#2350;&#2352;&#2366;&#2336;&#2
+368;</a>    <a href="http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNw
+N5jrE%3D&amp;hl=ta&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuuXeAhVHaCs
+KHXNqCc8Q2ZgBCAk">&#2980;&#2990;&#3007;&#2996;&#3021;</a>    <a href="http://www
+.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&amp;hl=gu&amp;source=h
+omepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAo">&#2711;&#2753
+;&#2716;&#2736;&#2750;&#2724;&#2752;</a>    <a href="http://www.google.com/setpr
+efs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&amp;hl=kn&amp;source=homepage&amp;sa=X&
+amp;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAs">&#3221;&#3240;&#3277;&#3240;&#
+3233;</a>    <a href="http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVN
+wN5jrE%3D&amp;hl=ml&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuuXeAhVHaC
+sKHXNqCc8Q2ZgBCAw">&#3374;&#3378;&#3375;&#3390;&#3379;&#3330;</a>    <a href="ht
+tp://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&amp;hl=pa&amp;
+source=homepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCA0">&#260
+2;&#2672;&#2588;&#2622;&#2604;&#2624;</a>  </div></div></div><span id="footer"><
+div style="font-size:10pt"><div style="margin:19px auto;text-align:center" id="f
+ll"><a href="/intl/en/ads/">Advertising\xa0Programs</a><a href="http://www.googl
+e.co.in/services/">Business Solutions</a><a href="https://plus.google.com/104205
+742743787718296" rel="publisher">+Google</a><a href="/intl/en/about.html">About
+Google</a><a href="http://www.google.com/setprefdomain?prefdom=IN&amp;prev=http:
+//www.google.co.in/&amp;sig=K_a0XSJNnsO3L6mMEuli9dlfo9Gss%3D">Google.co.in</a></
+div></div><p style="color:#767676;font-size:8pt">&copy; 2018 - <a href="/intl/en
+/policies/privacy/">Privacy</a> - <a href="/intl/en/policies/terms/">Terms</a></
+p></span></center><script nonce="PZV8Vjj5e+3UTQY4ov/09w==">(function(){window.go
+ogle.cdo={height:0,width:0};(function(){var a=window.innerWidth,b=window.innerHe
+ight;if(!a||!b){var c=window.document,d="CSS1Compat"==c.compatMode?c.documentEle
+ment:c.body;a=d.clientWidth;b=d.clientHeight}a&&b&&(a!=google.cdo.width||b!=goog
+le.cdo.height)&&google.log("","","/client_204?&atyp=i&biw="+a+"&bih="+b+"&ei="+g
+oogle.kEI);}).call(this);})();</script><div id="xjsd"></div><div id="xjsi"><scri
+pt nonce="PZV8Vjj5e+3UTQY4ov/09w==">(function(){function c(b){window.setTimeout(
+function(){var a=document.createElement("script");a.src=b;google.timers&&google.
+timers.load.t&&google.tick&&google.tick("load",{gen204:"xjsls",clearcut:31});doc
+ument.getElementById("xjsd").appendChild(a)},0)}google.dljp=function(b,a){google
+.xjsu=b;c(a)};google.dlj=c;}).call(this);if(!google.xjs){window._=window._||{};w
+indow._DumpException=window._._DumpException=function(e){throw e};window._F_inst
+allCss=window._._F_installCss=function(c){};google.dljp(\'/xjs/_/js/k\\x3dxjs.hp
+.en.-FjDpBLhWv0.O/m\\x3dsb_he,d/am\\x3dYsAs/rt\\x3dj/d\\x3d1/rs\\x3dACT90oHJ4rbe
+2OwpPxhLcnTfwCOaHm4-PA\',\'/xjs/_/js/k\\x3dxjs.hp.en.-FjDpBLhWv0.O/m\\x3dsb_he,d
+/am\\x3dYsAs/rt\\x3dj/d\\x3d1/rs\\x3dACT90oHJ4rbe2OwpPxhLcnTfwCOaHm4-PA\');googl
+e.xjs=1;}google.pmc={"sb_he":{"agen":true,"cgen":true,"client":"heirloom-hp","dh
+":true,"dhqt":true,"ds":"","ffql":"en","fl":true,"host":"google.com","isbh":28,"
+jsonp":true,"msgs":{"cibl":"Clear Search","dym":"Did you mean:","lcky":"I\\u0026
+#39;m Feeling Lucky","lml":"Learn more","oskt":"Input tools","psrc":"This search
+ was removed from your \\u003Ca href=\\"/history\\"\\u003EWeb History\\u003C/a\\
+u003E","psrl":"Remove","sbit":"Search by image","srch":"Google Search"},"ovr":{}
+,"pq":"","refpd":true,"rfs":[],"sbpl":24,"sbpr":24,"scd":10,"sce":5,"stok":"3IA8
+Rsf2mCZ4ZE4Ez6xN8bLmhlU","uhde":false},"d":{},"ZI/YVQ":{},"Qnk92g":{},"U5B21g":{
+},"YFCs/g":{}};google.x(null,function(){});(function(){var r=[];google.plm(r);})
+();(function(){var m=[]\n;m.length && google.jsc && google.jsc.m(m);})();</scrip
+t></div></body></html>'
+>>> from bs4 import BeautifulSoup
+>>> s = BeautifulSoup(r.text, 'html.parser')
+>>> s
+<!DOCTYPE doctype html>
+<html itemscope="" itemtype="http://schema.org/WebPage" lang="en-IN"><head><meta
+ content="text/html; charset=utf-8" http-equiv="Content-Type"/><meta content="/i
+mages/branding/googleg/1x/googleg_standard_color_128dp.png" itemprop="image"/><t
+itle>Google</title><script nonce="PZV8Vjj5e+3UTQY4ov/09w==">(function(){window.g
+oogle={kEI:'Ykv1W7SpJMfQrQHz1KX4DA',kEXPI:'0,1353746,58,1654,303,1017,1406,697,5
+28,731,141,184,293,1180,30,524,28,273,181,222,564,172,167,167,2335998,225,32,45,
+23,6,1,329219,1294,12383,4855,32692,15247,867,6692,5471,6381,3335,2,2,4604,2197,
+363,1218,2102,4133,1372,224,1017,1195,266,5107,575,835,284,2,579,727,612,1820,58
+,2,2,2,190,1107,284,1428,2611,403,1693,664,630,8,300,1269,222,552,276,1230,609,1
+41,971,430,2487,455,395,525,22,599,5,2,2,1745,218,528,3,931,1133,182,283,3736,69
+,1050,334,130,1344,386,1011,81,7,3,25,463,620,29,989,406,458,467,1,1374,5,13,80,
+676,536,696,1456,1,2833,313,315,3,558,412,2,553,80,1480,756,53,2,265,272,108,123
+4,78,23,1119,38,363,557,439,134,145,155,499,716,385,981,484,47,590,490,157,744,3
+87,1030,51,360,7,59,32,416,282,475,233,61,889,307,58,118,56,443,122,147,214,36,6
+28,255,1,1124,263,37,2,469,15,236,149,411,649,209,334,27,39,17,203,81,3,46,271,9
+7,167,82,247,51,58,8,1041,345,173,60,194,313,9,21,261,259,5978751,2554,140,20,59
+97441,90,2800095,4,1572,549,332,445,1,2,80,1,900,583,4,309,1,8,1,2,2132,1,1,1,1,
+1,414,1,748,141,463,30,131,11,52,1,1,1,76,4,2,17,2,2,2,18,15,1,1,29,2,6,5,7,37,2
+2307581',authuser:0,kscs:'c9c918f0_Ykv1W7SpJMfQrQHz1KX4DA',kGL:'IN'};google.kHL=
+'en-IN';})();google.time=function(){return(new Date).getTime()};(function(){goog
+le.lc=[];google.li=0;google.getEI=function(a){for(var b;a&&(!a.getAttribute||!(b
+=a.getAttribute("eid")));)a=a.parentNode;return b||google.kEI};google.getLEI=fun
+ction(a){for(var b=null;a&&(!a.getAttribute||!(b=a.getAttribute("leid")));)a=a.p
+arentNode;return b};google.https=function(){return"https:"==window.location.prot
+ocol};google.ml=function(){return null};google.log=function(a,b,e,c,g){if(a=goog
+le.logUrl(a,b,e,c,g)){b=new Image;var d=google.lc,f=google.li;d[f]=b;b.onerror=b
+.onload=b.onabort=function(){delete d[f]};google.vel&&google.vel.lu&&google.vel.
+lu(a);b.src=a;google.li=f+1}};google.logUrl=function(a,b,e,c,g){var d="",f=googl
+e.ls||"";e||-1!=b.search("&ei=")||(d="&ei="+google.getEI(c),-1==b.search("&lei="
+)&&(c=google.getLEI(c))&&(d+="&lei="+c));c="";!e&&google.cshid&&-1==b.search("&c
+shid=")&&"slh"!=a&&(c="&cshid="+google.cshid);a=e||"/"+(g||"gen_204")+"?atyp=i&c
+t="+a+"&cad="+b+d+f+"&zx="+google.time()+c;/^http:/i.test(a)&&google.https()&&(g
+oogle.ml(Error("a"),!1,{src:a,glmm:1}),a="");return a};}).call(this);(function()
+{google.y={};google.x=function(a,b){if(a)var c=a.id;else{do c=Math.random();whil
+e(google.y[c])}google.y[c]=[a,b];return!1};google.lm=[];google.plm=function(a){g
+oogle.lm.push.apply(google.lm,a)};google.lq=[];google.load=function(a,b,c){googl
+e.lq.push([[a],b,c])};google.loadAll=function(a,b){google.lq.push([a,b])};}).cal
+l(this);google.f={};</script><script nonce="PZV8Vjj5e+3UTQY4ov/09w==">var a=wind
+ow.location,b=a.href.indexOf("#");if(0<=b){var c=a.href.substring(b+1);/(^|&)q=/
+.test(c)&&-1==c.indexOf("#")&&a.replace("/search?"+c.replace(/(^|&)fp=[^&]*/g,""
+)+"&cad=h")};</script><style>#gbar,#guser{font-size:13px;padding-top:1px !import
+ant;}#gbar{height:22px}#guser{padding-bottom:7px !important;text-align:right}.gb
+h,.gbd{border-top:1px solid #c9d7f1;font-size:1px}.gbh{height:0;position:absolut
+e;top:24px;width:100%}@media all{.gb1{height:22px;margin-right:.5em;vertical-ali
+gn:top}#gbar{float:left}}a.gb1,a.gb4{text-decoration:underline !important}a.gb1,
+a.gb4{color:#00c !important}.gbi .gb4{color:#dd8e27 !important}.gbf .gb4{color:#
+900 !important}
+</style><style>body,td,a,p,.h{font-family:arial,sans-serif}body{margin:0;overflo
+w-y:scroll}#gog{padding:3px 8px 0}td{line-height:.8em}.gac_m td{line-height:17px
+}form{margin-bottom:20px}.h{color:#36c}.q{color:#00c}.ts td{padding:0}.ts{border
+-collapse:collapse}em{font-weight:bold;font-style:normal}.lst{height:25px;width:
+496px}.gsfi,.lst{font:18px arial,sans-serif}.gsfs{font:17px arial,sans-serif}.ds
+{display:inline-box;display:inline-block;margin:3px 0 4px;margin-left:4px}input{
+font-family:inherit}a.gb1,a.gb2,a.gb3,a.gb4{color:#11c !important}body{backgroun
+d:#fff;color:black}a{color:#11c;text-decoration:none}a:hover,a:active{text-decor
+ation:underline}.fl a{color:#36c}a:visited{color:#551a8b}a.gb1,a.gb4{text-decora
+tion:underline}a.gb3:hover{text-decoration:none}#ghead a.gb2:hover{color:#fff !i
+mportant}.sblc{padding-top:5px}.sblc a{display:block;margin:2px 0;margin-left:13
+px;font-size:11px}.lsbb{background:#eee;border:solid 1px;border-color:#ccc #999
+#999 #ccc;height:30px}.lsbb{display:block}.ftl,#fll a{display:inline-block;margi
+n:0 12px}.lsb{background:url(/images/nav_logo229.png) 0 -261px repeat-x;border:n
+one;color:#000;cursor:pointer;height:30px;margin:0;outline:0;font:15px arial,san
+s-serif;vertical-align:top}.lsb:active{background:#ccc}.lst:focus{outline:none}<
+/style><script nonce="PZV8Vjj5e+3UTQY4ov/09w=="></script></head><body bgcolor="#
+fff"><script nonce="PZV8Vjj5e+3UTQY4ov/09w==">(function(){var src='/images/nav_l
+ogo229.png';var iesg=false;document.body.onload = function(){window.n && window.
+n();if (document.images){new Image().src=src;}
+if (!iesg){document.f&&document.f.q.focus();document.gbqf&&document.gbqf.q.focus
+();}
+}
+})();</script><div id="mngb"> <div id="gbar"><nobr><b class="gb1">Search</b> <a
+class="gb1" href="http://www.google.co.in/imghp?hl=en&amp;tab=wi">Images</a> <a
+class="gb1" href="http://maps.google.co.in/maps?hl=en&amp;tab=wl">Maps</a> <a cl
+ass="gb1" href="https://play.google.com/?hl=en&amp;tab=w8">Play</a> <a class="gb
+1" href="http://www.youtube.com/?gl=IN&amp;tab=w1">YouTube</a> <a class="gb1" hr
+ef="http://news.google.co.in/nwshp?hl=en&amp;tab=wn">News</a> <a class="gb1" hre
+f="https://mail.google.com/mail/?tab=wm">Gmail</a> <a class="gb1" href="https://
+drive.google.com/?tab=wo">Drive</a> <a class="gb1" href="https://www.google.co.i
+n/intl/en/options/" style="text-decoration:none"><u>More</u> »</a></nobr></div><
+div id="guser" width="100%"><nobr><span class="gbi" id="gbn"></span><span class=
+"gbf" id="gbf"></span><span id="gbe"></span><a class="gb4" href="http://www.goog
+le.co.in/history/optout?hl=en">Web History</a> | <a class="gb4" href="/preferenc
+es?hl=en">Settings</a> | <a class="gb4" href="https://accounts.google.com/Servic
+eLogin?hl=en&amp;passive=true&amp;continue=http://www.google.com/" id="gb_70" ta
+rget="_top">Sign in</a></nobr></div><div class="gbh" style="left:0"></div><div c
+lass="gbh" style="right:0"></div> </div><center><br clear="all" id="lgpd"/><div
+id="lga"><img alt="Google" height="92" id="hplogo" onload="window.lol&amp;&amp;l
+ol()" src="/images/branding/googlelogo/1x/googlelogo_white_background_color_272x
+92dp.png" style="padding:28px 0 14px" width="272"/><br/><br/></div><form action=
+"/search" name="f"><table cellpadding="0" cellspacing="0"><tr valign="top"><td w
+idth="25%"> </td><td align="center" nowrap=""><input name="ie" type="hidden" val
+ue="ISO-8859-1"/><input name="hl" type="hidden" value="en-IN"/><input name="sour
+ce" type="hidden" value="hp"/><input name="biw" type="hidden"/><input name="bih"
+ type="hidden"/><div class="ds" style="height:32px;margin:4px 0"><input autocomp
+lete="off" class="lst" maxlength="2048" name="q" size="57" style="color:#000;mar
+gin:0;padding:5px 8px 0 6px;vertical-align:top" title="Google Search" value=""/>
+</div><br style="line-height:0"/><span class="ds"><span class="lsbb"><input clas
+s="lsb" name="btnG" type="submit" value="Google Search"/></span></span><span cla
+ss="ds"><span class="lsbb"><input class="lsb" name="btnI" onclick="if(this.form.
+q.value)this.checked=1; else top.location='/doodles/'" type="submit" value="I'm
+Feeling Lucky"/></span></span></td><td align="left" class="fl sblc" nowrap="" wi
+dth="25%"><a href="/advanced_search?hl=en-IN&amp;authuser=0">Advanced search</a>
+<a href="/language_tools?hl=en-IN&amp;authuser=0">Language tools</a></td></tr></
+table><input id="gbv" name="gbv" type="hidden" value="1"/><script nonce="PZV8Vjj
+5e+3UTQY4ov/09w==">(function(){var a,b="1";if(document&&document.getElementById)
+if("undefined"!=typeof XMLHttpRequest)b="2";else if("undefined"!=typeof ActiveXO
+bject){var c,d,e=["MSXML2.XMLHTTP.6.0","MSXML2.XMLHTTP.3.0","MSXML2.XMLHTTP","Mi
+crosoft.XMLHTTP"];for(c=0;d=e[c++];)try{new ActiveXObject(d),b="2"}catch(h){}}a=
+b;if("2"==a&&-1==location.search.indexOf("&gbv=2")){var f=google.gbvu,g=document
+.getElementById("gbv");g&&(g.value=a);f&&window.setTimeout(function(){location.h
+ref=f},0)};}).call(this);</script></form><div id="gac_scont"></div><div style="f
+ont-size:83%;min-height:3.5em"><br/><div id="gws-output-pages-elements-homepage_
+additional_languages__als"><style>#gws-output-pages-elements-homepage_additional
+_languages__als{font-size:small;margin-bottom:24px}#SIvCob{display:inline-block;
+line-height:28px;}#SIvCob a{padding:0 3px;}.H6sW5{display:inline-block;margin:0
+2px;white-space:nowrap}.z4hgWe{display:inline-block;margin:0 2px}</style><div id
+="SIvCob">Google offered in:  <a href="http://www.google.com/setprefs?sig=0__Q6e
+9to-0eislMM9pGNVNwN5jrE%3D&amp;hl=hi&amp;source=homepage&amp;sa=X&amp;ved=0ahUKE
+wi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAU">\u0939\u093f\u0928\u094d\u0926\u0940</a> <a
+href="http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&amp;hl
+=bn&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCA
+Y">\u09ac\u09be\u0982\u09b2\u09be</a> <a href="http://www.google.com/setprefs?si
+g=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&amp;hl=te&amp;source=homepage&amp;sa=X&amp;ve
+d=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAc">\u0c24\u0c46\u0c32\u0c41\u0c17\u0c41
+</a> <a href="http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3
+D&amp;hl=mr&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc
+8Q2ZgBCAg">\u092e\u0930\u093e\u0920\u0940</a> <a href="http://www.google.com/set
+prefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&amp;hl=ta&amp;source=homepage&amp;sa=
+X&amp;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAk">\u0ba4\u0bae\u0bbf\u0bb4\u0b
+cd</a> <a href="http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE
+%3D&amp;hl=gu&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNq
+Cc8Q2ZgBCAo">\u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0</a> <a href="http://www.
+google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&amp;hl=kn&amp;source=ho
+mepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAs">\u0c95\u0ca8\u
+0ccd\u0ca8\u0ca1</a> <a href="http://www.google.com/setprefs?sig=0__Q6e9to-0eisl
+MM9pGNVNwN5jrE%3D&amp;hl=ml&amp;source=homepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuu
+XeAhVHaCsKHXNqCc8Q2ZgBCAw">\u0d2e\u0d32\u0d2f\u0d3e\u0d33\u0d02</a> <a href="htt
+p://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&amp;hl=pa&amp;s
+ource=homepage&amp;sa=X&amp;ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCA0">\u0a2a
+\u0a70\u0a1c\u0a3e\u0a2c\u0a40</a> </div></div></div><span id="footer"><div styl
+e="font-size:10pt"><div id="fll" style="margin:19px auto;text-align:center"><a h
+ref="/intl/en/ads/">Advertising Programs</a><a href="http://www.google.co.in/ser
+vices/">Business Solutions</a><a href="https://plus.google.com/10420574274378771
+8296" rel="publisher">+Google</a><a href="/intl/en/about.html">About Google</a><
+a href="http://www.google.com/setprefdomain?prefdom=IN&amp;prev=http://www.googl
+e.co.in/&amp;sig=K_a0XSJNnsO3L6mMEuli9dlfo9Gss%3D">Google.co.in</a></div></div><
+p style="color:#767676;font-size:8pt">\xa9 2018 - <a href="/intl/en/policies/pri
+vacy/">Privacy</a> - <a href="/intl/en/policies/terms/">Terms</a></p></span></ce
+nter><script nonce="PZV8Vjj5e+3UTQY4ov/09w==">(function(){window.google.cdo={hei
+ght:0,width:0};(function(){var a=window.innerWidth,b=window.innerHeight;if(!a||!
+b){var c=window.document,d="CSS1Compat"==c.compatMode?c.documentElement:c.body;a
+=d.clientWidth;b=d.clientHeight}a&&b&&(a!=google.cdo.width||b!=google.cdo.height
+)&&google.log("","","/client_204?&atyp=i&biw="+a+"&bih="+b+"&ei="+google.kEI);})
+.call(this);})();</script><div id="xjsd"></div><div id="xjsi"><script nonce="PZV
+8Vjj5e+3UTQY4ov/09w==">(function(){function c(b){window.setTimeout(function(){va
+r a=document.createElement("script");a.src=b;google.timers&&google.timers.load.t
+&&google.tick&&google.tick("load",{gen204:"xjsls",clearcut:31});document.getElem
+entById("xjsd").appendChild(a)},0)}google.dljp=function(b,a){google.xjsu=b;c(a)}
+;google.dlj=c;}).call(this);if(!google.xjs){window._=window._||{};window._DumpEx
+ception=window._._DumpException=function(e){throw e};window._F_installCss=window
+._._F_installCss=function(c){};google.dljp('/xjs/_/js/k\x3dxjs.hp.en.-FjDpBLhWv0
+.O/m\x3dsb_he,d/am\x3dYsAs/rt\x3dj/d\x3d1/rs\x3dACT90oHJ4rbe2OwpPxhLcnTfwCOaHm4-
+PA','/xjs/_/js/k\x3dxjs.hp.en.-FjDpBLhWv0.O/m\x3dsb_he,d/am\x3dYsAs/rt\x3dj/d\x3
+d1/rs\x3dACT90oHJ4rbe2OwpPxhLcnTfwCOaHm4-PA');google.xjs=1;}google.pmc={"sb_he":
+{"agen":true,"cgen":true,"client":"heirloom-hp","dh":true,"dhqt":true,"ds":"","f
+fql":"en","fl":true,"host":"google.com","isbh":28,"jsonp":true,"msgs":{"cibl":"C
+lear Search","dym":"Did you mean:","lcky":"I\u0026#39;m Feeling Lucky","lml":"Le
+arn more","oskt":"Input tools","psrc":"This search was removed from your \u003Ca
+ href=\"/history\"\u003EWeb History\u003C/a\u003E","psrl":"Remove","sbit":"Searc
+h by image","srch":"Google Search"},"ovr":{},"pq":"","refpd":true,"rfs":[],"sbpl
+":24,"sbpr":24,"scd":10,"sce":5,"stok":"3IA8Rsf2mCZ4ZE4Ez6xN8bLmhlU","uhde":fals
+e},"d":{},"ZI/YVQ":{},"Qnk92g":{},"U5B21g":{},"YFCs/g":{}};google.x(null,functio
+n(){});(function(){var r=[];google.plm(r);})();(function(){var m=[]
+;m.length && google.jsc && google.jsc.m(m);})();</script></div></body></html>
+>>>
+>>> for l in s.find_all('a'):
+...     print(l['href'])
+...
+http://www.google.co.in/imghp?hl=en&tab=wi
+http://maps.google.co.in/maps?hl=en&tab=wl
+https://play.google.com/?hl=en&tab=w8
+http://www.youtube.com/?gl=IN&tab=w1
+http://news.google.co.in/nwshp?hl=en&tab=wn
+https://mail.google.com/mail/?tab=wm
+https://drive.google.com/?tab=wo
+https://www.google.co.in/intl/en/options/
+http://www.google.co.in/history/optout?hl=en
+/preferences?hl=en
+https://accounts.google.com/ServiceLogin?hl=en&passive=true&continue=http://www.
+google.com/
+/advanced_search?hl=en-IN&authuser=0
+/language_tools?hl=en-IN&authuser=0
+http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&hl=hi&source
+=homepage&sa=X&ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAU
+http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&hl=bn&source
+=homepage&sa=X&ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAY
+http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&hl=te&source
+=homepage&sa=X&ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAc
+http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&hl=mr&source
+=homepage&sa=X&ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAg
+http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&hl=ta&source
+=homepage&sa=X&ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAk
+http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&hl=gu&source
+=homepage&sa=X&ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAo
+http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&hl=kn&source
+=homepage&sa=X&ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAs
+http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&hl=ml&source
+=homepage&sa=X&ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCAw
+http://www.google.com/setprefs?sig=0__Q6e9to-0eislMM9pGNVNwN5jrE%3D&hl=pa&source
+=homepage&sa=X&ved=0ahUKEwi04qSsuuXeAhVHaCsKHXNqCc8Q2ZgBCA0
+/intl/en/ads/
+http://www.google.co.in/services/
+https://plus.google.com/104205742743787718296
+/intl/en/about.html
+http://www.google.com/setprefdomain?prefdom=IN&prev=http://www.google.co.in/&sig
+=K_a0XSJNnsO3L6mMEuli9dlfo9Gss%3D
+/intl/en/policies/privacy/
+/intl/en/policies/terms/
+>>>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+######################first.py ################
+from  __future__  import print_function, division
+import sys 
+
+#a = sys.argv[1]
+#b = sys.argv[2]
+#print(int(a) + int(b))
+
+#
+s = "Hello World"
+#H - 1
+#e - 1
+#l - 3
+#...
+d = {}
+#Take each char(ch) from s 
+for ch in set(s):
+    #initialize counter 
+    counter = 0 
+    #Take each char(ch1) from s 
+    for ch1 in s:
+        #if ch and ch1 are same 
+        if ch == ch1:
+            #increment counter
+            counter += 1
+    #print ch and counter 
+    d[ch] = counter 
+    print(ch, "-", counter)
+
+##
+input = "aaabcaabcd"
+output = "abcd"
+
+#create one empty string(output)
+output = ""
+#Take each char(ch) from input
+for  ch in input:
+    #If ch does not exist in output 
+    if ch not in output:
+        #concatenate ch to output and replace old output by above 
+        output = output + ch 
+
+## 1,2,3,4,5,6,7,8,9
+output = "123456789"
+
+# create one empty string(output)
+# Take each number(e) from suitable range 
+    # concatenate e to output (*)
+    # and replace old output by above 
+
+output = ""
+for e in range(1,10):
+    output += str(e)  #output = output + str(e)
+print(output)
+
+
+input="ABCDEF1234567890"
+# Take two two character(one byte) from above 
+# (which are in hex digit )
+# Convert to int  , int("AB", base=16)
+#Sum all and then find mod with 255, that is your checksum 
+
+
+res = 0
+for i in range(len(input)//2):
+     hex_str = input[i* 2 : 2*i+2]
+     res += int(hex_str, base=16)
+
+print(res % 255) 
+################################################
+[]   list - Indexing:A , Duplicates:A, insertion order-Y, Mutable 
+()       tuple - Immutable, ---above---
+         collection of element - each element could be any type
+   
+{}   set - Duplicates - NA , IO - No, Indexing - No , Mutable
+       frozenset - Immutable, ---above---
+    
+--------------------------
+{k:v} dict -  collection of key, value , where keys are like set 
+Given a key, find value 
+
+--------------------------
+#list - NO NO 
+lst = [1,3,6,2] 
+out = [1,9]
+
+Create empty list (out) 
+Take each element(e) from lst 
+    if e is odd
+        then only append to empty list, out 
+    
+out = []
+for e in lst:
+    out.append(e*e)
+print(out)
+
+
+out = []
+for e in lst:
+    if e % 2 == 1:
+        out.append(e)
+print(out)
+
+out = []
+for e in lst:
+    if e % 2 == 1:
+        out.append(e*e)
+print(out)
+
+##########################
+input = '[1,2,3,4]'
+output = [1,2,3,4]
+
+strip input with '[]' then split with ',' , store to s2 
+create empty list 
+Take each element(e) from s2 
+    convert e to int and append to empty list 
+
+output = []
+for e in input.strip("[]").split(","):
+    output.append(int(e))
+
+#Q
+input = 'Name:ABC,age=20|Name:XYZ,age=30'
+output = 'Name:Abc,age=20|Name:Xyz,age=30'
+
+#Split input with "|" and store to s2 
+s2 = input.split("|")
+#Create empty list(out)
+out = []
+#Take each element(e) from s2
+for e in s2:
+    #split e with ",", take first part (e1)
+    e1 = e.split(",")[0]
+    #Split e1 with ":", take 2nd part (res)
+    res = e1.split(":")[1]
+    #Capitalize res and store result to res2 
+    res2 = res.title()
+    #replace res by res2 in e and append to empty list  
+    e2 = e.replace(res, res2)
+    out.append(e2)
+output = '|'.join(out)
+
+
+l2 = [ 1, [2, [3,4],[5],[]]]
+
+l2_1 # [ 1, [2, [3,40],[5],[]]]
+l2[1][1][1] = 40
+ 
+l2_2 # [ 1, [2, [3,4],[5],[],30]]
+l2[1].append(30)
+
+l2_3 # [ 1, [2, [3,4],[5],[20,23]]]
+l2[1][3] += [20,23] 
+
+l2_4 # [ 1, [2, [3,4],[5],[]], "OK"]
+l2.append("OK")
+
+input="ABCDEF1234567890"
+Take two two character(one byte) from above 
+(which are in hex digit )
+Convert to int  , int("AB", base=16)
+Sum all and then find mod with 255, that is your checksum 
+
+
+
+res = []
+for l,r in zip(input[::2], input[1::2]):
+     res.append(int(l+r, base=16))
+
+print(sum(res) % 255)
+
+
+f = open(r"D:\PPT\python\hands\first.py", "rt")
+lines = f.readlines()  #list of string 
+f.close()
+#file size 
+res = []
+for line in lines:
+    res.append( len(line) )
+print(sum(res))
+#which line is max 
+res = []
+for index, line in enumerate(lines):
+    print(index)
+    res.append( ( index+1,len(line)) )
+print(res) #list of tuples, 
+
+max_length = res[0][-1]
+line_number = res[0][0]
+for no, length in res:
+    if length > max_length:
+        max_length = length 
+        line_number = no 
+
+print(line_number)
+#how many LOC?
+#how many LOC in a dir 
+filename = r"D:\PPT\python\hands\first.py"
+import glob 
+locs = []
+for filename in glob.glob("*.py"):
+    f = open(filename, "rt")
+    lines = f.readlines()  #list of string 
+    f.close()
+    res = []
+    for line in lines:
+        line1 = line.strip()
+        if line1 and line1[0] != '#':
+            res.append(line)
+    locs.append(len(res))
+
+print(sum(locs))
+
+##########
+s = "Hello World"
+
+#Create a empty dict(d)
+d = {}
+#Take each element(e) from s 
+for e in s:
+    #if e does not exist in empty dict 
+    if e not in d:
+        #create a key for e and initialize it's value 
+        d[e] = 1
+    else: 
+        #increment it's value 
+        d[e] += 1
+      
+print(d) 
+
+##
+Execute tasklist and create a dict 
+{pid_no: {'name':..., 'memory': .. }, .....}
+
+D:\PPT\python\hands>tasklist
+
+Image Name                     PID Session Name        Session#    Mem Usage
+========================= ======== ================ =========== ============
+System Idle Process              0 Services                   0          4 K
+System                           4 Services                   0     12,396 K
+
+command = 'tasklist'
+import subprocess as S 
+proc = S.Popen(command, shell=True, 
+                    stdout=S.PIPE, stderr=S.PIPE, 
+                    universal_newlines=True)
+stdout, stderr = proc.communicate()
+processes = {}
+import re 
+sp = r"([\w\. \+]+)\s+(\d+)\s+(\w+)\s+(\d+)\s+([\d,]+)"
+for line in stdout.splitlines()[3:]:
+    name,pid,s,s,memory = re.findall(sp,line)
+    processes[int(pid)] = {'name': name , 'memory': int(memory.replace(',', '')) }
+    #print(line)
+    #print(re.findall(sp,line))
+    
+##Subprocess 
+#nslookup www.google.com
+command = 'nslookup www.google.com'
+import subprocess as S 
+
+proc = S.Popen(command, shell=True,stdout=S.PIPE, stderr=S.PIPE,universal_newlines=True)
+stdout, stderr = proc.communicate()
+print(stdout) 
+
+#echo %errorlevel%
+proc = S.Popen(command, shell=True,stdout=S.PIPE, stderr=S.PIPE, universal_newlines=True)
+stdout, stderr = proc.communicate()
+print(proc.returncode) 
+
+
+
+
+
+
+
+
+
+
+
+#nslookup www.google.com > out.txt
+with open(r"out.txt", "wt") as f:
+    proc = S.Popen(command, shell=True, stdout=f,universal_newlines=True)
+    proc.wait()
+
+#nslookup www.google.com > out.txt 2>&1 
+with open(r"out.txt", "wt") as f:
+    proc = S.Popen(command, shell=True, stdout=f, stderr=S.STDOUT,universal_newlines=True)
+    proc.wait()
+    
+#nslookup www.google.com > out.txt 2> /dev/null
+import os 
+with open(os.devnull, "w") as DEVNULL:
+    with open(r"out.txt", "wt") as f:
+        proc = S.Popen(command, shell=True,stdout=f, stderr=DEVNULL,universal_newlines=True)
+        proc.wait()
+
+
+#type out.txt | findstr -c:"Server"
+command1 = 'type out.txt'
+p1 = S.Popen(command1, shell=True,stdout=S.PIPE, stderr=S.STDOUT,universal_newlines=True)
+command2 = 'findstr -c:"Server"'
+p2 = S.Popen(command2, shell=True, stdin=p1.stdout, 
+                stdout=S.PIPE, stderr=S.STDOUT,universal_newlines=True)
+p1.stdout.close()
+stdout, stderr = p2.communicate()
+print(stdout) 
+
+                 
+                    
+
+s="  4    14 ms    14 ms    14 ms  203.92.63.134.reverse.spectranet.in [203.92.63.1.34]"
+s2=' 2     1 ms     1 ms     1 ms  10.201.119.1'
+sp = r".+\s(.+?)\s(.+?)$"
+>>> re.findall(sp, s)
+[('203.92.63.134.reverse.spectranet.in', '[203.92.63.1.34]')]
+>>> re.findall(sp, s2)
+[('ms', ' 10.201.119.1')]
+
+
+
+command = 'tracert www.google.com'
+import subprocess as S 
+
+proc = S.Popen(command, shell=True,stdout=S.PIPE, stderr=S.PIPE,universal_newlines=True)
+stdout, stderr = proc.communicate()
+#print(stdout) 
+
+res = []
+for line in stdout.splitlines()[4:-1]:
+    coms = line.split()
+    if coms and '*' not in coms:
+        res.append(coms[7])
+        
+        
+##csv 
+import csv
+with open(r"data/iris.csv", "rt") as f:
+    rd = csv.reader(f)
+    rows = list(rd)
+
+headers = rows[0]
+rows = rows[1:]
+rowsd = []
+for sl, sw, pl, pw, name in rows:
+    rowsd.append([float(sl), float(sw), float(pl), float(pw), name])
+
+names = set()
+for row in rowsd:
+    names.add(row[-1])
+    
+#or 
+names = {row[-1] for row in rowsd }
+
+#max 
+d = {n : max([r[0] for r in rowsd]) for n in names }
+#{'Iris-setosa': 7.9, 'Iris-versicolor': 7.9, 'Iris-virginica': 7.9}
+#OR
+d = {}
+for n in names:
+    res = []
+    for r in rowsd:
+        res.append(r[0])
+    d[n] = max(res)
+
+#OR
+from sqlite3 import connect 
+con = connect(r"iris.db")
+cur = con.cursor()
+cur.execute("""drop table if exists iris""")
+cur.execute("""create table iris (sl double, sw double, 
+        pl double, pw double, name string)""")
+for r in rowsd:
+    w = cur.execute("""insert into iris values(?,?,?,?,?) """, r)
+
+con.commit()
+q = cur.execute("""select name, max(sl) from iris group by name""")
+result = list(q.fetchall())
+print(result)
+#[('Iris-setosa', 5.8), ('Iris-versicolor', 7.0), ('Iris-virginica', 7.9)]
+con.close()
+
+'''
+Use Rest server http://omdbapi.com/
+  eg GET with  http://omdbapi.com/?i=tt1285016&apikey=5cdc2256
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+####################rest.py 
+from flask import Flask, jsonify
+import json 
+app = Flask(__name__)
+
+@app.route("/json")  #http://localhost:5000/json
+def json1():
+    with open(r"D:\PPT\python\hands\data\example.json", "rt") as f:
+        obj = json.load(f)
+    #print(obj)
+    resp = jsonify(obj)
+    resp.status_code = 200
+    return resp
+    
+@app.route("/index")
+def index():
+    return "<html><body><h1>BYE</h1></body></html>"
+
+if __name__ == '__main__':
+    app.run()
+    
+'''
+url = 'http://localhost:5000/json'
+r = requests.get(url)
+r.json()
+'''
+
+#############proc.py
+import os, os.path, sys, subprocess as S, time, datetime as D
+import platform 
+
+child = True if len(sys.argv) >= 2 else False 
+direct_environ = dict(HOST=platform.node(),
+                      DT=D.datetime.today().strftime("%m%d%y%H%M%S"),
+                      SCRIPT=os.path.splitext(os.path.basename(sys.argv[0]))[0],
+                      SCRIPT_PID=str(os.getpid()),
+                      OUTDIR=r"c:/tmp/adm",
+                      ) 
+                      
+if not child:                   
+    print("saving")
+    for k,v in direct_environ.items():
+        os.environ[k] = str(v)  
+        
+#Now update LOGFIL      $OUTDIR/$SCRIPT.$DT.log (in unix expansion of variable)
+#using os.path.expandvars 
+indirect_environ = dict(LOGFILE=os.path.expandvars(r"$OUTDIR/$SCRIPT.$DT.log"))
+if not child:    
+    for k,v in indirect_environ.items():
+        os.environ[k] = str(v) 
+    
+#Now print 
+for k, v in os.environ.items():
+    if k in direct_environ or k in indirect_environ:
+        print(k,"=",v)
+        
+        
+#Now execute this script in subprocess 
+if not child:    
+    command = "python %s child" % (sys.argv[0], )
+    proc = S.Popen(command, shell=True,stdout=S.PIPE, stderr=S.PIPE,universal_newlines=True)
+    stdout, stderr = proc.communicate()
+    print("Printng from child process")
+    print(stdout) 
+
+
+
+
+
+
+
+
