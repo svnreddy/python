@@ -1,0 +1,611 @@
+D:\PPT\python\hands>python
+Python 3.5.2 (v3.5.2:4def2a2901a5, Jun 25 2016, 22:18:55) [MSC v.1900 64 bit (AM
+D64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> list(zip(['a', 'b'], [10,20]))
+[('a', 10), ('b', 20)]
+>>> list(enumerate(['a', b']))
+  File "<stdin>", line 1
+    list(enumerate(['a', b']))
+                             ^
+SyntaxError: EOL while scanning string literal
+>>> list(enumerate(['a', 'b']))
+[(0, 'a'), (1, 'b')]
+>>> list(zip(['a', 'b'], [10,20]))
+[('a', 10), ('b', 20)]
+>>> list(enumerate(['a', 'b']))
+[(0, 'a'), (1, 'b')]
+>>> zip(['a', 'b'], [10,20])
+<zip object at 0x0000000AC7AC2088>
+>>> for t in zip(['a', 'b'], [10,20]):
+...     print(t[0])
+...
+a
+b
+>>> for t in enumerate(['a', 'b']):
+...     print(t[1])
+...
+a
+b
+>>> for i,t in enumerate(['a', 'b']):
+...     print(t)
+...
+a
+b
+>>> t = [ ('a', ('b',0)), ('x',('y',1))]
+>>> for e in t:
+...     print(e[0]+e[1][0])
+...
+ab
+xy
+>>> for x,y in t:
+...     print(x+y[0])
+...
+ab
+xy
+>>> for a,(b,c) in t:
+...     print(a+b)
+...
+ab
+xy
+>>> x = 'AB'
+>>> int(x,base=16)
+171
+>>> lst = [1,2,3]
+>>> out = []
+>>> for e in lst:
+...     out.append(e*e)
+...
+>>> sum([1,2,3])
+6
+>>> input="ABCDEF1234567890"
+>>> input[::2]
+'ACE13579'
+>>> input[1::2]
+'BDF24680'
+>>> list(zip(input[::2], input[1::2]))
+[('A', 'B'), ('C', 'D'), ('E', 'F'), ('1', '2'), ('3', '4'), ('5', '6'), ('7', '
+8'), ('9', '0')]
+>>> out = []
+>>> for f,s in zip(input[::2], input[1::2]):
+...     out.append(f+s, base=16)
+...
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+TypeError: append() takes no keyword arguments
+>>> for f,s in zip(input[::2], input[1::2]):
+...     out.append(int(f+s, base=16))
+...
+>>> out
+[171, 205, 239, 18, 52, 86, 120, 144]
+>>> sum(out) % 255
+15
+>>> input[::2]
+'ACE13579'
+>>> list(input[::2])
+['A', 'C', 'E', '1', '3', '5', '7', '9']
+>>> out = []
+>>> out.append(input[::2])
+>>> out
+['ACE13579']
+>>> out = []
+>>> out += 'ACE13579'
+>>> out
+['A', 'C', 'E', '1', '3', '5', '7', '9']
+>>> lst = [1,2,3]
+>>> lst.append([20,30])
+>>> lst
+[1, 2, 3, [20, 30]]
+>>> lst += [20,30]
+>>> lst
+[1, 2, 3, [20, 30], 20, 30]
+>>> s = {1,2,3,4}
+>>> type(s)
+<class 'set'>
+>>> es = set()
+>>> type(es)
+<class 'set'>
+>>> len(s)
+4
+>>> 3 in s
+True
+>>> s = { 4,3,2,1}
+>>> s == { 4,3,2,1}
+True
+>>> s == { 4,3,2,1,1,1,1}
+True
+>>> { 4,3,2,1,1,1,1}
+{1, 2, 3, 4}
+>>> for e in s:
+...     print(e)
+...
+1
+2
+3
+4
+>>> s
+{1, 2, 3, 4}
+>>> s[0]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'set' object does not support indexing
+>>> s.append(40)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'set' object has no attribute 'append'
+>>> s.add(40)
+>>> s
+{40, 1, 2, 3, 4}
+>>> s1 = {1,2,3,4}
+>>> s2 = {4,5,6}
+>>> s1 | s2
+{1, 2, 3, 4, 5, 6}
+>>> s1 & s2
+{4}
+>>> s1 - s2
+{1, 2, 3}
+>>> s1 ^ s2
+{1, 2, 3, 5, 6}
+>>> (s1-s2) |(s2-s1)
+{1, 2, 3, 5, 6}
+>>> set([1,2,1,2])
+{1, 2}
+>>> list(set([1,2,1,2]))
+[1, 2]
+>>> set
+<class 'set'>
+>>> s = "OK"
+>>> rs = r"OK"
+>>> ru = u"OK"
+>>> rb = b"OK"
+>>> type(s), type(rs),type(ru), type(rb)
+(<class 'str'>, <class 'str'>, <class 'str'>, <class 'bytes'>)
+>>> len("\n")
+1
+>>> len(r"\n")
+2
+>>> s
+'OK'
+>>> s.encode('utf-8')
+b'OK'
+>>> rb.decode('utf-8')
+'OK'
+>>> dir(bytes)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '_
+_eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs
+__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__'
+, '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__r
+epr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subcl
+asshook__', 'capitalize', 'center', 'count', 'decode', 'endswith', 'expandtabs',
+ 'find', 'fromhex', 'hex', 'index', 'isalnum', 'isalpha', 'isdigit', 'islower',
+'isspace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans'
+, 'partition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'r
+strip', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'tran
+slate', 'upper', 'zfill']
+>>> dir(str)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '_
+_eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs
+__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__'
+, '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__r
+epr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subcl
+asshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', '
+expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isd
+ecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'issp
+ace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'pa
+rtition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip
+', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate
+', 'upper', 'zfill']
+>>> set(dir(bytes)) - set(dir(str))
+{'hex', 'fromhex', 'decode'}
+>>> set(dir(str)) - set(dir(bytes))
+{'isprintable', 'isdecimal', 'isidentifier', 'encode', 'format', 'format_map', '
+isnumeric', 'casefold'}
+>>> set(dir(str)) ^ set(dir(bytes))
+{'casefold', 'isdecimal', 'isprintable', 'format', 'hex', 'isidentifier', 'isnum
+eric', 'encode', 'fromhex', 'decode', 'format_map'}
+>>>
+>>> dir(set)
+['__and__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '_
+_eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__ian
+d__', '__init__', '__ior__', '__isub__', '__iter__', '__ixor__', '__le__', '__le
+n__', '__lt__', '__ne__', '__new__', '__or__', '__rand__', '__reduce__', '__redu
+ce_ex__', '__repr__', '__ror__', '__rsub__', '__rxor__', '__setattr__', '__sizeo
+f__', '__str__', '__sub__', '__subclasshook__', '__xor__', 'add', 'clear', 'copy
+', 'difference', 'difference_update', 'discard', 'intersection', 'intersection_u
+pdate', 'isdisjoint', 'issubset', 'issuperset', 'pop', 'remove', 'symmetric_diff
+erence', 'symmetric_difference_update', 'union', 'update']
+>>>
+>>> s = { 1,1,2,3,4}
+>>> s
+{1, 2, 3, 4}
+>>> hash(1)
+1
+>>> hash("OK")
+-4087136011448798072
+>>> hash((1,2))
+3713081631934410656
+>>> hash((2,1))
+3713082714465905806
+>>> #list of set
+...
+>>> [{1,2}, {3,4}]
+[{1, 2}, {3, 4}]
+>>> #set of lists
+...
+>>> {[1,2],[3,4]}
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+>>> hash([1,2])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'list'
+>>> {{1,2},{3,4}}
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: unhashable type: 'set'
+>>> {frozenset({1,2}),frozenset({3,4})}
+{frozenset({3, 4}), frozenset({1, 2})}
+>>> d = {'nok' : 1, 'ok' : 2}
+>>> type(d)
+<class 'dict'>
+>>> ed = {}
+>>> type(ed)
+<class 'dict'>
+>>> like = {'coffee':4, 'tea': 16}
+>>> like['coke'] = 4
+>>> like
+{'coke': 4, 'coffee': 4, 'tea': 16}
+>>> like['tea'] = like['tea'] - 4
+>>> like
+{'coke': 4, 'coffee': 4, 'tea': 12}
+>>> like['tea'] -= 4
+>>> like
+{'coke': 4, 'coffee': 4, 'tea': 8}
+>>> len(like)
+3
+>>> 'tea' in like
+True
+>>> for k in like:
+...     print(k, like[k])
+...
+coke 4
+coffee 4
+tea 8
+>>> like.keys()
+dict_keys(['coke', 'coffee', 'tea'])
+>>> like.values()
+dict_values([4, 4, 8])
+>>> like.items()
+dict_items([('coke', 4), ('coffee', 4), ('tea', 8)])
+>>> for k,v in like.items():
+...     print(k,v)
+...
+coke 4
+coffee 4
+tea 8
+>>> dir(dict)
+['__class__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__'
+, '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__',
+ '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__', '__ne__', '_
+_new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__setitem__'
+, '__sizeof__', '__str__', '__subclasshook__', 'clear', 'copy', 'fromkeys', 'get
+', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']
+>>> del like['coke']
+>>> like
+{'coffee': 4, 'tea': 8}
+>>> d ={'ok':1}
+>>> c = 0
+>>> while c<2:
+...     d = {'ok': [d]}
+...     c += 1
+...
+>>> d
+{'ok': [{'ok': [{'ok': 1}]}]}
+>>> d['ok']
+[{'ok': [{'ok': 1}]}]
+>>> d['ok'][0]
+{'ok': [{'ok': 1}]}
+>>> d['ok'][0]['ok']
+[{'ok': 1}]
+>>> d['ok'][0]['ok'][0]
+{'ok': 1}
+>>> d['ok'][0]['ok'][0]['ok']
+1
+>>> d['ok'][0]['ok'][0]['ok'] = 20
+>>> d
+{'ok': [{'ok': [{'ok': 20}]}]}
+>>>
+>>> like['tea'] = like['tea'] - 4
+>>>
+>>> D1 = {'ok': 1, 'nok': 2}
+>>> D2 = {'ok': 2, 'new':3 }
+>>> D_MERGE = D2.copy()
+>>> for k in D1:
+...     if k in D2:
+...         D_MERGE[k] = D1[k] + D2[k]
+...     else:
+...         D_MERGE[k] = D1[k]
+...
+>>>
+>>> D_MERGE
+{'nok': 2, 'ok': 3, 'new': 3}
+>>> lst = [1,2,3,4]
+>>> out=[]
+>>> for e in lst:
+...     out.append(e*e)
+...
+>>> out
+[1, 4, 9, 16]
+>>> out = [ e*e for e in lst]
+>>> out
+[1, 4, 9, 16]
+>>> out = [ e*e for e in lst if e%2 == 0]
+>>> out
+[4, 16]
+>>> [ e*e for e in lst if e%2 == 0]
+[4, 16]
+>>> {e*e for e in lst if e%2 == 0}
+{16, 4}
+>>> {e:e*e for e in lst if e%2 == 0}
+{2: 4, 4: 16}
+>>> [ (e,e1) for e in lst if e%2 == 0 for e in lst if e1%2 == 1]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "<stdin>", line 1, in <listcomp>
+NameError: name 'e1' is not defined
+>>> [ (e,e1) for e in lst if e%2 == 0 for e1 in lst if e1%2 == 1]
+[(2, 1), (2, 3), (4, 1), (4, 3)]
+>>> res = [ (x,y,z) for x in range(1,100) for y in range(x,100) for z in range(y
+,100) if z*z == x*x + y*y]
+>>> len(res)
+50
+>>>
+>>> {e:e*e for e in lst if e%2 == 0}
+{2: 4, 4: 16}
+>>> d = {}
+>>> for e in lst:
+...     if e % 2 == 0:
+...             d[e] = e*e
+...
+>>> s = "Hello World"
+>>> s.count('l')
+3
+>>> {e: s.count(e)  for e in s}
+{'l': 3, ' ': 1, 'e': 1, 'o': 2, 'H': 1, 'd': 1, 'r': 1, 'W': 1}
+>>> {e: s.count(e)  for e in set(s)}
+{'l': 3, ' ': 1, 'e': 1, 'o': 2, 'r': 1, 'd': 1, 'H': 1, 'W': 1}
+>>> f = open(r"first.py", "rt")
+>>> lines = f.readlines()
+>>> f.close()
+>>> with open(r"first.py", "rt") as f:
+...     lines = f.readlines()
+...
+>>> help(open)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Python35\lib\_sitebuiltins.py", line 102, in __call__
+    import pydoc
+  File "C:\Python35\lib\pydoc.py", line 59, in <module>
+    import inspect
+  File "C:\Python35\lib\inspect.py", line 34, in <module>
+    import ast
+  File "<frozen importlib._bootstrap>", line 969, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 958, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 673, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 661, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 750, in get_code
+  File "<frozen importlib._bootstrap_external>", line 818, in get_data
+KeyboardInterrupt
+>>>
+>>> with open(r"first.py", "rt") as f:
+...     with open(r"first.py.bk", "wt") as f2:
+...             lines = f.readlines()
+...             f2.writelines(lines)
+...
+>>> import glob
+>>> glob.glob("*")
+['DAY1.txt', 'first.py', 'first.py.bk']
+>>> glob.glob(r"c:\desktop\ppt\*")
+[]
+>>> glob.glob(r"d:\ppt\*")
+['d:\\ppt\\clojure', 'd:\\ppt\\elixir', 'd:\\ppt\\gdrive', 'd:\\ppt\\go', 'd:\\p
+pt\\Groovy', 'd:\\ppt\\kotlin', 'd:\\ppt\\not_active', 'd:\\ppt\\py-data-module'
+, 'd:\\ppt\\python', 'd:\\ppt\\rust', 'd:\\ppt\\scala', 'd:\\ppt\\spark']
+>>>
+>>> #line#:length
+...
+>>>
+>>> dir(str)
+['__add__', '__class__', '__contains__', '__delattr__', '__dir__', '__doc__', '_
+_eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getnewargs
+__', '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__', '__lt__'
+, '__mod__', '__mul__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__r
+epr__', '__rmod__', '__rmul__', '__setattr__', '__sizeof__', '__str__', '__subcl
+asshook__', 'capitalize', 'casefold', 'center', 'count', 'encode', 'endswith', '
+expandtabs', 'find', 'format', 'format_map', 'index', 'isalnum', 'isalpha', 'isd
+ecimal', 'isdigit', 'isidentifier', 'islower', 'isnumeric', 'isprintable', 'issp
+ace', 'istitle', 'isupper', 'join', 'ljust', 'lower', 'lstrip', 'maketrans', 'pa
+rtition', 'replace', 'rfind', 'rindex', 'rjust', 'rpartition', 'rsplit', 'rstrip
+', 'split', 'splitlines', 'startswith', 'strip', 'swapcase', 'title', 'translate
+', 'upper', 'zfill']
+>>> s = "#ok"
+>>> s.startswith("#")
+True
+>>> len(lines)
+168
+>>> list(enumerate(lines))[:5]
+[(0, 'from __future__ import print_function #only for py2.7\n'), (1, '#import sy
+s\n'), (2, '#a = sys.argv[1]\n'), (3, '#b = sys.argv[2]\n'), (4, '#print(a,"+",b
+ , "=", int(a)+int(b))\n')]
+>>> d = {}
+>>> for index,line in enumerate(lines):
+...     if not line.startswith('#'):
+...             d[index+1] = len(line)
+...
+>>> d
+{1: 54, 6: 1, 7: 18, 16: 14, 17: 26, 18: 16, 19: 34, 20: 18, 21: 35, 22: 23, 23:
+ 33, 24: 34, 25: 29, 26: 24, 27: 1, 28: 1, 33: 17, 34: 1, 35: 15, 36: 1, 38: 12,
+ 40: 13, 41: 37, 42: 25, 43: 31, 44: 30, 45: 14, 46: 1, 48: 1, 49: 6, 50: 1, 52:
+ 11, 53: 23, 54: 27, 55: 31, 56: 53, 57: 29, 58: 35, 59: 13, 60: 1, 61: 7, 62: 6
+, 63: 23, 64: 9, 65: 16, 66: 10, 68: 73, 69: 44, 70: 5, 71: 48, 72: 45, 73: 5, 7
+4: 46, 75: 31, 76: 23, 77: 1, 78: 1, 79: 1, 80: 1, 81: 5, 82: 5, 83: 1, 84: 16,
+85: 18, 86: 1, 88: 9, 90: 14, 91: 41, 92: 20, 93: 1, 94: 11, 95: 1, 96: 1, 97: 1
+6, 98: 12, 99: 1, 100: 22, 101: 31, 102: 20, 103: 39, 104: 1, 105: 9, 106: 14, 1
+07: 18, 108: 22, 109: 9, 110: 16, 111: 13, 112: 1, 113: 9, 114: 14, 115: 18, 116
+: 24, 117: 1, 119: 20, 120: 19, 121: 1, 123: 12, 124: 39, 125: 26, 126: 1, 127:
+14, 128: 1, 130: 18, 131: 19, 132: 27, 133: 40, 134: 51, 135: 10, 136: 32, 137:
+8, 138: 13, 139: 21, 140: 18, 141: 10, 142: 28, 143: 1, 144: 1, 145: 7, 146: 25,
+ 147: 25, 148: 14, 150: 43, 151: 1, 152: 20, 153: 13, 154: 16, 155: 35, 156: 10,
+ 157: 27, 158: 9, 159: 5, 160: 1, 161: 1, 162: 1, 163: 1, 164: 1, 165: 1, 166: 1
+, 167: 1, 168: 1}
+>>>
+>>> d = {}
+>>> for index,line in enumerate(lines)
+  File "<stdin>", line 1
+    for index,line in enumerate(lines)
+                                     ^
+SyntaxError: invalid syntax
+>>>     if not line.startswith('#'):
+  File "<stdin>", line 1
+    if not line.startswith('#'):
+    ^
+IndentationError: unexpected indent
+>>>             d[index+1] = len(line)
+  File "<stdin>", line 1
+    d[index+1] = len(line)
+    ^
+IndentationError: unexpected indent
+>>>
+>>>
+>>>
+>>>
+>>>
+>>>
+>>> d = {}
+>>> for index,line in enumerate(lines)
+  File "<stdin>", line 1
+    for index,line in enumerate(lines)
+                                     ^
+SyntaxError: invalid syntax
+>>>     if not line.startswith('#'):
+  File "<stdin>", line 1
+    if not line.startswith('#'):
+    ^
+IndentationError: unexpected indent
+>>>
+>>> d = {}
+>>> for index,line in enumerate(lines):
+...     if not line.startswith('#'):
+...             d[index+1] = len(line)
+...
+>>> d = {index+1:len(line)  for index,line in enumerate(lines) if not line.start
+swith('#')}
+>>> import subprocess as S
+>>> command = "nslookup www.google.com"
+>>> proc = S.Popen(command, shell=True,
+...                  stdout=S.PIPE, stderr=S.PIPE,
+...                  unniversal_newlines=True)
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+TypeError: __init__() got an unexpected keyword argument 'unniversal_newlines'
+>>> outs, oute = proc.communicate()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'proc' is not defined
+>>> print(outs)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'outs' is not defined
+>>>
+>>>
+>>> proc = S.Popen(command, shell=True,
+...                  stdout=S.PIPE, stderr=S.PIPE,
+...                  universal_newlines=True)
+>>> outs, oute = proc.communicate()
+>>> print(outs)
+Server:  UnKnown
+Address:  2405:200:800::1
+
+Name:    www.google.com
+Addresses:  2404:6800:4007:80d::2004
+          172.217.163.196
+
+
+>>> print(oute)
+Non-authoritative answer:
+
+
+>>> print(proc.returncode)
+0
+>>> proc = S.Popen(command, shell=True,
+...                  stdout=S.PIPE, stderr=S.STDOUT,
+...                  universal_newlines=True)
+>>> outs, oute = proc.communicate()
+>>> print(outs)
+Non-authoritative answer:
+
+Server:  UnKnown
+Address:  2405:200:800::1
+
+Name:    www.google.com
+Addresses:  2404:6800:4007:80f::2004
+          216.58.197.36
+
+
+>>> with open("out.txt", "wt") as f:
+...     proc = S.Popen(command, shell=True,
+...                  stdout=f, stderr=S.STDOUT,
+...                  universal_newlines=True)
+...     proc.wait()
+...
+0
+>>> glob.glob("*")
+['DAY1.txt', 'first.py', 'first.py.bk', 'out.txt']
+>>>
+>>>
+>>>
+>>> command2 = 'findStr -c:"Address" -i'
+>>> proc = S.Popen(command, shell=True,
+...                  stdout=S.PIPE, stderr=S.STDOUT,
+...                  universal_newlines=True)
+>>>
+>>> proc1 = S.Popen(command2, shell=True, stdin=proc.stdout,
+...                  stdout=S.PIPE, stderr=S.STDOUT,
+...                  universal_newlines=True)
+>>> proc.stdout.close()
+>>> outs, oute = proc1.communicate()
+>>> print(outs)
+Address:  2405:200:800::1
+Addresses:  2404:6800:4007:80c::2004
+
+>>> import subprocess as S
+>>> command = "nslookup www.google.com"
+>>> proc = S.Popen(command, shell=True, stdout=S.PIPE, stderr=S.PIPE, universal_
+newlines=True)
+>>> outs, oute = proc.communicate()
+>>> print(outs)
+Server:  UnKnown
+Address:  2405:200:800::1
+
+Name:    www.google.com
+Addresses:  2404:6800:4007:809::2004
+          216.58.200.132
+
+
+>>> outs
+'Server:  UnKnown\nAddress:  2405:200:800::1\n\nName:    www.google.com\nAddress
+es:  2404:6800:4007:809::2004\n\t  216.58.200.132\n\n'
+>>> import re
+>>> s = "Hello World"
+>>> re.findall(r"\w+", s)
+['Hello', 'World']
+>>> s1="Name:xyz"
+>>> re.findall(r"Name:(\w+)", s)
+[]
+>>> re.findall(r"Name:(\w+)", s1)
+['xyz']
+>>>
+
+
+
